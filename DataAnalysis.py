@@ -67,21 +67,33 @@ data = pd.read_csv("IMDB-Movie-Data.csv")
 
 
 # Genre vs Average Revenue
+
+# Generate set of distinct genres from dataframe
 allGenres = set(sum([genList.split(",") for genList in list(data.Genre)], []))
+
+# Generate a dictionary of empty revenues for each genre
 genreRevenues = {}
 for genre in allGenres:
     genreRevenues[genre] = []
+
+
 for index in data.index:
+    # Getting revenue for each movie
     itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue):
+    if math.isnan(itemRevenue): # Skip nan values
         continue
+
+    # Find each genre for the film
     itemGenres = data.Genre[index].split(",")
+    # Adds the film's revenue to each genre
     for genre in itemGenres:
         genreRevenues[genre].append(itemRevenue)
+
+# Calculate the average revenue for each genre
 for item in genreRevenues:
     genreRevenues[item] = sum(genreRevenues[item]) / len(genreRevenues[item])
 
-
+# Sort the revenues from highest to lowest
 genreRevenues = sort_and_crop_dict(genreRevenues)
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
@@ -194,19 +206,29 @@ plt.xticks(rotation=90)
 plt.savefig("Figures/Actors vs Average Revenue.png")
 
 
+# Year vs Average Revenue
+
+# Get the range of years in the dataframe
 # ? Year vs Average Revenue
 yearRange = range(min(data.Year), max(data.Year) + 1)
+
+# Create a dictionary with empty revenues for each year
 yearRevenues = {}
 for year in yearRange:
     yearRevenues[year] = []
+
 for index in data.index:
+    # Get the revenue for the movie
     itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue):
+    if math.isnan(itemRevenue): # Skip nan values
         continue
+    
+    # Find the movies year and add its revenue
     yearRevenues[data.Year[index]].append(itemRevenue)
+
+# Calculate the average revenue for each year
 for item in yearRevenues:
     if len(yearRevenues[item]) == 0:
-        print(item)
         del yearRevenues[item]
     yearRevenues[item] = sum(yearRevenues[item]) / len(yearRevenues[item])
 
