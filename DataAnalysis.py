@@ -105,9 +105,7 @@ ax1.bar(range(len(genreRevenues)), list(genreRevenues.values()),
         tick_label=list(genreRevenues.keys()))
 plt.savefig("Figures/Genre vs Average Revenue.png")
 
-
-
-# ? Directors vs Average Revenue
+# Directors vs Average Revenue
 
 # Generate set of distinct directors from dataframe
 allDirectors = set(sum([dirList.split(",") for dirList in list(data.Director)], []))
@@ -156,7 +154,7 @@ ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()), tick_label=list(dir
 plt.xticks(rotation=90)
 plt.savefig("Figures/Directors vs Average Revenue.png")
 
-# ? Actors vs Average Revenue
+# Actors vs Average Revenue
 
 # Generate set of distinct actors from dataframe
 allActors = set(sum([actList.split(",") for actList in list(data.Actors)], []))
