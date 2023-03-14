@@ -105,7 +105,9 @@ ax1.bar(range(len(genreRevenues)), list(genreRevenues.values()),
         tick_label=list(genreRevenues.keys()))
 plt.savefig("Figures/Genre vs Average Revenue.png")
 
-# Directors vs Average Revenue
+
+
+# ? Directors vs Average Revenue
 
 # Generate set of distinct directors from dataframe
 allDirectors = set(sum([dirList.split(",") for dirList in list(data.Director)], []))
@@ -141,9 +143,7 @@ for item in dirRevenues:
 for item in delList:
     del dirRevenues[item]
 
-
-
-# ? Get Directors with the top 100 average revenues
+# Get Directors with the top 100 average revenues
 dirRevenues = sort_and_crop_dict(dirRevenues, 100)
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
