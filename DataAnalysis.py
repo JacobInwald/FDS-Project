@@ -66,7 +66,7 @@ data = pd.read_csv("IMDB-Movie-Data.csv")
 # Rating, Votes, Revenue (Millions), Metascore
 
 
-# Genre vs Average Revenue
+# ? Genre vs Average Revenue
 
 # Generate set of distinct genres from dataframe
 allGenres = set(sum([genList.split(",") for genList in list(data.Genre)], []))
@@ -142,7 +142,8 @@ for item in delList:
     del dirRevenues[item]
 
 
-# Get Directors with the top 100 average revenues
+
+# ? Get Directors with the top 100 average revenues
 dirRevenues = sort_and_crop_dict(dirRevenues, 100)
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
@@ -154,7 +155,9 @@ ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()), tick_label=list(dir
 plt.xticks(rotation=90)
 plt.savefig("Figures/Directors vs Average Revenue.png")
 
-# Actors vs Average Revenue
+
+
+# ? Actors vs Average Revenue
 
 # Generate set of distinct actors from dataframe
 allActors = set(sum([actList.split(",") for actList in list(data.Actors)], []))
@@ -203,6 +206,7 @@ plt.xticks(rotation=90)
 plt.savefig("Figures/Actors vs Average Revenue.png")
 
 
+
 # ? Year vs Average Revenue
 yearRange = range(min(data.Year), max(data.Year) + 1)
 
@@ -231,6 +235,8 @@ ax4.set_xlabel("Year")
 ax4.set_ylabel("Revenue (Millions)")
 ax4.plot(yearRange, list(yearRevenues.values()))
 plt.savefig("Figures/Year vs Average Revenue.png")
+
+
 
 # ? Runtime vs Average Revenue
 # Get the range of runtimes in the dataframe
@@ -271,12 +277,9 @@ ax4.set_ylabel("Revenue (Millions)")
 ax4.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
 plt.savefig("Figures/Runtime vs Average Revenue.png")
 
+
+
 # ? Rating vs Average Revenue
-
-
-# Scatter plot
-
-
 
 # Generate set of the distinct ratings from dataframe
 allRatings = set(data.Rating)
