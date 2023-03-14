@@ -150,8 +150,7 @@ ax1.grid()
 ax1.set_title("Top 100 Director vs Average Revenue")
 ax1.set_xlabel("Top 100 Directors")
 ax1.set_ylabel("Revenue (Millions)")
-ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()),
-        tick_label=list(dirRevenues.keys()))
+ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()), tick_label=list(dirRevenues.keys()))
 plt.xticks(rotation=90)
 plt.savefig("Figures/Directors vs Average Revenue.png")
 
@@ -178,8 +177,6 @@ for index in data.index:
 
 # Calculate the average revenue for each year
 for item in yearRevenues:
-    if len(yearRevenues[item]) == 0:
-        del yearRevenues[item]
     yearRevenues[item] = sum(yearRevenues[item]) / len(yearRevenues[item])
 
 fig4, ax4 = plt.subplots(figsize=(20, 20))
@@ -191,5 +188,43 @@ ax4.plot(yearRange, list(yearRevenues.values()))
 plt.savefig("Figures/Year vs Average Revenue.png")
 
 # Runtime vs Average Revenue
+
+# Get the range of runtimes in the dataframe
+runtimeRange = range(min(data["Runtime (Minutes)"]), max(data["Runtime (Minutes)"]) + 1)
+
+# Create a dictionary with empty revenues for each year
+runtimeRevenues = {}
+for runtime in runtimeRange:
+    runtimeRevenues[runtime] = []
+
+for index in data.index:
+    # Get the revenue for the movie
+    itemRevenue = data["Revenue (Millions)"][index]
+    if math.isnan(itemRevenue): # Skip nan values
+        continue
+    
+    # Find the movies runtime and add its revenue
+    runtimeRevenues[data["Runtime (Minutes)"][index]].append(itemRevenue)
+
+delList = []
+
+# Calculate the average revenue for each year
+for item in runtimeRevenues:
+    if len(runtimeRevenues[item]) == 0:
+        delList.append(item)
+        continue
+    runtimeRevenues[item] = sum(runtimeRevenues[item]) / len(runtimeRevenues[item])
+
+# Remove runtimes with no data
+for item in delList:
+    del runtimeRevenues[item]
+
+fig4, ax4 = plt.subplots(figsize=(20, 20))
+ax4.grid()
+ax4.set_title("Runtime vs Average Revenue")
+ax4.set_xlabel("Runtime (Minutes)")
+ax4.set_ylabel("Revenue (Millions)")
+ax4.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
+plt.savefig("Figures/Runtime vs Average Revenue.png")
 
 # Rating vs Average Revenue
