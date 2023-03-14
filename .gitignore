@@ -1,0 +1,3 @@
+.DS_Store
+Report/build/**
+!Report/build/**.pdf
