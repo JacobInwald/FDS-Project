@@ -203,9 +203,6 @@ plt.xticks(rotation=90)
 plt.savefig("Figures/Actors vs Average Revenue.png")
 
 
-# Year vs Average Revenue
-
-# Get the range of years in the dataframe
 # ? Year vs Average Revenue
 yearRange = range(min(data.Year), max(data.Year) + 1)
 
@@ -236,7 +233,6 @@ ax4.plot(yearRange, list(yearRevenues.values()))
 plt.savefig("Figures/Year vs Average Revenue.png")
 
 # Runtime vs Average Revenue
-
 # Get the range of runtimes in the dataframe
 runtimeRange = range(min(data["Runtime (Minutes)"]), max(data["Runtime (Minutes)"]) + 1)
 
@@ -275,4 +271,61 @@ ax4.set_ylabel("Revenue (Millions)")
 ax4.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
 plt.savefig("Figures/Runtime vs Average Revenue.png")
 
-# Rating vs Average Revenue
+# ? Rating vs Average Revenue
+
+
+# Scatter plot
+
+
+
+# Generate set of the distinct ratings from dataframe
+allRatings = set(data.Rating)
+
+# Generate a dictionary of empty revenues for each rating
+rateRevenues = {}
+for rate in allRatings:
+    rateRevenues[rate] = []
+
+for index in data.index:
+    # Getting revenue for each movie
+    itemRevenue = data["Revenue (Millions)"][index]
+    if math.isnan(itemRevenue): # Skip nan values
+        continue
+
+    rate = data.Rating[index]
+    rateRevenues[rate].append(itemRevenue)
+
+delList = []
+
+# Average the revenue for each film
+for item in rateRevenues:
+    if (len(rateRevenues[item]) == 0):
+        delList.append(item)
+        continue
+    rateRevenues[item] = sum(rateRevenues[item]) / len(rateRevenues[item])
+
+# Remove ratings with no data
+for item in delList:
+    del rateRevenues[item]
+
+
+# sort ratings
+rateRevenues = sort_and_crop_dict(rateRevenues)
+
+fig1, ax1 = plt.subplots(figsize=(20, 20))
+ax1.grid()
+ax1.set_title("Ratings vs Average Revenue")
+ax1.set_xlabel("Movie Rating")
+ax1.set_ylabel("Average Revenue (Millions)")
+ax1.scatter(list(rateRevenues.keys()), list(rateRevenues.values()))
+
+plt.savefig("Figures/Rating vs Average Revenue.png")
+
+fig1, ax1 = plt.subplots(figsize=(20, 20))
+ax1.grid()
+ax1.set_title("Ratings vs Revenue")
+ax1.set_xlabel("Movie Rating")
+ax1.set_ylabel("Revenue (Millions)")
+ax1.scatter(data["Rating"], data["Revenue (Millions)"])
+
+plt.savefig("Figures/Rating vs Revenue.png")
