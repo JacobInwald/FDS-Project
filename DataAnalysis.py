@@ -152,8 +152,7 @@ ax1.grid()
 ax1.set_title("Top 100 Director vs Average Revenue")
 ax1.set_xlabel("Top 100 Directors")
 ax1.set_ylabel("Revenue (Millions)")
-ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()),
-        tick_label=list(dirRevenues.keys()))
+ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()), tick_label=list(dirRevenues.keys()))
 plt.xticks(rotation=90)
 plt.savefig("Figures/Directors vs Average Revenue.png")
 
@@ -228,8 +227,6 @@ for index in data.index:
 
 # Calculate the average revenue for each year
 for item in yearRevenues:
-    if len(yearRevenues[item]) == 0:
-        del yearRevenues[item]
     yearRevenues[item] = sum(yearRevenues[item]) / len(yearRevenues[item])
 
 fig4, ax4 = plt.subplots(figsize=(20, 20))
@@ -242,61 +239,42 @@ plt.savefig("Figures/Year vs Average Revenue.png")
 
 # Runtime vs Average Revenue
 
-# ? Rating vs Average Revenue
+# Get the range of runtimes in the dataframe
+runtimeRange = range(min(data["Runtime (Minutes)"]), max(data["Runtime (Minutes)"]) + 1)
 
-
-# Scatter plot
-
-
-
-# Generate set of the distinct ratings from dataframe
-allRatings = set(data.Rating)
-
-# Generate a dictionary of empty revenues for each rating
-rateRevenues = {}
-for rate in allRatings:
-    rateRevenues[rate] = []
+# Create a dictionary with empty revenues for each year
+runtimeRevenues = {}
+for runtime in runtimeRange:
+    runtimeRevenues[runtime] = []
 
 for index in data.index:
-    # Getting revenue for each movie
+    # Get the revenue for the movie
     itemRevenue = data["Revenue (Millions)"][index]
     if math.isnan(itemRevenue): # Skip nan values
         continue
-
-    rate = data.Rating[index]
-    rateRevenues[rate].append(itemRevenue)
+    
+    # Find the movies runtime and add its revenue
+    runtimeRevenues[data["Runtime (Minutes)"][index]].append(itemRevenue)
 
 delList = []
 
-# Average the revenue for each film
-for item in rateRevenues:
-    if (len(rateRevenues[item]) == 0):
+# Calculate the average revenue for each year
+for item in runtimeRevenues:
+    if len(runtimeRevenues[item]) == 0:
         delList.append(item)
         continue
-    rateRevenues[item] = sum(rateRevenues[item]) / len(rateRevenues[item])
+    runtimeRevenues[item] = sum(runtimeRevenues[item]) / len(runtimeRevenues[item])
 
-# Remove ratings with no data
+# Remove runtimes with no data
 for item in delList:
-    del rateRevenues[item]
+    del runtimeRevenues[item]
 
+fig4, ax4 = plt.subplots(figsize=(20, 20))
+ax4.grid()
+ax4.set_title("Runtime vs Average Revenue")
+ax4.set_xlabel("Runtime (Minutes)")
+ax4.set_ylabel("Revenue (Millions)")
+ax4.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
+plt.savefig("Figures/Runtime vs Average Revenue.png")
 
-# sort ratings
-rateRevenues = sort_and_crop_dict(rateRevenues)
-
-fig1, ax1 = plt.subplots(figsize=(20, 20))
-ax1.grid()
-ax1.set_title("Ratings vs Average Revenue")
-ax1.set_xlabel("Movie Rating")
-ax1.set_ylabel("Average Revenue (Millions)")
-ax1.scatter(list(rateRevenues.keys()), list(rateRevenues.values()))
-
-plt.savefig("Figures/Rating vs Average Revenue.png")
-
-fig1, ax1 = plt.subplots(figsize=(20, 20))
-ax1.grid()
-ax1.set_title("Ratings vs Revenue")
-ax1.set_xlabel("Movie Rating")
-ax1.set_ylabel("Revenue (Millions)")
-ax1.scatter(data["Rating"], data["Revenue (Millions)"])
-
-plt.savefig("Figures/Rating vs Revenue.png")
+# Rating vs Average Revenue
