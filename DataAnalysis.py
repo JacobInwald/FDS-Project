@@ -228,12 +228,12 @@ for index in data.index:
 for item in yearRevenues:
     yearRevenues[item] = sum(yearRevenues[item]) / len(yearRevenues[item])
 
-fig4, ax4 = plt.subplots(figsize=(20, 20))
-ax4.grid()
-ax4.set_title("Year vs Average Revenue")
-ax4.set_xlabel("Year")
-ax4.set_ylabel("Revenue (Millions)")
-ax4.plot(yearRange, list(yearRevenues.values()))
+fig1, ax1 = plt.subplots(figsize=(20, 20))
+ax1.grid()
+ax1.set_title("Year vs Average Revenue")
+ax1.set_xlabel("Year")
+ax1.set_ylabel("Revenue (Millions)")
+ax1.plot(yearRange, list(yearRevenues.values()))
 plt.savefig("Figures/Year vs Average Revenue.png")
 
 
@@ -269,12 +269,12 @@ for item in runtimeRevenues:
 for item in delList:
     del runtimeRevenues[item]
 
-fig4, ax4 = plt.subplots(figsize=(20, 20))
-ax4.grid()
-ax4.set_title("Runtime vs Average Revenue")
-ax4.set_xlabel("Runtime (Minutes)")
-ax4.set_ylabel("Revenue (Millions)")
-ax4.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
+fig1, ax1 = plt.subplots(figsize=(20, 20))
+ax1.grid()
+ax1.set_title("Runtime vs Average Revenue")
+ax1.set_xlabel("Runtime (Minutes)")
+ax1.set_ylabel("Revenue (Millions)")
+ax1.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
 plt.savefig("Figures/Runtime vs Average Revenue.png")
 
 
