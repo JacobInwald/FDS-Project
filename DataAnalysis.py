@@ -232,7 +232,7 @@ ax4.set_ylabel("Revenue (Millions)")
 ax4.plot(yearRange, list(yearRevenues.values()))
 plt.savefig("Figures/Year vs Average Revenue.png")
 
-# Runtime vs Average Revenue
+# ? Runtime vs Average Revenue
 # Get the range of runtimes in the dataframe
 runtimeRange = range(min(data["Runtime (Minutes)"]), max(data["Runtime (Minutes)"]) + 1)
 
