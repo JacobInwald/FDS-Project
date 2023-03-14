@@ -40,7 +40,7 @@ import seaborn as sns
 import math
 
 
-# HELPER FUNCTIONS
+# ! HELPER FUNCTIONS
 
 def sort_and_crop_dict(d: dict, n: int = None) -> dict:
     """
@@ -57,7 +57,54 @@ def sort_and_crop_dict(d: dict, n: int = None) -> dict:
     return sorted_dict
 
 
-# Main Code
+def create_average_revenue_dict(colname: str, n: int = None) -> dict:
+    # Generate set of distinct genres from dataframe
+    if (type(list(data[colname])[0]) == type("")):
+        all = set(sum([allcol.split(",") for allcol in list(data[colname])], []))
+    else:
+        all = set([allcol for allcol in list(data[colname])])
+
+    # Generate a dictionary of empty revenues for each genre
+    cRevenues = {}
+    for c in all:
+        cRevenues[c] = []
+
+
+    for index in data.index:
+        # Getting revenue for each movie
+        itemRevenue = data["Revenue (Millions)"][index]
+        if math.isnan(itemRevenue): # Skip nan values
+            continue
+
+        # Find each genre for the film
+        if (type(list(data[colname])[0]) == type("")):
+            itemCol = data[colname][index].split(",")
+        else:
+            itemCol = [data[colname][index]]
+        # Adds the film's revenue to each genre
+        for col in itemCol:
+            cRevenues[col].append(itemRevenue)
+
+    # Delete List for nan values
+    delList = []
+
+    # Calculate the average revenue for each genre
+    for item in cRevenues:
+        if (len(cRevenues[item]) == 0):
+            delList.append(item)
+            continue
+        cRevenues[item] = sum(cRevenues[item]) / len(cRevenues[item])
+
+    for i in delList:
+        del cRevenues[i]
+
+    # Sort the revenues from highest to lowest
+    return sort_and_crop_dict(cRevenues, n)
+
+
+
+# ! Main Code
+
 
 matplotlib.rcParams["figure.dpi"] = 150
 
@@ -68,33 +115,7 @@ data = pd.read_csv("IMDB-Movie-Data.csv")
 
 # ? Genre vs Average Revenue
 
-# Generate set of distinct genres from dataframe
-allGenres = set(sum([genList.split(",") for genList in list(data.Genre)], []))
-
-# Generate a dictionary of empty revenues for each genre
-genreRevenues = {}
-for genre in allGenres:
-    genreRevenues[genre] = []
-
-
-for index in data.index:
-    # Getting revenue for each movie
-    itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue): # Skip nan values
-        continue
-
-    # Find each genre for the film
-    itemGenres = data.Genre[index].split(",")
-    # Adds the film's revenue to each genre
-    for genre in itemGenres:
-        genreRevenues[genre].append(itemRevenue)
-
-# Calculate the average revenue for each genre
-for item in genreRevenues:
-    genreRevenues[item] = sum(genreRevenues[item]) / len(genreRevenues[item])
-
-# Sort the revenues from highest to lowest
-genreRevenues = sort_and_crop_dict(genreRevenues)
+genreRevenues = create_average_revenue_dict("Genre")
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
 ax1.grid()
@@ -109,42 +130,8 @@ plt.savefig("Figures/Genre vs Average Revenue.png")
 
 # ? Directors vs Average Revenue
 
-# Generate set of distinct directors from dataframe
-allDirectors = set(sum([dirList.split(",") for dirList in list(data.Director)], []))
-
-# Generate a dictionary of empty revenues for each director
-dirRevenues = {}
-for dir in allDirectors:
-    dirRevenues[dir] = []
-
-
-for index in data.index:
-    # Getting revenue for each movie
-    itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue): # Skip nan values
-        continue
-
-    # Finds the director for the film and 
-    # adds the revenue of that film to the dictionary
-    dir = data.Director[index]
-    dirRevenues[dir].append(itemRevenue)
-
-
-delList = []
-
-# Average the revenue for each film
-for item in dirRevenues:
-    if (len(dirRevenues[item]) == 0):
-        delList.append(item)
-        continue
-    dirRevenues[item] = sum(dirRevenues[item]) / len(dirRevenues[item])
-
-# Remove directors with no data
-for item in delList:
-    del dirRevenues[item]
-
-# Get Directors with the top 100 average revenues
-dirRevenues = sort_and_crop_dict(dirRevenues, 100)
+# Get directors with the top 100 average revenues
+dirRevenues = create_average_revenue_dict("Director", 100)
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
 ax1.grid()
@@ -159,41 +146,8 @@ plt.savefig("Figures/Directors vs Average Revenue.png")
 
 # ? Actors vs Average Revenue
 
-# Generate set of distinct actors from dataframe
-allActors = set(sum([actList.split(",") for actList in list(data.Actors)], []))
-
-# Generate a dictionary of empty revenues for each actor
-actRevenues = {}
-for act in allActors:
-    actRevenues[act] = []
-
-
-for index in data.index:
-    # Getting revenue for each movie
-    itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue): # Skip nan values
-        continue
-
-    itemActors = data.Actors[index].split(",")
-    for act in itemActors:
-        actRevenues[act].append(itemRevenue)
-
-delList = []
-
-# Average the revenue for each film
-for item in actRevenues:
-    if (len(actRevenues[item]) == 0):
-        delList.append(item)
-        continue
-    actRevenues[item] = sum(actRevenues[item]) / len(actRevenues[item])
-
-# Remove actors with no data
-for item in delList:
-    del actRevenues[item]
-
-
 # Get Actors with the top 100 average revenues
-actRevenues = sort_and_crop_dict(actRevenues, 100)
+actRevenues = create_average_revenue_dict("Actors", 100)
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
 ax1.grid()
@@ -208,6 +162,7 @@ plt.savefig("Figures/Actors vs Average Revenue.png")
 
 
 # ? Year vs Average Revenue
+
 yearRange = range(min(data.Year), max(data.Year) + 1)
 
 # Create a dictionary with empty revenues for each year
@@ -274,46 +229,14 @@ ax1.grid()
 ax1.set_title("Runtime vs Average Revenue")
 ax1.set_xlabel("Runtime (Minutes)")
 ax1.set_ylabel("Revenue (Millions)")
-ax1.plot(list(runtimeRevenues.keys()), list(runtimeRevenues.values()))
+ax1.scatter(data["Runtime (Minutes)"], data["Revenue (Millions)"])
 plt.savefig("Figures/Runtime vs Average Revenue.png")
 
 
 
 # ? Rating vs Average Revenue
 
-# Generate set of the distinct ratings from dataframe
-allRatings = set(data.Rating)
-
-# Generate a dictionary of empty revenues for each rating
-rateRevenues = {}
-for rate in allRatings:
-    rateRevenues[rate] = []
-
-for index in data.index:
-    # Getting revenue for each movie
-    itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue): # Skip nan values
-        continue
-
-    rate = data.Rating[index]
-    rateRevenues[rate].append(itemRevenue)
-
-delList = []
-
-# Average the revenue for each film
-for item in rateRevenues:
-    if (len(rateRevenues[item]) == 0):
-        delList.append(item)
-        continue
-    rateRevenues[item] = sum(rateRevenues[item]) / len(rateRevenues[item])
-
-# Remove ratings with no data
-for item in delList:
-    del rateRevenues[item]
-
-
-# sort ratings
-rateRevenues = sort_and_crop_dict(rateRevenues)
+rateRevenues = create_average_revenue_dict("Rating")
 
 fig1, ax1 = plt.subplots(figsize=(20, 20))
 ax1.grid()
