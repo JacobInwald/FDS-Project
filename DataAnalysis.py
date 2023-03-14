@@ -146,14 +146,27 @@ plt.savefig("Figures/Directors vs Average Revenue.png")
 # Actors vs Average Revenue
 
 # Year vs Average Revenue
-
+yearRange = range(min(data.Year), max(data.Year) + 1)
+yearRevenues = {}
+for year in yearRange:
+    yearRevenues[year] = []
+for index in data.index:
+    itemRevenue = data["Revenue (Millions)"][index]
+    if math.isnan(itemRevenue):
+        continue
+    yearRevenues[data.Year[index]].append(itemRevenue)
+for item in yearRevenues:
+    if len(yearRevenues[item]) == 0:
+        print(item)
+        del yearRevenues[item]
+    yearRevenues[item] = sum(yearRevenues[item]) / len(yearRevenues[item])
 
 fig4, ax4 = plt.subplots(figsize=(20, 20))
 ax4.grid()
 ax4.set_title("Year vs Average Revenue")
 ax4.set_xlabel("Year")
 ax4.set_ylabel("Revenue (Millions)")
-print(data.Year, data["Revenue (Millions)"])
+ax4.plot(yearRange, list(yearRevenues.values()))
 plt.savefig("Figures/Year vs Average Revenue.png")
 
 # Runtime vs Average Revenue
