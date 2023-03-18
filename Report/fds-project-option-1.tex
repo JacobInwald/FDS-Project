@@ -5,6 +5,7 @@
 \usepackage{mathptmx} % Use Times Font
 
 \usepackage{graphicx} % Required for including pictures
+\graphicspath{ {Figures} }
 \usepackage{hyperref} % Format links for pdf
 \usepackage{biblatex}
 \addbibresource{references.bib}
@@ -19,8 +20,8 @@
 
 \usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
 
-\title{My datascience project title}
-\author{Irma Student and Soham Eye}
+\title{Project Title}
+\author{Jacob Inwald and Ollie Jones}
 
 \begin{document}
 
@@ -65,7 +66,14 @@
 %%
 
 \section{Overview}
-% 250 words maximum
+This report analyzes the relationship between different aspects of a movie
+and its gross income. These aspects include director list, actor list, runtime
+and so on. To investigate these relationships, we looked at a comprehensive
+dataset compiled by the movie ranking website IMDB.com. This dataset includes
+information about a movie like the director, the actors, the genre. 
+
+We found ..
+
 
 \section{Introduction}
 % Suggested 400 words
@@ -107,7 +115,7 @@ cleaning, removing missing values, joining tables.
 % 't' means "try to position at the top of the page"
 \begin{figure}[t]
   \centering
-  \includegraphics{example1}
+  \includegraphics{Directors vs Average Revenue.png}
   \caption{Demonstration figure. This caption explains more about the
     figure. Note that the font size of the labels in the plot is 9pt,
     which is obtained by the settings as shown in the Jupyter
