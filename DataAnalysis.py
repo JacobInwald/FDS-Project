@@ -111,14 +111,14 @@ def create_average_rating_dict(colname: str, n: int = None) -> dict:
         all = set([allcol for allcol in list(data[colname])])
 
     # Generate a dictionary of empty revenues for each genre
-    cRevenues = {}
+    cRatings = {}
     for c in all:
-        cRevenues[c] = []
+        cRatings[c] = []
 
     for index in data.index:
         # Getting revenue for each movie
-        itemRevenue = data["Rating"][index]
-        if math.isnan(itemRevenue):  # Skip nan values
+        itemRating = data["Rating"][index]
+        if math.isnan(itemRating):  # Skip nan values
             continue
 
         # Find each genre for the film
@@ -128,23 +128,23 @@ def create_average_rating_dict(colname: str, n: int = None) -> dict:
             itemCol = [data[colname][index]]
         # Adds the film's revenue to each genre
         for col in itemCol:
-            cRevenues[col].append(itemRevenue)
+            cRatings[col].append(itemRating)
 
     # Delete List for nan values
     delList = []
 
     # Calculate the average revenue for each genre
-    for item in cRevenues:
-        if (len(cRevenues[item]) == 0):
+    for item in cRatings:
+        if (len(cRatings[item]) == 0):
             delList.append(item)
             continue
-        cRevenues[item] = sum(cRevenues[item]) / len(cRevenues[item])
+        cRatings[item] = sum(cRatings[item]) / len(cRatings[item])
 
     for i in delList:
-        del cRevenues[i]
+        del cRatings[i]
 
     # Sort the revenues from highest to lowest
-    return sort_and_crop_dict(cRevenues, n)
+    return sort_and_crop_dict(cRatings, n)
 
 
 # ! Main Code
