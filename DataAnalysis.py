@@ -60,7 +60,8 @@ def sort_and_crop_dict(d: dict, n: int = None) -> dict:
 def create_average_revenue_dict(colname: str, n: int = None) -> dict:
     # Generate set of distinct genres from dataframe
     if (type(list(data[colname])[0]) == type("")):
-        all = set(sum([allcol.split(",") for allcol in list(data[colname])], []))
+        all = set(sum([allcol.split(",")
+                  for allcol in list(data[colname])], []))
     else:
         all = set([allcol for allcol in list(data[colname])])
 
@@ -69,11 +70,10 @@ def create_average_revenue_dict(colname: str, n: int = None) -> dict:
     for c in all:
         cRevenues[c] = []
 
-
     for index in data.index:
         # Getting revenue for each movie
         itemRevenue = data["Revenue (Millions)"][index]
-        if math.isnan(itemRevenue): # Skip nan values
+        if math.isnan(itemRevenue):  # Skip nan values
             continue
 
         # Find each genre for the film
@@ -102,13 +102,12 @@ def create_average_revenue_dict(colname: str, n: int = None) -> dict:
     return sort_and_crop_dict(cRevenues, n)
 
 
-
 # ! Main Code
-
 
 matplotlib.rcParams["figure.dpi"] = 150
 
 data = pd.read_csv("IMDB-Movie-Data.csv")
+data = data.dropna(0)
 # Rank, Title, Genre, Description, Director, Actors, Year, Runtime (Minutes),
 # Rating, Votes, Revenue (Millions), Metascore
 
@@ -117,15 +116,15 @@ data = pd.read_csv("IMDB-Movie-Data.csv")
 
 genreRevenues = create_average_revenue_dict("Genre")
 
-fig1, ax1 = plt.subplots(figsize=(20, 20))
+fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.grid()
 ax1.set_title("Genre vs Average Revenue")
 ax1.set_xlabel("Genre")
 ax1.set_ylabel("Revenue (Millions)")
 ax1.bar(range(len(genreRevenues)), list(genreRevenues.values()),
         tick_label=list(genreRevenues.keys()))
-plt.savefig("Figures/Genre vs Average Revenue.png")
-
+plt.xticks(rotation=90)
+plt.savefig("Report/Figures/Genre vs Average Revenue.png")
 
 
 # ? Directors vs Average Revenue
@@ -138,10 +137,10 @@ ax1.grid()
 ax1.set_title("Top 100 Director vs Average Revenue")
 ax1.set_xlabel("Top 100 Directors")
 ax1.set_ylabel("Revenue (Millions)")
-ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()), tick_label=list(dirRevenues.keys()))
+ax1.bar(range(len(dirRevenues)), list(dirRevenues.values()),
+        tick_label=list(dirRevenues.keys()))
 plt.xticks(rotation=90)
-plt.savefig("Figures/Directors vs Average Revenue.png")
-
+plt.savefig("Report/Figures/Directors vs Average Revenue.png")
 
 
 # ? Actors vs Average Revenue
@@ -157,8 +156,7 @@ ax1.set_ylabel("Revenue (Millions)")
 ax1.bar(range(len(actRevenues)), list(actRevenues.values()),
         tick_label=list(actRevenues.keys()))
 plt.xticks(rotation=90)
-plt.savefig("Figures/Actors vs Average Revenue.png")
-
+plt.savefig("Report/Figures/Actors vs Average Revenue.png")
 
 
 # ? Year vs Average Revenue
@@ -173,9 +171,9 @@ for year in yearRange:
 for index in data.index:
     # Get the revenue for the movie
     itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue): # Skip nan values
+    if math.isnan(itemRevenue):  # Skip nan values
         continue
-    
+
     # Find the movies year and add its revenue
     yearRevenues[data.Year[index]].append(itemRevenue)
 
@@ -183,19 +181,19 @@ for index in data.index:
 for item in yearRevenues:
     yearRevenues[item] = sum(yearRevenues[item]) / len(yearRevenues[item])
 
-fig1, ax1 = plt.subplots(figsize=(20, 20))
+fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.grid()
 ax1.set_title("Year vs Average Revenue")
 ax1.set_xlabel("Year")
 ax1.set_ylabel("Revenue (Millions)")
 ax1.plot(yearRange, list(yearRevenues.values()))
-plt.savefig("Figures/Year vs Average Revenue.png")
-
+plt.savefig("Report/Figures/Year vs Average Revenue.png")
 
 
 # ? Runtime vs Average Revenue
 # Get the range of runtimes in the dataframe
-runtimeRange = range(min(data["Runtime (Minutes)"]), max(data["Runtime (Minutes)"]) + 1)
+runtimeRange = range(min(data["Runtime (Minutes)"]),
+                     max(data["Runtime (Minutes)"]) + 1)
 
 # Create a dictionary with empty revenues for each year
 runtimeRevenues = {}
@@ -205,9 +203,9 @@ for runtime in runtimeRange:
 for index in data.index:
     # Get the revenue for the movie
     itemRevenue = data["Revenue (Millions)"][index]
-    if math.isnan(itemRevenue): # Skip nan values
+    if math.isnan(itemRevenue):  # Skip nan values
         continue
-    
+
     # Find the movies runtime and add its revenue
     runtimeRevenues[data["Runtime (Minutes)"][index]].append(itemRevenue)
 
@@ -218,40 +216,59 @@ for item in runtimeRevenues:
     if len(runtimeRevenues[item]) == 0:
         delList.append(item)
         continue
-    runtimeRevenues[item] = sum(runtimeRevenues[item]) / len(runtimeRevenues[item])
+    runtimeRevenues[item] = sum(
+        runtimeRevenues[item]) / len(runtimeRevenues[item])
 
 # Remove runtimes with no data
 for item in delList:
     del runtimeRevenues[item]
 
-fig1, ax1 = plt.subplots(figsize=(20, 20))
+fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.grid()
 ax1.set_title("Runtime vs Average Revenue")
 ax1.set_xlabel("Runtime (Minutes)")
 ax1.set_ylabel("Revenue (Millions)")
-ax1.scatter(data["Runtime (Minutes)"], data["Revenue (Millions)"])
-plt.savefig("Figures/Runtime vs Average Revenue.png")
-
+ax1.scatter(data["Runtime (Minutes)"], data["Revenue (Millions)"], s=5)
+plt.savefig("Report/Figures/Runtime vs Average Revenue.png")
 
 
 # ? Rating vs Average Revenue
 
 rateRevenues = create_average_revenue_dict("Rating")
 
-fig1, ax1 = plt.subplots(figsize=(20, 20))
+fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.grid()
 ax1.set_title("Ratings vs Average Revenue")
 ax1.set_xlabel("Movie Rating")
 ax1.set_ylabel("Average Revenue (Millions)")
-ax1.scatter(list(rateRevenues.keys()), list(rateRevenues.values()))
+ax1.scatter(list(rateRevenues.keys()), list(rateRevenues.values()), s=5)
 
-plt.savefig("Figures/Rating vs Average Revenue.png")
+plt.savefig("Report/Figures/Rating vs Average Revenue.png")
 
-fig1, ax1 = plt.subplots(figsize=(20, 20))
+fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.grid()
 ax1.set_title("Ratings vs Revenue")
 ax1.set_xlabel("Movie Rating")
 ax1.set_ylabel("Revenue (Millions)")
-ax1.scatter(data["Rating"], data["Revenue (Millions)"])
+ax1.scatter(data["Rating"], data["Revenue (Millions)"], s=5)
 
-plt.savefig("Figures/Rating vs Revenue.png")
+plt.savefig("Report/Figures/Rating vs Revenue.png")
+
+# ? Meta Score vs Rating
+
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.grid()
+ax1.set_title("Meta Score vs Rating")
+ax1.set_ylabel("Meta Score")
+ax1.set_xlabel("Rating")
+ax1.scatter(data["Rating"], data["Metascore"], s=5)
+
+x = data["Rating"]
+y = data["Metascore"]
+a, b = np.polyfit(x, y, 1)
+r_2 = np.corrcoef(x, y)
+print(r_2[0][1])
+ax1.plot(x, a * x + b, label=("$R^2=$%.2f: y = %.2f*x + %.2f" %
+         (r_2[0][1], a, b)))
+ax1.legend()
+plt.savefig("Report/Figures/Meta Score vs Rating.png")
