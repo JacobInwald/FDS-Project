@@ -102,6 +102,51 @@ def create_average_revenue_dict(colname: str, n: int = None) -> dict:
     return sort_and_crop_dict(cRevenues, n)
 
 
+def create_average_rating_dict(colname: str, n: int = None) -> dict:
+    # Generate set of distinct genres from dataframe
+    if (type(list(data[colname])[0]) == type("")):
+        all = set(sum([allcol.split(",")
+                  for allcol in list(data[colname])], []))
+    else:
+        all = set([allcol for allcol in list(data[colname])])
+
+    # Generate a dictionary of empty revenues for each genre
+    cRevenues = {}
+    for c in all:
+        cRevenues[c] = []
+
+    for index in data.index:
+        # Getting revenue for each movie
+        itemRevenue = data["Rating"][index]
+        if math.isnan(itemRevenue):  # Skip nan values
+            continue
+
+        # Find each genre for the film
+        if (type(list(data[colname])[0]) == type("")):
+            itemCol = data[colname][index].split(",")
+        else:
+            itemCol = [data[colname][index]]
+        # Adds the film's revenue to each genre
+        for col in itemCol:
+            cRevenues[col].append(itemRevenue)
+
+    # Delete List for nan values
+    delList = []
+
+    # Calculate the average revenue for each genre
+    for item in cRevenues:
+        if (len(cRevenues[item]) == 0):
+            delList.append(item)
+            continue
+        cRevenues[item] = sum(cRevenues[item]) / len(cRevenues[item])
+
+    for i in delList:
+        del cRevenues[i]
+
+    # Sort the revenues from highest to lowest
+    return sort_and_crop_dict(cRevenues, n)
+
+
 # ! Main Code
 
 matplotlib.rcParams["figure.dpi"] = 150
@@ -117,7 +162,7 @@ data = data.dropna(0)
 genreRevenues = create_average_revenue_dict("Genre")
 
 fig1, ax1 = plt.subplots(figsize=(10, 10))
-ax1.grid()
+ax1.grid(axis="y")
 ax1.set_title("Genre vs Average Revenue")
 ax1.set_xlabel("Genre")
 ax1.set_ylabel("Revenue (Millions)")
@@ -125,6 +170,19 @@ ax1.bar(range(len(genreRevenues)), list(genreRevenues.values()),
         tick_label=list(genreRevenues.keys()))
 plt.xticks(rotation=90)
 plt.savefig("Report/Figures/Genre vs Average Revenue.png")
+
+genreRating = create_average_rating_dict("Genre")
+
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.grid(axis="y")
+ax1.set_title("Genre vs Average Rating")
+ax1.set_xlabel("Genre")
+ax1.set_ylabel("Rating")
+ax1.bar(range(len(genreRating)), list(genreRating.values()),
+        tick_label=list(genreRating.keys()))
+ax1.set_ylim(5.5)
+plt.xticks(rotation=90)
+plt.savefig("Report/Figures/Genre vs Average Rating.png")
 
 
 # ? Directors vs Average Revenue
