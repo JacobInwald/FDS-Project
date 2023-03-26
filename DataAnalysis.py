@@ -266,9 +266,7 @@ ax1.scatter(data["Rating"], data["Metascore"], s=5)
 x = data["Rating"]
 y = data["Metascore"]
 a, b = np.polyfit(x, y, 1)
-r_2 = np.corrcoef(x, y)
-print(r_2[0][1])
-ax1.plot(x, a * x + b, label=("$R^2=$%.2f: y = %.2f*x + %.2f" %
-         (r_2[0][1], a, b)))
+r_2 = np.corrcoef(x, y)[0][1]
+ax1.plot(x, a * x + b, label=("$R^2=$%.2f: y = %.2f*x + %.2f" % (r_2, a, b)))
 ax1.legend()
 plt.savefig("Report/Figures/Meta Score vs Rating.png")
