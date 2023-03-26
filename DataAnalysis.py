@@ -156,6 +156,56 @@ data = data.dropna(0)
 # Rank, Title, Genre, Description, Director, Actors, Year, Runtime (Minutes),
 # Rating, Votes, Revenue (Millions), Metascore
 
+# ? Actor Experience (Number of Appearances) vs Mean Revenue of Movie
+
+director_counts = pd.read_csv("director_counts.csv")
+dirRevenues = create_average_revenue_dict("Director")
+d = {}
+for director in dirRevenues.keys():
+    a = director.strip()
+    if len(director_counts[director_counts.name == director]) != 1:
+        continue
+    num_movies = director_counts[director_counts.name == director]['num_films'].values[0]
+    if num_movies not in d.keys():
+        d[num_movies] = [dirRevenues[director]]
+    else:
+        d[num_movies].append(dirRevenues[director])
+
+for a in d.keys():
+    d[a] = sum(d[a]) / len(d[a])
+
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.set_title("Director Experience (Number of Appearances) vs Mean Revenue of Movie")
+ax1.set_xlabel("Director Experience (Number of Appearances")
+ax1.set_ylabel("Mean Revenue of Movie (Millions)")
+ax1.scatter(d.keys(),d.values())
+plt.savefig("Report/Figures/Director Experience (Number of Appearances) vs Mean Revenue of Movie.png")
+
+
+# ? Actor Experience (Number of Appearances) vs Mean Revenue of Movie
+
+actor_counts = pd.read_csv("actor_counts.csv")
+actRevenues = create_average_revenue_dict("Actors")
+d = {}
+for actor in actRevenues.keys():
+    a = actor.strip()
+    if len(actor_counts[actor_counts.name == actor]) != 1:
+        continue
+    num_movies = actor_counts[actor_counts.name == actor]['num_films'].values[0]
+    if num_movies not in d.keys():
+        d[num_movies] = [actRevenues[actor]]
+    else:
+        d[num_movies].append(actRevenues[actor])
+
+for a in d.keys():
+    d[a] = sum(d[a]) / len(d[a])
+
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.set_title("Actor Experience (Number of Appearances) vs Mean Revenue of Movie")
+ax1.set_xlabel("Actor Experience (Number of Appearances")
+ax1.set_ylabel("Mean Revenue of Movie (Millions)")
+ax1.scatter(d.keys(),d.values())
+plt.savefig("Report/Figures/Actor Experience (Number of Appearances) vs Mean Revenue of Movie.png")
 
 # ? Genre vs Average Revenue
 
