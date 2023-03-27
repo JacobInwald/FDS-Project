@@ -151,4 +151,4 @@ def save_figure(plot, fileName):
         "figure.figsize": (6, 6)
     })
     plot.savefig(
-        f"Report/Figures/Prelim Analysis/{fileName}.png", bbox_inches="tight")
+        f"Report/Figures/Prelim Analysis/{fileName}.pdf", bbox_inches="tight")
