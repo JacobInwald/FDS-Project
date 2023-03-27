@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import math
+import _Data as d
 
 def convert_to_numeric():
     data_raw = pd.read_csv("IMDB-Movie-Data.csv")
@@ -30,8 +31,15 @@ def convert_to_numeric():
     print("processing_done")
     data_raw.to_csv("numeric_IMDB_movie_data.csv")
 
-data = pd.read_csv("numeric_IMDB_movie_data.csv").set_index("Rank")
-plt.figure(figsize=(10,10))
+data = pd.read_csv("Data Sets/numeric_IMDB_movie_data.csv")
+plt.figure(figsize=(8,8))
 heatmap = sns.heatmap(data.corr(), vmin=-1, vmax=1, annot=True, cmap='BrBG')
-heatmap.set_title('Correlations Heatmap')
-plt.show()
+heatmap.set_title('Correlation Heatmap')
+heatmap.set_xticklabels(heatmap.get_xticklabels(), 
+                        rotation = 20,
+                        ha = 'right')
+heatmap.set_yticklabels(heatmap.get_yticklabels(), 
+                        rotation = 60,
+                        va = 'top')
+
+d.save_figure(plt, 'Correlation Heatmap')
