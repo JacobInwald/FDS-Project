@@ -146,4 +146,9 @@ def create_average_rating_dict(colname: str, n: int = None) -> dict:
 
 
 def save_figure(plot, fileName):
-    plot.savefig(f"Report/Figures/Prelim Analysis/{fileName}.png")
+    plot.rcParams.update({
+        "font.size": 11,
+        "figure.figsize": (6, 6)
+    })
+    plot.savefig(
+        f"Report/Figures/Prelim Analysis/{fileName}.png", bbox_inches="tight")
