@@ -2,12 +2,76 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        Who created the dataset(s)?
-        How you have obtained it (e.g., file or web scraping), and do the T\&Cs allow
-            you to use obtain the data for the project?
+        We used two datasets to aid our investigation: an IMDB movie dataset, containing
+            various details about movies made from 2006-2016; and a larger movie dataset,
+            containing details about movies released on or before July 2017.
+        The IMDB dataset has a bit of a contentious past as it was scraped off of the movie
+            ranking website IMDB.com, and is actually only a sample dataset from a much larger
+            dataset that has every movie made from 2006-2016 that is in the IMDB.
+        The large movie dataset was collated using data from TMDB (The Movie DataBase) and 
+            grouplens.org; but we only use the part that was obtained from TMDB as it is used
+            to find Director and Actor experience.
+
+        Both datasets were downloaded from kaggle.com, a data science platform that enables users
+            to access and share datasets. These datsets are shared underneath the CC0 1.0 Universal
+            Public Domain Dedication, as such we will use them underneath fair use.
 
     \paragraph{Data description}
-        Description of the data, e.g. variables in each table, number of records.
+        The IMDB movie dataset has 12 columns, all either containing string values or floating point values.
+        The only odd column is the Genre column which contains the different genres that can be applied to a particular movie
+        The genres that are in this dataset are the arbritary genres: 
+        \begin{multicols}{5}
+            \begin{itemize}
+                \item Action 
+                \item Adventure 
+                \item Sci-Fi 
+                \item Mystery 
+                \item Horror 
+                \item Thriller 
+                \item Animation 
+                \item Comedy 
+                \item Family 
+                \item Fantasy 
+                \item Drama 
+                \item Music 
+                \item Biography 
+                \item Romance 
+                \item History 
+                \item Crime 
+                \item Western 
+                \item War 
+                \item Musical 
+                \item Sport
+            \end{itemize}
+        \end{multicols}
+        \begin{figure}[h]
+            \centering
+            \begin{tabular}{ll}
+                \toprule
+                Column Name &           Description \\
+                \midrule
+                Rank &                  The rank the movie has in the IMDB database \\
+                Title &                 The name of the movie \\
+                Genre &                 The genres that apply to the movie, there can be anywhere from 1-3 genres. \\
+                {}      &               A genre can be any from: Action, Adventure, Sci-Fi, Mystery, Horror,       \\
+                {}      &               Thriller, Animation, Comedy, Family, Fantasy, Drama, Music, Biography,     \\
+                {}      &               Romance, History, Crime, Western, War, Musical, Sport                      \\
+                Description &           The description of the movie \\
+                Director &              The person who directed the movie \\
+                Actors &                The lead roles in the movie \\
+                Year  &                 The year the movie was released \\
+                Runtime (Minutes) &     The runtime in minutes of the movie \\ 
+                Rating   &              The mean rating of the movie, taken from IMDB.com \\
+                Votes   &               The amount of users that voted on a movie to give it that rating \\ 
+                Revenue (Millions) &    The gross income the movie made at the US box office\\  
+                Metascore   &           The rating of movie, determined using aggregated weighted critic scores \\ 
+                \bottomrule
+            \end{tabular}
+            \caption[short]{The different columns in the IMDB-Movie-Data.csv file}\label{fig-IMDB-Movie-Data-Column-Description}
+        \end{figure}
+        The other dataset used had a bit of a more odd structure.
+        We used the crew.csv file obtained from 
+
 
     \paragraph{Data processing}
         How you have processed the dataset, e.g., cleaning, removing missing values,
