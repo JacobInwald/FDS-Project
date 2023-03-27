@@ -8,7 +8,7 @@ ax1.grid(axis="y")
 ax1.set_title("Genre vs Average Rating")
 ax1.set_xlabel("Genre")
 ax1.set_ylabel("Rating")
-ax1.bar(range(len(genreRating)), list(genreRating.values()),
+ax1.boxplot(range(len(genreRating)), list(genreRating.values()),
         tick_label=list(genreRating.keys()))
 ax1.set_ylim(5.5)
 plt.xticks(rotation=90)
