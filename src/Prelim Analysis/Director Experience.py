@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from _Data import *
 
-director_counts = pd.read_csv("director_counts.csv")
+director_counts = pd.read_csv("Data Sets/director_counts.csv")
 dirRevenues = create_average_revenue_dict("Director")
 dirRatings = create_average_rating_dict("Director")
 d = {}

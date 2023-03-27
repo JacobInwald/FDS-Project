@@ -2,9 +2,6 @@ import matplotlib.pyplot as plt
 import math
 from _Data import *
 
-data = pd.read_csv("IMDB-Movie-Data.csv")
-data = data.dropna(0)
-
 yearRange = range(min(data.Year), max(data.Year) + 1)
 
 # Create a dictionary with empty revenues for each year

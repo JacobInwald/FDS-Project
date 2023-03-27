@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from _Data import *
 
-actor_counts = pd.read_csv("actor_counts.csv")
+actor_counts = pd.read_csv("Data Sets/actor_counts.csv")
 actRevenues = create_average_revenue_dict("Actors")
 actRatings = create_average_rating_dict("Actors")
 d = {}

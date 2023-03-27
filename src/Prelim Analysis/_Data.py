@@ -36,7 +36,7 @@ import math
 import numpy as np
 import pandas as pd
 
-data = pd.read_csv("IMDB-Movie-Data.csv")
+data = pd.read_csv("Data Sets/IMDB-Movie-Data.csv")
 data = data.dropna(0)
 
 
