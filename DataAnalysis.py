@@ -160,7 +160,9 @@ data = data.dropna(0)
 
 director_counts = pd.read_csv("director_counts.csv")
 dirRevenues = create_average_revenue_dict("Director")
+dirRatings = create_average_rating_dict("Director")
 d = {}
+dRatings = {}
 for director in dirRevenues.keys():
     a = director.strip()
     if len(director_counts[director_counts.name == director]) != 1:
@@ -171,8 +173,15 @@ for director in dirRevenues.keys():
     else:
         d[num_movies].append(dirRevenues[director])
 
+    if num_movies not in dRatings.keys():
+        dRatings[num_movies] = [dirRatings[director]]
+    else:
+        dRatings[num_movies].append(dirRatings[director])
+
 for a in d.keys():
     d[a] = sum(d[a]) / len(d[a])
+for b in dRatings.keys():
+    dRatings[b] = sum(dRatings[b]) / len(dRatings[b])
 
 fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.set_title("Director Experience (Number of Appearances) vs Mean Revenue of Movie")
@@ -181,12 +190,23 @@ ax1.set_ylabel("Mean Revenue of Movie (Millions)")
 ax1.scatter(d.keys(),d.values())
 plt.savefig("Report/Figures/Director Experience (Number of Appearances) vs Mean Revenue of Movie.png")
 
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.set_title("Director Experience (Number of Appearances) vs Mean Rating of Movie")
+ax1.set_xlabel("Director Experience (Number of Appearances")
+ax1.set_ylabel("Mean Rating")
+ax1.scatter(dRatings.keys(),dRatings.values())
+plt.savefig("Report/Figures/Director Experience (Number of Appearances) vs Mean Rating of Movie.png")
+
+
 
 # ? Actor Experience (Number of Appearances) vs Mean Revenue of Movie
 
 actor_counts = pd.read_csv("actor_counts.csv")
 actRevenues = create_average_revenue_dict("Actors")
+actRatings = create_average_rating_dict("Actors")
 d = {}
+dRatings = {}
+
 for actor in actRevenues.keys():
     a = actor.strip()
     if len(actor_counts[actor_counts.name == actor]) != 1:
@@ -197,15 +217,28 @@ for actor in actRevenues.keys():
     else:
         d[num_movies].append(actRevenues[actor])
 
+    if num_movies not in dRatings.keys():
+        dRatings[num_movies] = [actRatings[actor]]
+    else:
+        dRatings[num_movies].append(actRatings[actor])
+
 for a in d.keys():
     d[a] = sum(d[a]) / len(d[a])
-
+for b in dRatings.keys():
+    dRatings[b] = sum(dRatings[b]) / len(dRatings[b])
 fig1, ax1 = plt.subplots(figsize=(10, 10))
 ax1.set_title("Actor Experience (Number of Appearances) vs Mean Revenue of Movie")
 ax1.set_xlabel("Actor Experience (Number of Appearances")
 ax1.set_ylabel("Mean Revenue of Movie (Millions)")
 ax1.scatter(d.keys(),d.values())
 plt.savefig("Report/Figures/Actor Experience (Number of Appearances) vs Mean Revenue of Movie.png")
+
+fig1, ax1 = plt.subplots(figsize=(10, 10))
+ax1.set_title("Actor Experience (Number of Appearances) vs Mean Rating of Movie")
+ax1.set_xlabel("Actor Experience (Number of Appearances")
+ax1.set_ylabel("Mean Rating of Movie")
+ax1.scatter(dRatings.keys(),dRatings.values())
+plt.savefig("Report/Figures/Actor Experience (Number of Appearances) vs Mean Rating of Movie.png")
 
 # ? Genre vs Average Revenue
 
