@@ -2,3 +2,4 @@
 Report/build/**
 !Report/build/**.pdf
 credits.csv
+__pycache__
