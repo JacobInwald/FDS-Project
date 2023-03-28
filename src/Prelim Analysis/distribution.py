@@ -9,9 +9,8 @@ import scipy
 
 data = pd.read_csv("Data Sets/merged_movie_data.csv")
 
-fig, axs = plt.subplots(ncols=3, nrows=3, figsize=(8,8), sharey=True)
-fig.delaxes(axs[2][1])
-fig.delaxes(axs[2][2])
+fig, axs = plt.subplots(ncols=4, nrows=2, figsize=(8,5), sharey=True)
+fig.delaxes(axs[1][3])
 fig.suptitle("Distribution of Numeric Variables (No Transformation)")
 fig.supylabel("Count")
 fig.tight_layout()
