@@ -8,7 +8,7 @@
         The IMDB dataset has a bit of a contentious past as it was scraped off of the movie
             ranking website IMDB.com, and is actually only a sample dataset from a much larger
             dataset that has every movie made from 2006-2016 that is in the IMDB.
-        The large movie dataset was collated using data from TMDB (The Movie DataBase) and 
+        The large movie dataset (TMD) was collated using data from TMDB (The Movie DataBase) and 
             grouplens.org; but we only use the part that was obtained from TMDB as it is used
             to find Director and Actor experience.
 
@@ -73,8 +73,8 @@
             \caption[short]{The different columns in the IMDB-Movie-Data.csv file}\label{fig-IMDB-Movie-Data-Column-Description}
         \end{figure}
         \newline
-        The other dataset used had a bit of a more odd structure.
-        We used the crew.csv file that is part of the larger dataset, so that file's structure is the only part explained.
+        The TMD dataset used had a bit of a more odd structure.
+        We only used the crew.csv file that is a small part of the larger dataset, so we only explain the structure of crew.csv.
         This file was composed of three columns: cast, crew and id.
         The odd part of the dataset is that the cast and crew columns are composed of .json files, and as such we needed to parse 
             out the useful data from these json files to actually get useable data.
@@ -96,4 +96,4 @@
     \paragraph{Data processing}
         How you have processed the dataset, e.g., cleaning, removing missing values,
             joining tables.
-        To create the 
+        To cleanup the f
