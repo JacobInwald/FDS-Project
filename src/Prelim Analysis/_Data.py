@@ -149,7 +149,7 @@ def create_average_rating_dict(colname: str, n: int = None) -> dict:
 def save_figure(plot, fileName):
     plot.rcParams.update({
         "font.size": 11,
-        "figure.figsize": (6, 6)
+        "figure.figsize": (3, 3)
     })
     plot.savefig(
         f"Report/Figures/Prelim Analysis/{fileName}.pdf", bbox_inches="tight")
@@ -163,15 +163,15 @@ def create_merged_dataset():
     director_count = pd.read_csv("Data Sets/director_counts.csv")
     actor_count = pd.read_csv("Data Sets/actor_counts.csv")
 
-    data_raw['Director Exp.'] = [director_count[director_count.name == d.strip()]['num_films'].values[0] 
+    data_raw['Director Exp.'] = [director_count[director_count.name == d.strip()]['num_films'].values[0] + 1
                                     if len(director_count[director_count.name == d.strip()]) >= 1
-                                        else 0 
+                                        else 1 
                                         for d in data_raw['Director']]
     data_raw = data_raw.drop('Director', axis=1)
 
-    data_raw['Mean Lead Roles Exp.'] = [sum([actor_count[actor_count.name == act]['num_films'].values[0] 
+    data_raw['Mean Lead Roles Exp.'] = [sum([actor_count[actor_count.name == act]['num_films'].values[0] + 1
                                     if len(actor_count[actor_count.name == act]) >= 1
-                                        else 0
+                                        else 1
                                         for act in a.split(', ')]) / len(a.split(', ')) for a in data_raw['Actors']]
     data_raw = data_raw.drop('Actors', axis=1)
     

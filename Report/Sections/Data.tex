@@ -20,30 +20,9 @@
         The IMDB movie dataset has 12 columns, all either containing string values or floating point values.
         The only odd column is the Genre column which contains the different genres that can be applied to a particular movie.
         The genres that are in this dataset are the arbritary genres: 
-        \begin{multicols}{5}
-            \begin{itemize}
-                \item Action 
-                \item Adventure 
-                \item Sci-Fi 
-                \item Mystery 
-                \item Horror 
-                \item Thriller 
-                \item Animation 
-                \item Comedy 
-                \item Family 
-                \item Fantasy 
-                \item Drama 
-                \item Music 
-                \item Biography 
-                \item Romance 
-                \item History 
-                \item Crime 
-                \item Western 
-                \item War 
-                \item Musical 
-                \item Sport
-            \end{itemize}
-        \end{multicols}
+            
+        Action, Adventure, Sci-Fi, Mystery, Horror, Thriller, Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance, History, Crime, Western, War, Musical, Sport
+        
         The column summary is shown in Figure \ref*{fig-IMDB-Movie-Data-Column-Description}.
         \begin{figure}[h]
             \centering
@@ -102,7 +81,7 @@
         Using this newly acquired data, we merged it with the original IMDB dataset. 
         In the merging process the Description column was dropped, and the Director and Actor columns were replaced with the 
             Director Exp. and Mean Lead Roles Exp.
-        This resulted in a merged\_movie\_data.csv file with structure shown in Figure \ref*{fig-merged-data-column-description}
+        This resulted in a merged\_movie\_data.csv file with structure shown in Figure \ref*{fig-merged-data-column-description}.
         \begin{figure}[h]
             \begin{tabular}[width = \textwidth]{lll}
                 \toprule
@@ -122,5 +101,39 @@
                 \bottomrule
             \end{tabular}
         \caption[short]{The different columns in the merged data set}\label{fig-merged-data-column-description}
-        We use this merged dataset for our analysis of movie trends.
-    \end{figure}
+        \end{figure}
+
+        To check this data was properly normalised we made a histogram plot of all the numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
+        As expected, a few variables did not appear to be normally distributed, namely: Revenue (Millions), Votes, Runtime (Minutes), 
+            Director Exp., and Rating.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
+            \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
+        \end{figure}
+        As shown in the plot, Revenue (Millions) and Votes are severly right skewed, implying an exponential distribution;
+        Runtime (Minutes) and Director Exp. appear to be less severly right-skewed, implying a lognormal distribution;
+        Rating seems to be left-skewed.
+        The transformations for these variables that gave the best approximations to a normal distribution were:
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item Revenue (Millions) : Cube Root transform
+                \item Votes              : Cube Root transform
+                \item Runtime (Minutes)  : Log transform
+                \item Director Exp.      : Log transform
+                \item Rating             : Square transform
+            \end{itemize}
+        \end{multicols}
+        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the transformed and normalised numeric variables.
+        The label has the p-values from testing whether the transformed distribution is normal, using the Kolmogorov-Smirnov
+            test for goodness of fit.
+        One interesting note is that altough the Director Exp. column fails the Kolmogorov-Smirnov test, there is clearly missing
+            data; around 3 columns are missing from the histogram shown.
+        With this in mind, and as the histogram does follow the normal distribution curve, there is sufficient evidence to assume
+            ln(Director Exp.) has a normal distribution.
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
+            \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-transformed-distribution-of-numeric-variable}
+        \end{figure}
+        This normalised data was used for the rest of our investigations later on.
