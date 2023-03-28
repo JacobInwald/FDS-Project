@@ -26,7 +26,7 @@ for a in actors:
         actor_count[a] = 1
 
 actor_count = pd.DataFrame.from_dict(actor_count, orient='index')
-actor_count.to_csv("Data Sets/actor_counts.csv")
+actor_count.to_csv("Data Sets/actor_counts.csv", index=False)
 
 
 for i in range(n):
@@ -50,4 +50,4 @@ for d in directors:
         director_count[d] = 1
 
 director_count = pd.DataFrame.from_dict(director_count, orient='index')
-director_count.to_csv("Data Sets/director_counts.csv")
+director_count.to_csv("Data Sets/director_counts.csv", index=False)

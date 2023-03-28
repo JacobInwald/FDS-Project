@@ -6,8 +6,10 @@ import seaborn as sns
 import math
 import _Data as d
 
-data = pd.read_csv("Data Sets/numeric_IMDB_movie_data.csv")
-plt.figure(figsize=(8,8))
+data = pd.read_csv("Data Sets/merged_movie_data.csv")
+data = data.dropna()
+data = data.drop(['Genre', 'Title'], axis=1)
+
 heatmap = sns.heatmap(data.corr(), vmin=-1, vmax=1, annot=True, cmap='BrBG')
 heatmap.set_title('Correlation Heatmap')
 heatmap.set_xticklabels(heatmap.get_xticklabels(), 
