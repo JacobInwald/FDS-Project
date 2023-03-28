@@ -3,7 +3,7 @@
 
     \paragraph{Data provenance}
         We used two datasets to aid our investigation: an IMDB movie dataset, containing
-            various details about movies made from 2006-2016; and a larger movie dataset,
+            various details about movies made from 2006-2016; and a larger movie dataset (TMD),
             containing details about movies released on or before July 2017.
         The IMDB dataset has a bit of a contentious past as it was scraped off of the movie
             ranking website IMDB.com, and is actually only a sample dataset from a much larger
@@ -94,6 +94,33 @@
         \end{figure}
 
     \paragraph{Data processing}
-        How you have processed the dataset, e.g., cleaning, removing missing values,
-            joining tables.
-        To cleanup the f
+        To cleanup the TMD dataset, we made and used a python script that went through all the entries of
+            the dataset and extracted two things; number of movies each actor appeared in, and number of movies each director
+            directed.
+        These two sets of data were saved to .csv files, named actor\_counts.csv and director\_counts respectively.
+        \\
+        Using this newly acquired data, we merged it with the original IMDB dataset. 
+        In the merging process the Description column was dropped, and the Director and Actor columns were replaced with the 
+            Director Exp. and Mean Lead Roles Exp.
+        This resulted in a merged\_movie\_data.csv file with structure shown in Figure \ref*{fig-merged-data-column-description}
+        \begin{figure}[h]
+            \begin{tabular}[width = \textwidth]{lll}
+                \toprule
+                Column Name &           Description                                                                 & Data Type \\
+                \midrule
+                Rank &                  See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\          
+                Title &                 See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & String \\
+                Genre &                 See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Genre \\
+                Director Exp. &         The number of movies that the director of the movie has made                & Float \\
+                Mean Lead Roles Exp. &  The mean number of movies that the lead actors have been in                 & Float \\
+                Year  &                 See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\
+                Runtime (Minutes) &     See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\ 
+                Rating   &              See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Float \\
+                Votes   &               See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\ 
+                Revenue (Millions) &    See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Float \\  
+                Metascore   &           See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\
+                \bottomrule
+            \end{tabular}
+        \caption[short]{The different columns in the merged data set}\label{fig-merged-data-column-description}
+        We use this merged dataset for our analysis of movie trends.
+    \end{figure}
