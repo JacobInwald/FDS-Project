@@ -2,8 +2,8 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We used two datasets to aid our investigation: an IMDB movie dataset, containing
-            various details about movies made from 2006-2016; and a larger movie dataset (TMD),
+        We used two datasets to aid our investigation: an IMDB movie dataset\cite*{data:IMDB}, containing
+            various details about movies made from 2006-2016; and a larger movie dataset\cite*{data:TMD} (TMD),
             containing details about movies released on or before July 2017.
         The IMDB dataset has a bit of a contentious past as it was scraped off of the movie
             ranking website IMDB.com, and is actually only a sample dataset from a much larger
@@ -51,7 +51,7 @@
             \end{tabular}
             \caption[short]{The different columns in the IMDB-Movie-Data.csv file}\label{fig-IMDB-Movie-Data-Column-Description}
         \end{figure}
-        \newline
+        
         The TMD dataset used had a bit of a more odd structure.
         We only used the crew.csv file that is a small part of the larger dataset, so we only explain the structure of crew.csv.
         This file was composed of three columns: cast, crew and id.
@@ -106,7 +106,7 @@
         To check this data was properly normalised we made a histogram plot of all the numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
         As expected, a few variables did not appear to be normally distributed, namely: Revenue (Millions), Votes, Runtime (Minutes), 
             Director Exp., and Rating.
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
             \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
@@ -126,12 +126,12 @@
         \end{multicols}
         Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the transformed and normalised numeric variables.
         The label has the p-values from testing whether the transformed distribution is normal, using the Kolmogorov-Smirnov
-            test for goodness of fit.
+            test\cite*{KStest} for goodness of fit.
         One interesting note is that altough the Director Exp. column fails the Kolmogorov-Smirnov test, there is clearly missing
             data; around 3 columns are missing from the histogram shown.
         With this in mind, and as the histogram does follow the normal distribution curve, there is sufficient evidence to assume
             ln(Director Exp.) has a normal distribution.
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
             \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-transformed-distribution-of-numeric-variable}
