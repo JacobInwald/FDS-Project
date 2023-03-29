@@ -2,108 +2,144 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        This study utilizes two movie datasets: an IMDb dataset\cite*{data:IMDb} and TMD\cite*{data:TMD} (The Movie Dataset).
-        The IMDb dataset contains data about movies made from 2006-2016, while the TMD dataset contains data about movies released on or before July 2017.
-        Both datasets were obtained from kaggle.com and are shared under the CC0 1.0 Universal Public Domain Dedication.
-        TMD is merged data from TMDb (The Movie DataBase) and grouplens.org, a movie ranking site.
-        It is worth noting that the provenance of the IMDb dataset has been subject to controversy as it was scraped from IMDb.com.
-        However, for this investigation, we used only a sample of this dataset which is publicly available on kaggle.com.
+        We utilized two movie datasets: an IMDb dataset\cite*{data:IMDb} and
+            TMD\cite*{data:TMD} (The Movie Dataset).
+        The IMDb dataset contains data about movies made from 2006-2016, while the TMD
+            dataset contains data about movies released on or before July 2017.
+        Both datasets were obtained from kaggle.com and are shared under the CC0 1.0
+            Universal Public Domain Dedication.
+        TMD is merged data from TMDb (The Movie DataBase) and grouplens.org, a movie
+            ranking site.
+        However, we only used the part that was obtained from TMDb.
+        It is worth noting that the provenance of the IMDb dataset has been subject to
+            controversy as it was scraped from IMDb.com.
+        However, for this investigation, we used only a sample of this dataset which is
+            publicly available on kaggle.com.
 
     \paragraph{Data description}
-        The IMDb movie dataset contains 12 columns consisting of string or floating point values.
-        One unique column is the Genre, which lists the arbitrary genres assigned to each movie in the dataset such as Action, Adventure, Sci-Fi, Mystery, Horror, Thriller, 
-            Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance, History, Crime, Western, War, Musical and Sport.
-        The column summary is shown in Figure \ref*{fig-IMDb-Movie-Data-Column-Description}.
-        \begin{figure}[h]
+        The IMDb movie dataset contains 12 columns consisting of string or floating
+            point values.
+        One unique column is the Genre, which lists the arbitrary genres assigned to
+            each movie in the dataset such as Action, Adventure, Sci-Fi, Mystery, Horror,
+            Thriller, Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance,
+            History, Crime, Western, War, Musical and Sport.
+        The column summary is shown in Table
+            \ref*{tab-IMDb-Movie-Data-Column-Description}.
+        \begin{table}[h]
             \centering
-            \begin{tabular}[width=\linewidth]{lll}
+            \begin{tabular}{lp{10cm}l}
                 \toprule
-                Column Name &           Description                                                                 & Data Type \\
+                Column Name        & Description                                                                & Data Type \\
                 \midrule
-                Rank &                  The rank the movie has in the IMDb database                                 & Integer \\          
-                Title &                 The name of the movie                                                       & String \\
-                Genre &                 The genres that apply to the movie, there can be anywhere from              & Genre \\
-                {}      &               1-3 genres. A genre can be any from: Action, Adventure, Sci-Fi,             & Category \\
-                {}      &               Thriller, Animation, Comedy, Family, Fantasy, Drama, Music,                 & {} \\
-                {}      &               Romance, History, Crime, Western, War, Musical, Sport, Horror               & {} \\
-                {}      &               Mystery, Biography                                                          & {} \\
-                Description &           The description of the movie                                                & String \\
-                Director &              The person who directed the movie                                           & String \\
-                Actors &                The lead roles in the movie                                                 & String \\
-                Year  &                 The year the movie was released                                             & Integer \\
-                Runtime (Minutes) &     The runtime in minutes of the movie                                         & Integer \\ 
-                Rating   &              The mean rating of the movie, taken from IMDb.com                           & Float \\
-                Votes   &               The amount of users that voted on a movie to give it that rating            & Integer \\ 
-                Revenue (Millions) &    The gross income the movie made at the US box office                        & Float \\  
-                Metascore   &           The rating of movie, determined using aggregated weighted Critics           & Integer \\
-                {}          &           scores                                                                      & {} \\         
+                Rank               & The rank the movie has in the IMDb database                                & Integer   \\
+                Title              & The name of the movie                                                      & String    \\
+                Genre              & The genres that apply to the movie, there can be anywhere from 1-3 genres.
+                A genre can be any from: Action, Adventure, Sci-Fi, Thriller, Animation,
+                    Comedy, Family, Fantasy, Drama, Music, Romance, History, Crime, Western, War,
+                    Musical, Sport, Horror, Mystery, Biography.
+                                   & Genre                                                                                  \\
+                Description        & The description of the movie                                               & String    \\
+                Director           & The person who directed the movie                                          & String    \\
+                Actors             & The lead roles in the movie                                                & String    \\
+                Year               & The year the movie was released                                            & Integer   \\
+                Runtime (Minutes)  & The runtime in minutes of the movie                                        & Integer   \\
+                Rating             & The mean rating of the movie, taken from IMDb.com                          & Float     \\
+                Votes              & The amount of users that voted on a movie to give it that rating           & Integer   \\
+                Revenue (Millions) & The gross income the movie made at the US box office                       & Float     \\
+                Metascore          & The rating of movie, determined using aggregated weighted Critics scores   & Integer   \\
                 \bottomrule
             \end{tabular}
-            \caption[short]{The different columns in the IMDb-Movie-Data.csv file}\label{fig-IMDb-Movie-Data-Column-Description}
-        \end{figure}
+            \caption[short]{The different columns in the IMDb-Movie-Data.csv file}\label{tab-IMDb-Movie-Data-Column-Description}
+        \end{table}
 
-        We only worked with the crew table in TMD, which is a small part of the whole database.
+        We only worked with the crew table in TMD, which is a small part of the whole
+            database.
         This table has three columns - cast, crew, and id.
-        However, the cast and crew columns are not composed of discrete datapoints, instead being json files representing the entire cast or crew list.
-        As such, when working with it, we had to extract the data using string parsing methods.
-        The column summary is shown in Figure \ref*{fig-Credits-Column-Description}.
-        \begin{figure}[h]
+        However, the cast and crew columns are not composed of discrete datapoints,
+            instead being json files representing the entire cast or crew list.
+        As such, when working with it, we had to extract the data using string parsing
+            methods.
+        The column summary is shown in Table \ref*{tab-Credits-Column-Description}.
+        \begin{table}[h]
             \centering
-            \begin{tabular}[width = \textwidth]{lll}
+            \begin{tabular}{lp{10cm}l}
                 \toprule
-                Column Name &           Description                                                                 & Data Type  \\
+                Column Name & Description                                                              & Data Type  \\
                 \midrule
-                cast &                  The cast list of the movie, including all actors who appeared in it.        & .json file \\          
-                crew &                  The entire crew list of the movie, including all the people who made it.    & .json file \\
-                id &                    The movie id. This is used in the larger dataset to connect tables together & Integer     \\        
+                cast        & The cast list of the movie, including all actors who appeared in it.     & .json file \\
+                crew        & The entire crew list of the movie, including all the people who made it. & .json file \\
+                id          & The movie id - used in the larger dataset to connect tables together     & Integer    \\
                 \bottomrule
             \end{tabular}
-            \caption[short]{The different columns in the credits.csv file}\label{fig-Credits-Column-Description}
-        \end{figure}
+            \caption[short]{The different columns in the credits.csv file}\label{tab-Credits-Column-Description}
+        \end{table}
 
     \paragraph{Data processing}
-        To assist in parsing the TMD dataset, we used a Python script to count the amount of movies each individual director or actor
-            has helped make.
-        The resulting datasets were saved as CSV files named actor\_counts.csv and director\_counts.csv respectively.
-        This newly acquired data was then merged with the original IMDb dataset, which involved dropping the Description column while
-            replacing the Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
-        This resulted in a merged data set with structure shown in Figure \ref*{fig-merged-data-column-description}.
-        \begin{figure}[h]
-            \begin{tabular}[width = \textwidth]{lll}
+        To assist in parsing the TMD dataset, we used a Python script to count the
+            amount of movies each individual director or actor has helped make.
+        The resulting datasets were saved as CSV files named actor\_counts.csv and
+            director\_counts.csv respectively.
+        This newly acquired data was then merged with the original IMDb dataset, which
+            involved dropping the Description column while replacing the Director and Actor
+            columns with Director Exp.
+        and Mean Lead Roles Exp.
+        This resulted in a merged data set with structure shown in Table
+            \ref*{tab-merged-data-column-description}.
+        \begin{table}[h]
+            \begin{tabular}{lp{9cm}l}
                 \toprule
-                Column Name &           Description                                                                 & Data Type \\
+                Column Name          & Description                                                  & Data Type \\
                 \midrule
-                Rank &                  See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\          
-                Title &                 See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & String \\
-                Genre &                 See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Genre \\
-                Director Exp. &         The number of movies that the director of the movie has made                & Float \\
-                Mean Lead Roles Exp. &  The mean number of movies that the lead actors have been in                 & Float \\
-                Year  &                 See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\
-                Runtime (Minutes) &     See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\ 
-                Rating   &              See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Float \\
-                Votes   &               See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\ 
-                Revenue (Millions) &    See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Float \\  
-                Metascore   &           See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\
+                Rank                 & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
+                Title                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & String    \\
+                Genre                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Genre     \\
+                Director Exp.        & The number of movies that the director of the movie has made & Float     \\
+                Mean Lead Roles Exp. & The mean number of movies that the lead actors have been in  & Float     \\
+                Year                 & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
+                Runtime (Minutes)    & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
+                Rating               & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Float     \\
+                Votes                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
+                Revenue (Millions)   & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Float     \\
+                Metascore            & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
                 \bottomrule
             \end{tabular}
-        \caption[short]{The different columns in the merged data set}\label{fig-merged-data-column-description}
-        \end{figure}
+            \caption[short]{The different columns in the merged data set}\label{tab-merged-data-column-description}
+        \end{table}
 
-        To check this data was properly normalised we made a histogram plot of all the numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
-        As expected, a few variables did not appear to be normally distributed, namely: Revenue (Millions), Votes, Runtime (Minutes), 
-            Director Exp., and Rating.
+        To check this data was properly normalised we made a histogram plot of all the
+            numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
+        As expected, a few variables did not appear to be normally distributed, namely:
+        Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
             \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
         \end{figure}
-        Figure \ref*{fig-distribution-of-numeric-variable} shows that Revenue (Millions) and Votes are extremely right-skewed, suggesting an exponential distribution.
-        Runtime (Minutes) and Director Exp. appear to be less severely right-skewed, implying a lognormal distribution.
-        Rating appears to be left-skewed.
-        To achieve normality in the data, each variable was transformed appropriately.
-        Cube root transform was used for both Revenue (Millions) and Votes, while log transform was used for both Runtime (Minutes) and Director Exp.
-        Square transform worked best for Rating. 
-        The data was then standardised.
+        As shown in the plot, Revenue (Millions) and Votes are severly right skewed,
+            implying an exponential distribution; Runtime (Minutes) and Director Exp.
+        appear to be less severly right-skewed, implying a lognormal distribution;
+        Rating seems to be left-skewed.
+        The transformations for these variables that gave the best approximations to a
+            normal distribution were:
+        \begin{multicols}{2}
+            \begin{itemize}
+                \item Revenue (Millions) : Cube Root transform
+                \item Votes              : Cube Root transform
+                \item Runtime (Minutes)  : Log transform
+                \item Director Exp.      : Log transform
+                \item Rating             : Square transform
+            \end{itemize}
+        \end{multicols}
+        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the
+            transformed and normalised numeric variables.
+        The label has the p-values from testing whether the transformed distribution is
+            normal, using the Kolmogorov-Smirnov test\cite*{KStest} for goodness of fit.
+        One interesting note is that altough the Director Exp.
+        column fails the Kolmogorov-Smirnov test, there is clearly missing
+        data; around 3 columns are missing from the histogram shown.
+        With this in mind, and as the histogram does follow the normal distribution
+            curve, there is sufficient evidence to assume ln(Director Exp) has a normal
+            distribution.
         \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
