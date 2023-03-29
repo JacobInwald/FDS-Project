@@ -27,6 +27,8 @@ data = data.drop(['Revenue (Millions)', 'Votes',
            'Runtime (Minutes)', 'Director Exp.',
             'Rating'], axis=1)
 
+data = d.to_latex(data, ignore_col=['Title', 'Genre', 'Year', 'Rank'])
+
 # P-Value testing for normal distribution
 p = {}
 label = {}
@@ -36,10 +38,8 @@ for c in data.columns:
     data[c] = (data[c] - np.mean(data[c])) / np.std(data[c])
     s, p[c] = kstest(data[c], 'norm')
     print(p[c])
-    label[c] = f'${c}$ : p = %.3f ∴ X~N(0,1)'%p[c] if p[c] > 0.05 else \
-                f'${c}$ : p <0.05, ∴ X≁N(0,1)'
-
-
+    label[c] = f'{c} : p = %.3f ∴ X~N(0,1)'%p[c] if p[c] > 0.05 else \
+                f'{c} : p <0.05, ∴ X≁N(0,1)'
 
 
 # Plot data
@@ -69,7 +69,7 @@ for ax_r in axs:
         ax.hist(data[c], 20, label=label[c], color=next(colors)["color"], density=True)
         ax.plot(x, pdf)
         ax.set_xlabel('x')
-        ax.set_title(f'Distribution of \n ${c}$')
+        ax.set_title(f'Distribution of \n {c}')
 
         fig.tight_layout()
 
@@ -80,4 +80,6 @@ for c in data.columns:
     if c in ['Genre', 'Title', 'Rank', 'Year']:
         continue
     data = data[np.abs(stats.zscore(data[c])) < 3]
+    
+data = d.from_latex(data)
 data.to_csv("Data Sets/normalised_movie_data.csv", index=False)

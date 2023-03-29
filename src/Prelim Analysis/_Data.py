@@ -186,13 +186,29 @@ def create_merged_dataset():
     
     data_raw.to_csv("Data Sets/merged_movie_data.csv", index=False)
 
-def to_latex(data_in):
+def to_latex(data_in, ignore_col=[]):
     data = data_in
     for c in data.columns:
+        if c in ignore_col:
+            continue
         c1 = c
         if '/' in c:
             c1 = re.sub(r'(\d)/(\d)', '\\\\frac{\\1}{\\2}', c)
         
-        data[f'${c1} $'] = data[c]
+        data[f'${c1}$'] = data[c]
+        data = data.drop(c, axis=1)
+    return data
+
+def from_latex(data_in, ignore_col=[]):
+    data = data_in
+    for c in data.columns:
+        if c in ignore_col or '$' not in c:
+            continue
+        c1 = c
+        if 'frac' in c:
+            c1 = re.sub(r'\\frac\{(\d)\}\{(\d)\}', '\\1/\\2', c)
+            print(c1)
+        
+        data[f'{c1[1:-1]}'] = data[c]
         data = data.drop(c, axis=1)
     return data
