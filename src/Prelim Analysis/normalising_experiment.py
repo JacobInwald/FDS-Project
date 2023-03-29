@@ -63,10 +63,9 @@ for ax_r in axs:
             i+= 1
         c = cs[i]
         
-        x,loc,scale=  scipy.stats.t.fit(data[c])
         lim = np.max(np.abs(data[c]))
         x = np.linspace(-lim, lim, 100)
-        pdf = scipy.stats.norm.pdf(x, loc=loc, scale=scale)
+        pdf = scipy.stats.norm.pdf(x, loc=np.mean(data[c]), scale=np.std(data[c]))
         ax.hist(data[c], 20, label=label[c], color=next(colors)["color"], density=True)
         ax.plot(x, pdf)
         ax.set_xlabel('x')
