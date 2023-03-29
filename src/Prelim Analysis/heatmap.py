@@ -25,7 +25,7 @@ d.save_figure(plt, 'Correlation Heatmap')
 data = pd.read_csv("Data Sets/normalised_movie_data.csv")
 data = data.dropna()
 data = data.drop(['Genre', 'Title'], axis=1)
-
+data = d.to_latex(data)
 fig = plt.figure(figsize=(8,8))
 heatmap = sns.heatmap(data.corr(), vmin=-1, vmax=1, annot=True, cmap='BrBG')
 heatmap.set_title('Normalised Correlation Heatmap')

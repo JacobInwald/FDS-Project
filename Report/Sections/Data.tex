@@ -143,6 +143,13 @@
         \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
-            \caption[short]{The distributions of the standardised and normalised numeric variables in the merged dataset}\label{fig-transformed-distribution-of-numeric-variable}
+            \caption[short]{The distributions of the standardised and normalised numeric variables in the merged dataset,
+                            the legend has the p-values from testing with $H_{0}: X \not\sim N(0,1)$. Also shown on the plots is
+                            the Gaussian Distribution with the columns mean and standard deviation}\label{fig-transformed-distribution-of-numeric-variable}
         \end{figure}
-        This normalised data was used for the rest of our investigations later on.
+        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the transformed and normalised numeric variables.
+        The legend contains the p-values from testing the data with $H_{0}: X \not\sim N(0,1)$, using the Kolmogorov-Smirnov normality
+            test\cite*{KStest} for goodness of fit.
+        It's worth noting that even though the Director Exp. column failed the Kolmogorov-Smirnov test, there is missing data present in the histogram shown.
+        Given that the histogram follows a normal distribution curve, there is convincing evidence to assume ln(Director Exp.) has a normal distribution.
+        Overall, these transformations helped to normalize the dataset and enhance its suitability for further analysis.

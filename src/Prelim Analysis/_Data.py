@@ -36,6 +36,7 @@ import math
 import numpy as np
 import pandas as pd
 from scipy import stats
+import re
 
 data = pd.read_csv("Data Sets/IMDB-Movie-Data.csv")
 data = data.dropna(0)
@@ -184,3 +185,12 @@ def create_merged_dataset():
     print("processing_done")
     
     data_raw.to_csv("Data Sets/merged_movie_data.csv", index=False)
+
+def to_latex(data_in):
+    data = data_in
+    for c in data.columns:
+        if '/' in c:
+            c = re.sub(r'(\d)/(\d)', '\\' + 'frac{\\1}{\\2}', c)
+        data[f'${c}$'] = data[c]
+        data = data.drop(c, axis=1)
+    return data
