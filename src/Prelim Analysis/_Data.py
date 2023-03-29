@@ -189,8 +189,10 @@ def create_merged_dataset():
 def to_latex(data_in):
     data = data_in
     for c in data.columns:
+        c1 = c
         if '/' in c:
-            c = re.sub(r'(\d)/(\d)', '\\' + 'frac{\\1}{\\2}', c)
-        data[f'${c}$'] = data[c]
+            c1 = re.sub(r'(\d)/(\d)', '\\\\frac{\\1}{\\2}', c)
+        
+        data[f'${c1} $'] = data[c]
         data = data.drop(c, axis=1)
     return data
