@@ -2,35 +2,26 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We used two datasets to aid our investigation: an IMDB movie dataset, containing
-            various details about movies made from 2006-2016; and a larger movie dataset (TMD),
-            containing details about movies released on or before July 2017.
-        The IMDB dataset has a bit of a contentious past as it was scraped off of the movie
-            ranking website IMDB.com, and is actually only a sample dataset from a much larger
-            dataset that has every movie made from 2006-2016 that is in the IMDB.
-        The large movie dataset (TMD) was collated using data from TMDB (The Movie DataBase) and 
-            grouplens.org; but we only use the part that was obtained from TMDB as it is used
-            to find Director and Actor experience.
-
-        Both datasets were downloaded from kaggle.com, a data science platform that enables users
-            to access and share datasets. These datsets are shared underneath the CC0 1.0 Universal
-            Public Domain Dedication, as such we will use them underneath fair use.
+        We utilized two movie datasets: an IMDb dataset\cite*{data:IMDb} and TMD\cite*{data:TMD} (The Movie Dataset).
+        The IMDb dataset contains data about movies made from 2006-2016, while the TMD dataset contains data about movies released on or before July 2017.
+        Both datasets were obtained from kaggle.com and are shared under the CC0 1.0 Universal Public Domain Dedication.
+        TMD is merged data from TMDb (The Movie DataBase) and grouplens.org, a movie ranking site.
+        However, we only used the part that was obtained from TMDb.
+        It is worth noting that the provenance of the IMDb dataset has been subject to controversy as it was scraped from IMDb.com.
+        However, for this investigation, we used only a sample of this dataset which is publicly available on kaggle.com.
 
     \paragraph{Data description}
-        The IMDB movie dataset has 12 columns, all either containing string values or floating point values.
-        The only odd column is the Genre column which contains the different genres that can be applied to a particular movie.
-        The genres that are in this dataset are the arbritary genres: 
-            
-        Action, Adventure, Sci-Fi, Mystery, Horror, Thriller, Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance, History, Crime, Western, War, Musical, Sport
-        
-        The column summary is shown in Figure \ref*{fig-IMDB-Movie-Data-Column-Description}.
+    The IMDb movie dataset contains 12 columns consisting of string or floating point values.
+    One unique column is the Genre, which lists the arbitrary genres assigned to each movie in the dataset such as Action, Adventure, Sci-Fi, Mystery, Horror, Thriller, 
+        Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance, History, Crime, Western, War, Musical and Sport.
+    The column summary is shown in Figure \ref*{fig-IMDb-Movie-Data-Column-Description}.
         \begin{figure}[h]
             \centering
-            \begin{tabular}[width = \textwidth]{lll}
+            \begin{tabular}[width=\linewidth]{lll}
                 \toprule
                 Column Name &           Description                                                                 & Data Type \\
                 \midrule
-                Rank &                  The rank the movie has in the IMDB database                                 & Integer \\          
+                Rank &                  The rank the movie has in the IMDb database                                 & Integer \\          
                 Title &                 The name of the movie                                                       & String \\
                 Genre &                 The genres that apply to the movie, there can be anywhere from              & Genre \\
                 {}      &               1-3 genres. A genre can be any from: Action, Adventure, Sci-Fi,             & Category \\
@@ -42,21 +33,20 @@
                 Actors &                The lead roles in the movie                                                 & String \\
                 Year  &                 The year the movie was released                                             & Integer \\
                 Runtime (Minutes) &     The runtime in minutes of the movie                                         & Integer \\ 
-                Rating   &              The mean rating of the movie, taken from IMDB.com                           & Float \\
+                Rating   &              The mean rating of the movie, taken from IMDb.com                           & Float \\
                 Votes   &               The amount of users that voted on a movie to give it that rating            & Integer \\ 
                 Revenue (Millions) &    The gross income the movie made at the US box office                        & Float \\  
                 Metascore   &           The rating of movie, determined using aggregated weighted Critics           & Integer \\
                 {}          &           scores                                                                      & {} \\         
                 \bottomrule
             \end{tabular}
-            \caption[short]{The different columns in the IMDB-Movie-Data.csv file}\label{fig-IMDB-Movie-Data-Column-Description}
+            \caption[short]{The different columns in the IMDb-Movie-Data.csv file}\label{fig-IMDb-Movie-Data-Column-Description}
         \end{figure}
-        \newline
-        The TMD dataset used had a bit of a more odd structure.
-        We only used the crew.csv file that is a small part of the larger dataset, so we only explain the structure of crew.csv.
-        This file was composed of three columns: cast, crew and id.
-        The odd part of the dataset is that the cast and crew columns are composed of .json files, and as such we needed to parse 
-            out the useful data from these json files to actually get useable data.
+
+        We only worked with the crew table in TMD, which is a small part of the whole database.
+        This table has three columns - cast, crew, and id.
+        However, the cast and crew columns are not composed of discrete datapoints, instead being json files representing the entire cast or crew list.
+        As such, when working with it, we had to extract the data using string parsing methods.
         The column summary is shown in Figure \ref*{fig-Credits-Column-Description}.
         \begin{figure}[h]
             \centering
@@ -66,38 +56,35 @@
                 \midrule
                 cast &                  The cast list of the movie, including all actors who appeared in it.        & .json file \\          
                 crew &                  The entire crew list of the movie, including all the people who made it.    & .json file \\
-                id &                    The movie id. This is used in the larger dataset to connect data together   & Integer     \\        
+                id &                    The movie id. This is used in the larger dataset to connect tables together & Integer     \\        
                 \bottomrule
             \end{tabular}
             \caption[short]{The different columns in the credits.csv file}\label{fig-Credits-Column-Description}
         \end{figure}
 
     \paragraph{Data processing}
-        To cleanup the TMD dataset, we made and used a python script that went through all the entries of
-            the dataset and extracted two things; number of movies each actor appeared in, and number of movies each director
-            directed.
-        These two sets of data were saved to .csv files, named actor\_counts.csv and director\_counts respectively.
-        \\
-        Using this newly acquired data, we merged it with the original IMDB dataset. 
-        In the merging process the Description column was dropped, and the Director and Actor columns were replaced with the 
-            Director Exp. and Mean Lead Roles Exp.
-        This resulted in a merged\_movie\_data.csv file with structure shown in Figure \ref*{fig-merged-data-column-description}.
+        To assist in parsing the TMD dataset, we used a Python script to count the amount of movies each individual director or actor
+            has helped make.
+        The resulting datasets were saved as CSV files named actor\_counts.csv and director\_counts.csv respectively.
+        This newly acquired data was then merged with the original IMDb dataset, which involved dropping the Description column while
+            replacing the Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
+        This resulted in a merged data set with structure shown in Figure \ref*{fig-merged-data-column-description}.
         \begin{figure}[h]
             \begin{tabular}[width = \textwidth]{lll}
                 \toprule
                 Column Name &           Description                                                                 & Data Type \\
                 \midrule
-                Rank &                  See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\          
-                Title &                 See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & String \\
-                Genre &                 See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Genre \\
+                Rank &                  See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\          
+                Title &                 See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & String \\
+                Genre &                 See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Genre \\
                 Director Exp. &         The number of movies that the director of the movie has made                & Float \\
                 Mean Lead Roles Exp. &  The mean number of movies that the lead actors have been in                 & Float \\
-                Year  &                 See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\
-                Runtime (Minutes) &     See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\ 
-                Rating   &              See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Float \\
-                Votes   &               See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\ 
-                Revenue (Millions) &    See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Float \\  
-                Metascore   &           See fig \ref*{fig-IMDB-Movie-Data-Column-Description}                       & Integer \\
+                Year  &                 See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\
+                Runtime (Minutes) &     See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\ 
+                Rating   &              See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Float \\
+                Votes   &               See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\ 
+                Revenue (Millions) &    See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Float \\  
+                Metascore   &           See fig \ref*{fig-IMDb-Movie-Data-Column-Description}                       & Integer \\
                 \bottomrule
             \end{tabular}
         \caption[short]{The different columns in the merged data set}\label{fig-merged-data-column-description}
@@ -106,7 +93,7 @@
         To check this data was properly normalised we made a histogram plot of all the numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
         As expected, a few variables did not appear to be normally distributed, namely: Revenue (Millions), Votes, Runtime (Minutes), 
             Director Exp., and Rating.
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
             \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
@@ -126,14 +113,14 @@
         \end{multicols}
         Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the transformed and normalised numeric variables.
         The label has the p-values from testing whether the transformed distribution is normal, using the Kolmogorov-Smirnov
-            test for goodness of fit.
+            test\cite*{KStest} for goodness of fit.
         One interesting note is that altough the Director Exp. column fails the Kolmogorov-Smirnov test, there is clearly missing
             data; around 3 columns are missing from the histogram shown.
         With this in mind, and as the histogram does follow the normal distribution curve, there is sufficient evidence to assume
             ln(Director Exp.) has a normal distribution.
-        \begin{figure}[h]
+        \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
-            \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-transformed-distribution-of-numeric-variable}
+            \caption[short]{The distributions of the standardised and normalised numeric variables in the merged dataset}\label{fig-transformed-distribution-of-numeric-variable}
         \end{figure}
         This normalised data was used for the rest of our investigations later on.
