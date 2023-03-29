@@ -3,3 +3,4 @@ Report/build/**
 !Report/build/**.pdf
 credits.csv
 __pycache__
+indent.log
