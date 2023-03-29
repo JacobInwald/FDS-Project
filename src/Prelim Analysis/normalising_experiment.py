@@ -49,7 +49,7 @@ fig.delaxes(axs[1][2])
 fig.delaxes(axs[1][3])
 fig.delaxes(axs[1][4])
 fig.suptitle("Distribution of Numeric Variables (Transformed)")
-fig.supylabel("Count")
+fig.supylabel("Frequency Density")
 fig.tight_layout()
 colors = plt.rcParams["axes.prop_cycle"]()
 
