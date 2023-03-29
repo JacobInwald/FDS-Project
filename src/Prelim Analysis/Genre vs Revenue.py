@@ -3,34 +3,9 @@ from _Data import *
 import seaborn as sns
 
 
-genre_data = pd.read_csv("Data Sets/IMDB-Movie-Data.csv")
-genre_data = genre_data.drop(['Title', 'Description', 'Director', 'Actors', 'Year', 'Runtime (Minutes)', 'Votes'], axis=1)
-
-genre_data_clean = pd.DataFrame(columns=['Genre', 'Rating', 'Revenue (Millions)', 'Metascore'])
-i = 0
-for x in range(len(genre_data)):
-    r = genre_data.iloc[x]
-    for g in r['Genre'].split(','):
-        genre_data_clean.loc[i] = [g, r['Rating'], r['Revenue (Millions)'], r['Metascore']]
-        i+=1
-
-genre_data = genre_data_clean
-fig1, ax1 = plt.subplots(figsize=(10, 10))
-ax1.grid(axis="y")
-ax1.set_title("Genre vs Revenue (Millions)")
-ax1.set_xlabel("Genre")
-ax1.set_ylabel("Revenue (Millions)")
-plot = sns.boxplot(data=pd.concat([genre_data, genre_data.assign(type='both')]),
-            x='Genre', y='Revenue (Millions)',
-              order=genre_data['Genre'].unique(),
-              notch=True,
-              color='lightsalmon')
-plt.xticks(rotation=45, ha='right')
-save_figure(plt, "Genre vs Revenue (Millions)")
-
 genre_data = pd.read_csv("Data Sets/normalised_movie_data.csv")
-
 genre_data_clean = pd.DataFrame(columns=['Genre', 'Rating^2', 'Revenue^{1/3}', 'Metascore'])
+
 i = 0
 for x in range(len(genre_data)):
     r = genre_data.iloc[x]
@@ -43,15 +18,17 @@ order_by_mean = {c:np.median(genre_data[genre_data.Genre == c]['Revenue^{1/3}'])
 order =  [k for k, v in sorted(order_by_mean.items(), key=lambda item: item[1])]
 fig1, ax1 = plt.subplots(figsize=(8, 8))
 ax1.grid(axis="y")
-ax1.set_title("Genre vs Revenue^{1/3}")
-ax1.set_xlabel("Genre")
-ax1.set_ylabel("Revenue^{1/3}")
+ax1.set_title("Genre vs $Revenue^{\\frac{1}{3}}$")
+
 plot = sns.boxplot(data=pd.concat([genre_data, genre_data.assign(type='both')]),
             x='Genre', y='Revenue^{1/3}',
               order=order,
               notch=True,
               color='lightsalmon',
               showmeans=True)
+
+ax1.set_xlabel("Genre")
+ax1.set_ylabel("$Revenue^{\\frac{1}{3}}$")
 plt.xticks(rotation=45, ha='right')
 
 n = len(order)
