@@ -6,6 +6,7 @@ import seaborn as sns
 import math
 import _Data as d
 from scipy.stats import kstest
+from sklearn.preprocessing import normalize
 import scipy
 from scipy import stats
 

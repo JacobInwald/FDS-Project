@@ -1,43 +1,6 @@
 \section{Exploration and Analysis}
     % Suggested 500 words for individual report; proportionately longer for group
     % projects).
-    \begin{center}
-\begin{tabular}{lclc}
-\toprule
-\textbf{Dep. Variable:}       &     $Rating^2$     & \textbf{  R-squared:         } &     0.611   \\
-\textbf{Model:}               &       OLS        & \textbf{  Adj. R-squared:    } &     0.605   \\
-\textbf{Method:}              &  Least Squares   & \textbf{  F-statistic:       } &     111.5   \\
-\textbf{Date:}                & Thu, 30 Mar 2023 & \textbf{  Prob (F-statistic):} & 2.72e-111   \\
-\textbf{Time:}                &     13:12:42     & \textbf{  Log-Likelihood:    } &   -535.77   \\
-\textbf{No. Observations:}    &         578      & \textbf{  AIC:               } &     1090.   \\
-\textbf{Df Residuals:}        &         569      & \textbf{  BIC:               } &     1129.   \\
-\textbf{Df Model:}            &           8      & \textbf{                     } &             \\
-\textbf{Covariance Type:}     &    nonrobust     & \textbf{                     } &             \\
-\bottomrule
-\end{tabular}
-\begin{tabular}{lcccccc}
-                              & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
-\midrule
-\textbf{$const$}                &     -37.2611  &       21.675     &    -1.719  &         0.086        &      -79.833    &        5.311     \\
-\textbf{$Rank$}                 &      -0.0002  &        0.000     &    -1.684  &         0.093        &       -0.000    &        3e-05     \\
-\textbf{$Year$}                 &       0.0186  &        0.011     &     1.725  &         0.085        &       -0.003    &        0.040     \\
-\textbf{$Metascore$}            &       0.4743  &        0.027     &    17.326  &         0.000        &        0.421    &        0.528     \\
-\textbf{$Mean Lead Roles Exp.$} &      -0.0145  &        0.028     &    -0.523  &         0.601        &       -0.069    &        0.040     \\
-\textbf{$Revenue^{1/3}$}        &      -0.3032  &        0.037     &    -8.115  &         0.000        &       -0.377    &       -0.230     \\
-\textbf{$Votes^{1/3}$}          &       0.5970  &        0.047     &    12.787  &         0.000        &        0.505    &        0.689     \\
-\textbf{$ln(Runtime)$}          &       0.1100  &        0.029     &     3.779  &         0.000        &        0.053    &        0.167     \\
-\textbf{$ln(Director Exp)$}     &      -0.0531  &        0.028     &    -1.910  &         0.057        &       -0.108    &        0.002     \\
-\bottomrule
-\end{tabular}
-\begin{tabular}{lclc}
-\textbf{Omnibus:}       & 12.551 & \textbf{  Durbin-Watson:     } &    2.000  \\
-\textbf{Prob(Omnibus):} &  0.002 & \textbf{  Jarque-Bera (JB):  } &   23.114  \\
-\textbf{Skew:}          & -0.023 & \textbf{  Prob(JB):          } & 9.57e-06  \\
-\textbf{Kurtosis:}      &  3.979 & \textbf{  Cond. No.          } & 1.75e+06  \\
-\bottomrule
-\end{tabular}
-%\caption{OLS Regression Results}
-\end{center}
         
     A data science analysis of the paper, including: \begin{itemize} \item
         Visualisations (for example Figure~\ref{fds-project-template:fig:example1}) and
@@ -60,3 +23,144 @@
         K-nearest neighbours etc. Remember to explain any symbols use, e.g.~``$n$ is
         the number of data points and $x_i$ is the value of the $i$th data point.
     ''.
+    \newpage
+    % Revenue Multiple Regression
+    In order to further analyze the correlations between the various movie details
+    and the revenue they generated, we created a multiple regression model using the
+    normalized data we collected. 
+    The target variable was the normalised revenue, with the rest of the dataset as the 
+        predictor variables, excluding Genre and Title.
+    $Votes^\frac{1}{3}$ was excluded as it is causally linked to Revenue; the more votes, the more people bought movie tickets. 
+    The model uses Ordinary Least Squares regression and a constant column has been added to show y-intercept.
+    The summary results are provided below.
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{lclc}
+            \toprule
+            \textbf{Dep. Variable:}           &  $Revenue^{\frac{1}{3}}$   & \textbf{  R-squared:         } &     0.209   \\
+            \textbf{Model:}                   &       OLS        & \textbf{  Adj. R-squared:    } &     0.200   \\
+            \textbf{Method:}                  &  Least Squares   & \textbf{  F-statistic:       } &     24.59   \\
+            \textbf{Date:}                    & Thu, 30 Mar 2023 & \textbf{  Prob (F-statistic):} &  8.23e-30   \\
+            \textbf{Time:}                    &     14:14:56     & \textbf{  Log-Likelihood:    } &   -851.28   \\
+            \textbf{No. Observations:}        &         660      & \textbf{  AIC:               } &     1719.   \\
+            \textbf{Df Residuals:}            &         652      & \textbf{  BIC:               } &     1754.   \\
+            \textbf{Df Model:}                &           7      & \textbf{                     } &             \\
+            \textbf{Covariance Type:}         &    nonrobust     & \textbf{                     } &             \\
+            \bottomrule
+            \end{tabular}
+            \begin{tabular}{lcccccc}
+                                              & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+            \midrule
+            \textbf{$const$}                &     146.6239  &       25.235     &     5.810  &         0.000        &       97.072    &      196.176     \\
+            \textbf{$Rank$}                 &      -0.0009  &        0.000     &    -6.886  &         0.000        &       -0.001    &       -0.001     \\
+            \textbf{$Year$}                 &      -0.0726  &        0.013     &    -5.799  &         0.000        &       -0.097    &       -0.048     \\
+            \textbf{$Metascore$}            &      -0.0428  &        0.046     &    -0.927  &         0.354        &       -0.134    &        0.048     \\
+            \textbf{$Mean Lead Roles Exp.$} &       0.1774  &        0.037     &     4.779  &         0.000        &        0.105    &        0.250     \\
+            \textbf{$ln(Runtime)$}          &       0.1631  &        0.039     &     4.160  &         0.000        &        0.086    &        0.240     \\
+            \textbf{$ln(Director Exp)$}     &       0.0369  &        0.037     &     0.993  &         0.321        &       -0.036    &        0.110     \\
+            \textbf{$Rating^2$}             &       0.0192  &        0.050     &     0.381  &         0.703        &       -0.080    &        0.118     \\
+            \bottomrule
+            \end{tabular}
+            \begin{tabular}{lclc}
+            \textbf{Omnibus:}       &  5.244 & \textbf{  Durbin-Watson:     } &    1.900  \\
+            \textbf{Prob(Omnibus):} &  0.073 & \textbf{  Jarque-Bera (JB):  } &    4.821  \\
+            \textbf{Skew:}          &  0.154 & \textbf{  Prob(JB):          } &   0.0898  \\
+            \textbf{Kurtosis:}      &  2.717 & \textbf{  Cond. No.          } & 1.52e+06  \\
+            \bottomrule
+            \end{tabular}
+        \end{center}
+        
+        \caption[short]{Multiple Regression results summary}\label{tab:revenue-ols-summary}
+    \end{table}
+    While this model does only explain 20\% of the variance in the revenue, it is statistically significant,
+        getting a very small  $P(F-statistic)$.
+    This indicates that the revenue of a movie can not be accurately predicted from data
+        present in the dataset.
+    However, despite the poor accuracy, there are a few interesting insights it provides.
+    
+    % Director vs Actor for selling tickets
+    One such observation is that the experience of lead actors has a statistically significant effect
+        on movie ticket sales (p<0.05), while the experience of directors does not (p>0.05). 
+    This raises the question of whether the director has as much of an impact as the actors when it
+        comes to selling tickets.
+    A possible explanation is the fact that promotional posters for movies often focus on the
+        actors\cite*{label}, with their faces being the first thing a consumer sees.
+    Actors who have been in many movies tend to be more recognisable, making potential consumers more
+        likely to see a movie they are in and thus improving ticket sales.
+    In contrast, the director's name is usually the only thing featured on the poster, drawing little
+        attention and thus being less impactful.
+    This idea is inline with previous research\cite*{label}.
+
+    % Rating not impacting movie revenue
+    Another insight is that user rating and critic scores are not reliable predictors of a
+        film's revenue, with p-values greater than 0.05.
+    This raises the question of how poorly rated movies can still make money in the box office. 
+    One explanation could be that ratings require someone to watch the movie, and since box office
+        revenue is only generated while the movie is in cinemas, the rating and metascore don't 
+        have enough time to significantly impact the movie's revenue.
+    A good example of this is Star Wars: The Rise of Skywalker, which made \$1.074 billion despite
+        having a low rating and metascore of 6.5 and 53\%, respectively \cite*{label}.
+
+    % Rating Multiple Regression
+    The same approach was used to further analyse the relationship between a movies rating and the
+        other data collected about it.
+    In this case, the target variable was the normalised user rating, with the rest of the dataset as the 
+        predictor variables, excluding Genre and Title.
+    $Votes^\frac{1}{3}$ was not excluded here as there is no reason to believe it is causally related; 
+        the more votes a movie receives doesn't necessitate high ratings, i.e. Star Wars: The Rise of Skywalker. 
+    The model uses Ordinary Least Squares regression and a constant column has been added to show y-intercept.
+    The summary results are provided below.
+    \begin{table}[H]
+        \begin{center}
+            \begin{tabular}{lclc}
+                \toprule
+                \textbf{Dep. Variable:}            &     $Rating^2$     & \textbf{  R-squared:         } &     0.421   \\
+                \textbf{Model:}                    &       OLS        & \textbf{  Adj. R-squared:    } &     0.416   \\
+                \textbf{Method:}                   &  Least Squares   & \textbf{  F-statistic:       } &     84.93   \\
+                \textbf{Date:}                     & Thu, 30 Mar 2023 & \textbf{  Prob (F-statistic):} &  1.11e-92   \\
+                \textbf{Time:}                     &     17:02:17     & \textbf{  Log-Likelihood:    } &   -926.48   \\
+                \textbf{No. Observations:}         &         826      & \textbf{  AIC:               } &     1869.   \\
+                \textbf{Df Residuals:}             &         818      & \textbf{  BIC:               } &     1907.   \\
+                \textbf{Df Model:}                 &           7      & \textbf{                     } &             \\
+                \textbf{Covariance Type:}          &    nonrobust     & \textbf{                     } &             \\
+                \bottomrule
+            \end{tabular}
+            \begin{tabular}{lcccccc}
+                                                & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+                \midrule
+                \textbf{$const$}                 &     -48.4648  &       21.934     &    -2.210  &         0.027        &      -91.518    &       -5.412     \\
+                \textbf{$Rank$}                  &      -0.0003  &        0.000     &    -2.971  &         0.003        &       -0.001    &       -0.000     \\
+                \textbf{$Year$}                  &       0.0242  &        0.011     &     2.219  &         0.027        &        0.003    &        0.046     \\
+                \textbf{$Mean Lead Roles Exp.$}  &      -0.0588  &        0.029     &    -2.059  &         0.040        &       -0.115    &       -0.003     \\
+                \textbf{$Revenue^{\frac{1}{3}}$} &      -0.4241  &        0.038     &   -11.234  &         0.000        &       -0.498    &       -0.350     \\
+                \textbf{$Votes^{\frac{1}{3}}$}   &       0.7941  &        0.045     &    17.464  &         0.000        &        0.705    &        0.883     \\
+                \textbf{$ln(Runtime)$}           &       0.1987  &        0.030     &     6.732  &         0.000        &        0.141    &        0.257     \\
+                \textbf{$ln(Director Exp)$}      &      -0.0877  &        0.028     &    -3.139  &         0.002        &       -0.143    &       -0.033     \\
+                \bottomrule
+            \end{tabular}
+            \begin{tabular}{lclc}
+                \textbf{Omnibus:}       &  8.164 & \textbf{  Durbin-Watson:     } &    1.960  \\
+                \textbf{Prob(Omnibus):} &  0.017 & \textbf{  Jarque-Bera (JB):  } &    8.964  \\
+                \textbf{Skew:}          & -0.170 & \textbf{  Prob(JB):          } &   0.0113  \\
+                \textbf{Kurtosis:}      &  3.380 & \textbf{  Cond. No.          } & 1.75e+06  \\
+                \bottomrule
+            \end{tabular}
+        \end{center}
+        \caption[short]{Multiple Regression results summary}\label{tab:rating-osm-summary}
+    \end{table}
+    This model performs respectably, explaining about  41\% of the variance in user ratings.
+    It is also statistically significant, getting a very small  $P(F-statistic)$.
+    This indicates that the user rating of a movie can be predicted from the data present in the dataset,
+        albeit not extremely well.
+    However, the relatively good $R^2$ value does indicate a well performing model, as such
+        we can postulate that users do use similar data when deciding the quality of a movie.
+    Another good thing about this model is that each predictor has a low p-value, p<0.05.
+    This indicates that each of these movie features have a statistically significant impact
+        on user rating.
+
+    % 
+    
+    % We should check 
+    %   - linearity -> residuals
+    %   - homoskedastic -> ??
+    %   - Casual data
