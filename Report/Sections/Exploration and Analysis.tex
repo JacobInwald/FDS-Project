@@ -1,7 +1,44 @@
 \section{Exploration and Analysis}
     % Suggested 500 words for individual report; proportionately longer for group
     % projects).
-
+    \begin{center}
+\begin{tabular}{lclc}
+\toprule
+\textbf{Dep. Variable:}       &     $Rating^2$     & \textbf{  R-squared:         } &     0.611   \\
+\textbf{Model:}               &       OLS        & \textbf{  Adj. R-squared:    } &     0.605   \\
+\textbf{Method:}              &  Least Squares   & \textbf{  F-statistic:       } &     111.5   \\
+\textbf{Date:}                & Thu, 30 Mar 2023 & \textbf{  Prob (F-statistic):} & 2.72e-111   \\
+\textbf{Time:}                &     13:12:42     & \textbf{  Log-Likelihood:    } &   -535.77   \\
+\textbf{No. Observations:}    &         578      & \textbf{  AIC:               } &     1090.   \\
+\textbf{Df Residuals:}        &         569      & \textbf{  BIC:               } &     1129.   \\
+\textbf{Df Model:}            &           8      & \textbf{                     } &             \\
+\textbf{Covariance Type:}     &    nonrobust     & \textbf{                     } &             \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lcccccc}
+                              & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]}  \\
+\midrule
+\textbf{$const$}                &     -37.2611  &       21.675     &    -1.719  &         0.086        &      -79.833    &        5.311     \\
+\textbf{$Rank$}                 &      -0.0002  &        0.000     &    -1.684  &         0.093        &       -0.000    &        3e-05     \\
+\textbf{$Year$}                 &       0.0186  &        0.011     &     1.725  &         0.085        &       -0.003    &        0.040     \\
+\textbf{$Metascore$}            &       0.4743  &        0.027     &    17.326  &         0.000        &        0.421    &        0.528     \\
+\textbf{$Mean Lead Roles Exp.$} &      -0.0145  &        0.028     &    -0.523  &         0.601        &       -0.069    &        0.040     \\
+\textbf{$Revenue^{1/3}$}        &      -0.3032  &        0.037     &    -8.115  &         0.000        &       -0.377    &       -0.230     \\
+\textbf{$Votes^{1/3}$}          &       0.5970  &        0.047     &    12.787  &         0.000        &        0.505    &        0.689     \\
+\textbf{$ln(Runtime)$}          &       0.1100  &        0.029     &     3.779  &         0.000        &        0.053    &        0.167     \\
+\textbf{$ln(Director Exp)$}     &      -0.0531  &        0.028     &    -1.910  &         0.057        &       -0.108    &        0.002     \\
+\bottomrule
+\end{tabular}
+\begin{tabular}{lclc}
+\textbf{Omnibus:}       & 12.551 & \textbf{  Durbin-Watson:     } &    2.000  \\
+\textbf{Prob(Omnibus):} &  0.002 & \textbf{  Jarque-Bera (JB):  } &   23.114  \\
+\textbf{Skew:}          & -0.023 & \textbf{  Prob(JB):          } & 9.57e-06  \\
+\textbf{Kurtosis:}      &  3.979 & \textbf{  Cond. No.          } & 1.75e+06  \\
+\bottomrule
+\end{tabular}
+%\caption{OLS Regression Results}
+\end{center}
+        
     A data science analysis of the paper, including: \begin{itemize} \item
         Visualisations (for example Figure~\ref{fds-project-template:fig:example1}) and
         tables (for example Table~\ref{tab:example1}).

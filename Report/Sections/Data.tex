@@ -2,29 +2,26 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We utilized two movie datasets: an IMDb dataset\cite*{data:IMDb} and
-            TMD\cite*{data:TMD} (The Movie Dataset).
-        The IMDb dataset contains data about movies made from 2006-2016, while the TMD
-            dataset contains data about movies released on or before July 2017.
-        Both datasets were obtained from kaggle.com and are shared under the CC0 1.0
-            Universal Public Domain Dedication.
-        TMD is merged data from TMDb (The Movie DataBase) and grouplens.org, a movie
-            ranking site.
-        However, we only used the part that was obtained from TMDb.
+        We used two movie datasets for our investigation: an IMDb dataset
+            \cite*{data:IMDb} and The Movie Dataset (TMD) \cite*{data:TMD}. 
+        The IMDb dataset contains data about movies released between 2006 and 2016, while
+            the TMD dataset contains data about movies released on or before July
+            2017.
+        Both datasets were obtained from Kaggle.com and are shared under
+            the CC0 1.0 Universal Public Domain Dedication.
+        TMD is a merged dataset from TMDb (The Movie Database) and grouplens.org, a movie ranking site.
+        We only used the part of the dataset that was obtained from TMDb.
         It is worth noting that the provenance of the IMDb dataset has been subject to
-            controversy as it was scraped from IMDb.com.
-        However, for this investigation, we used only a sample of this dataset which is
-            publicly available on kaggle.com.
+            controversy as it was scraped from IMDb.com. 
+        However, for this investigation, we used only a sample of this dataset which is publicly
+            available on Kaggle.com.
 
     \paragraph{Data description}
-        The IMDb movie dataset contains 12 columns consisting of string or floating
-            point values.
-        One unique column is the Genre, which lists the arbitrary genres assigned to
-            each movie in the dataset such as Action, Adventure, Sci-Fi, Mystery, Horror,
-            Thriller, Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance,
-            History, Crime, Western, War, Musical and Sport.
-        The column summary is shown in Table
-            \ref*{tab-IMDb-Movie-Data-Column-Description}.
+        The IMDb movie dataset contains 12 columns with string or floating point
+            values. 
+        The only column of note is the Genre column, which can only take on 12 distinct values, 
+            shown in Table \ref*{tab-IMDb-Movie-Data-Column-Description}
+        A summary of the columns is provided in Table \ref*{tab-IMDb-Movie-Data-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -52,14 +49,13 @@
             \caption[short]{The different columns in the IMDb-Movie-Data.csv file}\label{tab-IMDb-Movie-Data-Column-Description}
         \end{table}
 
-        We only worked with the crew table in TMD, which is a small part of the whole
-            database.
-        This table has three columns - cast, crew, and id.
-        However, the cast and crew columns are not composed of discrete datapoints,
-            instead being json files representing the entire cast or crew list.
-        As such, when working with it, we had to extract the data using string parsing
-            methods.
-        The column summary is shown in Table \ref*{tab-Credits-Column-Description}.
+        We worked exclusively with the Crew table in TMD, which is a small part of
+            the entire database. 
+        This table contains three columns - Cast, Crew, and ID.
+        However, the Cast and Crew columns are not composed of discrete data points, 
+            but rather JSON files representing the entire cast or crew list. 
+        As a result, we to extracted the data using string parsing methods. 
+        A summary of the columns is provided in Table \ref*{tab-Credits-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -75,16 +71,17 @@
         \end{table}
 
     \paragraph{Data processing}
-        To assist in parsing the TMD dataset, we used a Python script to count the
-            amount of movies each individual director or actor has helped make.
-        The resulting datasets were saved as CSV files named actor\_counts.csv and
-            director\_counts.csv respectively.
-        This newly acquired data was then merged with the original IMDb dataset, which
-            involved dropping the Description column while replacing the Director and Actor
-            columns with Director Exp.
-        and Mean Lead Roles Exp.
-        This resulted in a merged data set with structure shown in Table
+        We used a Python script to parse the TMD dataset and count the number of
+            movies each director and actor has been involved in.
+        he resulting datasets were saved as CSV files named actor\_counts.csv and
+            director\_counts.csv.
+        We then merged this data with the original IMDb
+            dataset.
+        This involved dropping the Description column and replacing the
+            Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
+        A summary of the merged datasets columns is shown in Table
             \ref*{tab-merged-data-column-description}.
+
         \begin{table}[h]
             \begin{tabular}{lp{9cm}l}
                 \toprule
@@ -106,40 +103,24 @@
             \caption[short]{The different columns in the merged data set}\label{tab-merged-data-column-description}
         \end{table}
 
-        To check this data was properly normalised we made a histogram plot of all the
-            numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
-        As expected, a few variables did not appear to be normally distributed, namely:
-        Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
+        We checked that the data had been properly normalized by creating a
+        histogram plot of all the numeric variables, as shown in Figure
+        \ref*{fig-distribution-of-numeric-variable}. As anticipated, some
+        variables were not normally distributed, including Revenue (Millions),
+        Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
             \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
         \end{figure}
-        As shown in the plot, Revenue (Millions) and Votes are severly right skewed,
-            implying an exponential distribution; Runtime (Minutes) and Director Exp.
-        appear to be less severly right-skewed, implying a lognormal distribution;
-        Rating seems to be left-skewed.
-        The transformations for these variables that gave the best approximations to a
-            normal distribution were:
-        \begin{multicols}{2}
-            \begin{itemize}
-                \item Revenue (Millions) : Cube Root transform
-                \item Votes              : Cube Root transform
-                \item Runtime (Minutes)  : Log transform
-                \item Director Exp.      : Log transform
-                \item Rating             : Square transform
-            \end{itemize}
-        \end{multicols}
-        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the
-            transformed and normalised numeric variables.
-        The label has the p-values from testing whether the transformed distribution is
-            normal, using the Kolmogorov-Smirnov test\cite*{KStest} for goodness of fit.
-        One interesting note is that altough the Director Exp.
-        column fails the Kolmogorov-Smirnov test, there is clearly missing
-        data; around 3 columns are missing from the histogram shown.
-        With this in mind, and as the histogram does follow the normal distribution
-            curve, there is sufficient evidence to assume ln(Director Exp) has a normal
-            distribution.
+        Figure \ref*{fig-distribution-of-numeric-variable} shows that Revenue (Millions) and Votes are
+        severely right-skewed, implying an exponential distribution. Runtime
+        (Minutes) and Director Exp. appear to be less severely right-skewed,
+        implying a lognormal distribution. Rating seems to be left-skewed. The
+        transformations that give the best approximations to a normal
+        distribution are cube root transform for Revenue (Millions) and Votes,
+        log transform for Runtime (Minutes) and Director Exp., and square
+        transform for Rating.
         \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
@@ -147,9 +128,12 @@
                             the legend has the p-values from testing with $H_{0}: X \not\sim N(0,1)$. Also shown on the plots is
                             the Gaussian Distribution with the columns mean and standard deviation}\label{fig-transformed-distribution-of-numeric-variable}
         \end{figure}
-        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the transformed and normalised numeric variables.
-        The legend contains the p-values from testing the data with $H_{0}: X \not\sim N(0,1)$, using the Kolmogorov-Smirnov normality
-            test\cite*{KStest} for goodness of fit.
-        It's worth noting that even though the Director Exp. column failed the Kolmogorov-Smirnov test, there is missing data present in the histogram shown.
-        Given that the histogram follows a normal distribution curve, there is convincing evidence to assume ln(Director Exp.) has a normal distribution.
-        Overall, these transformations helped to normalize the dataset and enhance its suitability for further analysis.
+        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the
+        standarised and normalised numeric variables. The legend contains the p-values
+        from the Kolmogorov-Smirnov normality test \cite*{KStest}, which was used to
+        test the data against the null hypothesis $H_{0}: X \not\sim N(0,1)$. It is
+        worth noting that the Director Exp. column failed the test, however, there is
+        missing data present in the histogram. Despite this, the histogram follows a
+        normal distribution curve, providing convincing evidence that ln(Director Exp.)
+        has a normal distribution. Ultimately, these transformations helped to normalize
+        the dataset and improve its suitability for further analysis.
