@@ -6,7 +6,7 @@ import _Data as d
 
 data = pd.read_csv("Data Sets/normalised_movie_data.csv")
 
-fig, axs = plt.subplots(2, 2, figsize=(10, 10))
+fig, axs = plt.subplots(2, 2, figsize=(5, 5), sharex=True)
 fig.suptitle(
     "The four factors with moderate to strong correlations with a movie's revenue.")
 x = data["Revenue^{1/3}"]
@@ -27,5 +27,7 @@ for i, ax in enumerate(axs.flat):
         color="red"
     )
     ax.legend()
+
+fig.tight_layout()
 
 d.save_figure(plt, "Revenue Factors")
