@@ -8,20 +8,20 @@
             By examining the correlations between the movie's revenue and other factors, we
                 can gain insight into which factors have the greatest impact on the success of
                 a movie.
-            These correlations are visualised in Figure \ref{fig-heatmap}.
+            These correlations are visualised in Figure~\ref{fig-heatmap}.
 
             \begin{figure}[H]
                 \centering
                 \includegraphics[width=0.8\linewidth]{Final/Normalised Correlation Heatmap.pdf}
                 \caption[short]{
                     A heatmap illustrating the strength of correlations between various normalised
-                    variables from the IMDb dataset \cite{data:IMDb}.
+                    variables from the IMDb dataset~\cite{data:IMDb}.
                     The Pearson's Product Moment Correlation Coefficient is used to calculate the
                         strength of the correlations.
                     These variables included Rank, Year, Metascore, Revenue, Votes, Runtime, and
                         Rating.
-                    Additionally, two more variables were calculated from the TMD data
-                        \cite{data:TMD}: MeanLeadRolesExperience and DirectorExperience.
+                    Additionally, two more variables were calculated from the TMD
+                        data~\cite{data:TMD}: MeanLeadRolesExperience and DirectorExperience.
                     Each correlation is represented by a value between -1 and 1, with weaker
                         correlations having values closer to 0, and negative correlations having
                         negative values and positive correlations having positive values.
@@ -29,7 +29,7 @@
             \end{figure}
 
         \paragraph{}
-            Figure \ref{fig-heatmap} reveals a strong positive correlation (0.7) between a
+            Figure~\ref{fig-heatmap} reveals a strong positive correlation (0.7) between a
                 movie's revenue and the number of votes it receives on IMDb, suggesting that
                 the more votes a movie receives, the higher its revenue is likely to be.
             Additionally, the heatmap shows moderate positive correlations between the
@@ -39,8 +39,8 @@
             In contrast, there is a moderate negative correlation between a movie's revenue
                 and its rank on IMDb (-0.24), suggesting that higher ranks on IMDb do not
                 necessarily translate to higher revenues.
-            These four correlations are shown in more detail in Figure
-                \ref{fig-revenue-factors}.
+            These four correlations are shown in more detail in
+                Figure~\ref{fig-revenue-factors}.
 
             \begin{figure}[H]
                 \centering
@@ -132,20 +132,20 @@
             This raises the question of whether the director has as much of an impact as
                 the actors when it comes to selling tickets.
             A possible explanation is the fact that promotional posters for movies often
-                focus on the actors \cite{label}, with their faces being the first thing a
+                focus on the actors~\cite{label}, with their faces being the first thing a
                 consumer sees.
             Actors who have been in many movies tend to be more recognisable, making
                 potential consumers more likely to see a movie they are in and thus improving
                 ticket sales.
             In contrast, the director's name is usually the only thing featured on the
                 poster, drawing little attention and thus being less impactful.
-            This idea is inline with previous research \cite{label}.
+            This idea is inline with previous research~\cite{label}.
 
             % Rating not impacting movie revenue
             Another insight is that while critic scores are not reliable predictors of a
                 film's revenue user ratings are, with p>0.05 and p<0.05 respectively.
             This raises the question of why there is a difference between these two forms
-                of rating; they both correlate strongly with each other (see fig \ref{label})
+                of rating; they both correlate strongly with each other (see fig~\ref{label})
                 so it is reasonable to assume they would have similar strength as predictor
                 variables.
             A possible explanation could be due to the relatively short time movies appear

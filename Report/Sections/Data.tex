@@ -2,8 +2,8 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We utilized two movie datasets: an IMDb dataset\cite{data:IMDb} and
-            TMD\cite{data:TMD} (The Movie Dataset).
+        We utilized two movie datasets: an IMDb dataset~\cite{data:IMDb} and
+            TMD~\cite{data:TMD} (The Movie Dataset).
         The IMDb dataset contains data about movies made from 2006-2016, while the TMD
             dataset contains data about movies released on or before July 2017.
         Both datasets were obtained from kaggle.com and are shared under the CC0 1.0
@@ -20,9 +20,9 @@
         The IMDb movie dataset contains 12 columns with string or floating point
             values.
         The only column of note is the Genre column, which can only take on 12 distinct
-            values, shown in Table \ref*{tab-IMDb-Movie-Data-Column-Description}.
-        A summary of the columns is provided in Table
-            \ref*{tab-IMDb-Movie-Data-Column-Description}.
+            values, shown in Table~\ref{tab-IMDb-Movie-Data-Column-Description}.
+        A summary of the columns is provided in
+            Table~\ref{tab-IMDb-Movie-Data-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -56,8 +56,8 @@
         However, the Cast and Crew columns are not composed of discrete data points,
             but rather JSON files representing the entire cast or crew list.
         As a result, we to extracted the data using string parsing methods.
-        A summary of the columns is provided in Table
-            \ref*{tab-Credits-Column-Description}.
+        A summary of the columns is provided in
+            Table~\ref{tab-Credits-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -80,32 +80,32 @@
         We then merged this data with the original IMDb dataset.
         This involved dropping the Description column and replacing the Director and
             Actor columns with Director Exp.~and Mean Lead Roles Exp.
-        A summary of the merged datasets columns is shown in Table
-            \ref*{tab-merged-data-column-description}.
+        A summary of the merged datasets columns is shown in
+            Table~\ref{tab-merged-data-column-description}.
 
         \begin{table}[h]
             \begin{tabular}{lp{9cm}l}
                 \toprule
                 Column Name           & Description                                                  & Data Type \\
                 \midrule
-                Rank                  & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Title                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & String    \\
-                Genre                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Genre     \\
+                Rank                  & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Title                 & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & String    \\
+                Genre                 & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Genre     \\
                 Director Exp.~        & The number of movies that the director of the movie has made & Float     \\
                 Mean Lead Roles Exp.~ & The mean number of movies that the lead actors have been in  & Float     \\
-                Year                  & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Runtime (Minutes)     & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Rating                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
-                Votes                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Revenue (Millions)    & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
-                Metascore             & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Year                  & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Runtime (Minutes)     & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Rating                & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
+                Votes                 & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Revenue (Millions)    & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
+                Metascore             & See table~\ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
                 \bottomrule
             \end{tabular}
             \caption[short]{The different columns in the merged data set}\label{tab-merged-data-column-description}
         \end{table}
 
         To check this data was properly normalised we made a histogram plot of all the
-            numeric variables, shown in Figure \ref{fig-distribution-of-numeric-variable}.
+            numeric variables, shown in Figure~\ref{fig-distribution-of-numeric-variable}.
         As expected, a few variables did not appear to be normally distributed, namely:
         Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
@@ -113,9 +113,8 @@
             \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
             \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
         \end{figure}
-        Figure \ref*{fig-distribution-of-numeric-variable} shows that Revenue
-            (Millions) and Votes are severely right-skewed, implying an exponential
-            distribution.
+        Figure~\ref{fig-distribution-of-numeric-variable} shows that Revenue (Millions)
+            and Votes are severely right-skewed, implying an exponential distribution.
         Runtime (Minutes) and Director Exp.~appear to be less severely right-skewed,
             implying a lognormal distribution.
         Rating seems to be left-skewed.
@@ -132,10 +131,10 @@
                     standard deviation.
             }\label{fig-transformed-distribution-of-numeric-variable}
         \end{figure}
-        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the
+        Figure~\ref{fig-transformed-distribution-of-numeric-variable} shows the
             standarised and normalised numeric variables.
-        The legend contains the p-values from the Kolmogorov-Smirnov normality test
-            \cite*{KStest}, which was used to test the data against the null hypothesis
+        The legend contains the p-values from the Kolmogorov-Smirnov normality
+            test~\cite{KStest}, which was used to test the data against the null hypothesis
             $H_{0}: X \not\sim N(0,1)$.
         It is worth noting that the Director Exp.~column failed the test, however,
             there is missing data present in the histogram.
