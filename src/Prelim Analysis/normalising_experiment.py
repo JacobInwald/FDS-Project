@@ -97,8 +97,6 @@ for x in range(len(data)):
 genres = genre_data_clean['Genre'].unique()
 for g in genres:
     data[g] = [int(g in s) for s in data['Genre']]
-
-    print(data[g])
     if sum(data[g]) < 100:
         data = data.drop(g, axis=1)
 
