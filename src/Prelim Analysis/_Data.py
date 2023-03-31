@@ -148,10 +148,7 @@ def create_average_rating_dict(colname: str, n: int = None) -> dict:
 
 
 def save_figure(plot, fileName):
-    plot.rcParams.update({
-        "font.size": 11,
-        "figure.figsize": (3, 3)
-    })
+    plot.rcParams.update({"font.size": 11})
     plot.savefig(
         f"Report/Figures/Prelim Analysis/{fileName}.pdf", bbox_inches="tight")
 
@@ -165,26 +162,26 @@ def create_merged_dataset():
     actor_count = pd.read_csv("Data Sets/actor_counts.csv")
 
     data_raw['Director Exp.'] = [director_count[director_count.name == d.strip()]['num_films'].values[0] + 1
-                                    if len(director_count[director_count.name == d.strip()]) >= 1
-                                        else 1 
-                                        for d in data_raw['Director']]
+                                 if len(director_count[director_count.name == d.strip()]) >= 1
+                                 else 1
+                                 for d in data_raw['Director']]
     data_raw = data_raw.drop('Director', axis=1)
 
     data_raw['Mean Lead Roles Exp.'] = [sum([actor_count[actor_count.name == act]['num_films'].values[0] + 1
-                                    if len(actor_count[actor_count.name == act]) >= 1
+                                             if len(actor_count[actor_count.name == act]) >= 1
                                         else 1
                                         for act in a.split(', ')]) / len(a.split(', ')) for a in data_raw['Actors']]
     data_raw = data_raw.drop('Actors', axis=1)
-    
+
     # Remove outliers
-    #outliers = data_raw
-    #data_raw = data_raw[(np.abs(stats.zscore(data_raw['Revenue (Millions)'])) < 3)]
-    #outliers = outliers[(np.abs(stats.zscore(outliers['Revenue (Millions)'])) >= 3)]
-    
+    # outliers = data_raw
+    # data_raw = data_raw[(np.abs(stats.zscore(data_raw['Revenue (Millions)'])) < 3)]
+    # outliers = outliers[(np.abs(stats.zscore(outliers['Revenue (Millions)'])) >= 3)]
 
     print("processing_done")
-    
+
     data_raw.to_csv("Data Sets/merged_movie_data.csv", index=False)
+
 
 def to_latex(data_in, ignore_col=[]):
     data = data_in
@@ -194,10 +191,11 @@ def to_latex(data_in, ignore_col=[]):
         c1 = c
         if '/' in c:
             c1 = re.sub(r'(\d)/(\d)', '\\\\frac{\\1}{\\2}', c)
-        
+
         data[f'${c1}$'] = data[c]
         data = data.drop(c, axis=1)
     return data
+
 
 def from_latex(data_in, ignore_col=[]):
     data = data_in
@@ -208,7 +206,7 @@ def from_latex(data_in, ignore_col=[]):
         if 'frac' in c:
             c1 = re.sub(r'\\frac\{(\d)\}\{(\d)\}', '\\1/\\2', c)
             print(c1)
-        
+
         data[f'{c1[1:-1]}'] = data[c]
         data = data.drop(c, axis=1)
     return data

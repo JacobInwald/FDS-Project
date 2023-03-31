@@ -2,15 +2,15 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We used two movie datasets for our investigation: an IMDb dataset
-            \cite*{data:IMDb} and The Movie Dataset (TMD) \cite*{data:TMD}. 
-        The IMDb dataset contains data about movies released between 2006 and 2016, while
-            the TMD dataset contains data about movies released on or before July
-            2017.
-        Both datasets were obtained from Kaggle.com and are shared under
-            the CC0 1.0 Universal Public Domain Dedication.
-        TMD is a merged dataset from TMDb (The Movie Database) and grouplens.org, a movie ranking site.
-        We only used the part of the dataset that was obtained from TMDb.
+        We utilized two movie datasets: an IMDb dataset\cite{data:IMDb} and
+            TMD\cite{data:TMD} (The Movie Dataset).
+        The IMDb dataset contains data about movies made from 2006-2016, while the TMD
+            dataset contains data about movies released on or before July 2017.
+        Both datasets were obtained from kaggle.com and are shared under the CC0 1.0
+            Universal Public Domain Dedication.
+        TMD is merged data from TMDb (The Movie DataBase) and grouplens.org, a movie
+            ranking site.
+        However, we only used the part that was obtained from TMDb.
         It is worth noting that the provenance of the IMDb dataset has been subject to
             controversy as it was scraped from IMDb.com. 
         However, for this investigation, we used only a sample of this dataset which is publicly
@@ -87,27 +87,26 @@
                 \toprule
                 Column Name          & Description                                                  & Data Type \\
                 \midrule
-                Rank                 & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Title                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & String    \\
-                Genre                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Genre     \\
+                Rank                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Title                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & String    \\
+                Genre                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Genre     \\
                 Director Exp.        & The number of movies that the director of the movie has made & Float     \\
                 Mean Lead Roles Exp. & The mean number of movies that the lead actors have been in  & Float     \\
-                Year                 & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Runtime (Minutes)    & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Rating               & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Float     \\
-                Votes                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Revenue (Millions)   & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Float     \\
-                Metascore            & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
+                Year                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Runtime (Minutes)    & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Rating               & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
+                Votes                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Revenue (Millions)   & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
+                Metascore            & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
                 \bottomrule
             \end{tabular}
             \caption[short]{The different columns in the merged data set}\label{tab-merged-data-column-description}
         \end{table}
 
-        We checked that the data had been properly normalized by creating a
-        histogram plot of all the numeric variables, as shown in Figure
-        \ref*{fig-distribution-of-numeric-variable}. As anticipated, some
-        variables were not normally distributed, including Revenue (Millions),
-        Votes, Runtime (Minutes), Director Exp., and Rating.
+        To check this data was properly normalised we made a histogram plot of all the
+            numeric variables, shown in Figure \ref{fig-distribution-of-numeric-variable}.
+        As expected, a few variables did not appear to be normally distributed, namely:
+        Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
             \centering
             \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
