@@ -15,8 +15,8 @@ ys = ["Votes^{1/3}", "ln(Runtime)", "Mean Lead Roles Exp.", "Rank"]
 for i, ax in enumerate(axs.flat):
     y = data[ys[i]]
     ax.scatter(x, y, s=1)
-    ax.set_ylabel("$Revenue^{\\frac{1}{3}}$")
-    ax.set_xlabel("$" + re.sub(r'(\d)/(\d)',
+    ax.set_xlabel("$Revenue^{\\frac{1}{3}}$")
+    ax.set_ylabel("$" + re.sub(r'(\d)/(\d)',
                   '\\\\frac{\\1}{\\2}', ys[i]) + "$")
     a, b = np.polyfit(x, y, 1)
     r_2 = np.corrcoef(x, y)[0][1]
