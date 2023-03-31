@@ -2,8 +2,8 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We utilized two movie datasets: an IMDb dataset\cite*{data:IMDb} and
-            TMD\cite*{data:TMD} (The Movie Dataset).
+        We utilized two movie datasets: an IMDb dataset\cite{data:IMDb} and
+            TMD\cite{data:TMD} (The Movie Dataset).
         The IMDb dataset contains data about movies made from 2006-2016, while the TMD
             dataset contains data about movies released on or before July 2017.
         Both datasets were obtained from kaggle.com and are shared under the CC0 1.0
@@ -24,7 +24,7 @@
             Thriller, Animation, Comedy, Family, Fantasy, Drama, Music, Biography, Romance,
             History, Crime, Western, War, Musical and Sport.
         The column summary is shown in Table
-            \ref*{tab-IMDb-Movie-Data-Column-Description}.
+            \ref{tab-IMDb-Movie-Data-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -59,7 +59,7 @@
             instead being json files representing the entire cast or crew list.
         As such, when working with it, we had to extract the data using string parsing
             methods.
-        The column summary is shown in Table \ref*{tab-Credits-Column-Description}.
+        The column summary is shown in Table \ref{tab-Credits-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -84,30 +84,30 @@
             columns with Director Exp.
         and Mean Lead Roles Exp.
         This resulted in a merged data set with structure shown in Table
-            \ref*{tab-merged-data-column-description}.
+            \ref{tab-merged-data-column-description}.
         \begin{table}[h]
             \begin{tabular}{lp{9cm}l}
                 \toprule
                 Column Name          & Description                                                  & Data Type \\
                 \midrule
-                Rank                 & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Title                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & String    \\
-                Genre                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Genre     \\
+                Rank                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Title                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & String    \\
+                Genre                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Genre     \\
                 Director Exp.        & The number of movies that the director of the movie has made & Float     \\
                 Mean Lead Roles Exp. & The mean number of movies that the lead actors have been in  & Float     \\
-                Year                 & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Runtime (Minutes)    & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Rating               & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Float     \\
-                Votes                & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
-                Revenue (Millions)   & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Float     \\
-                Metascore            & See table \ref*{tab-IMDb-Movie-Data-Column-Description}      & Integer   \\
+                Year                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Runtime (Minutes)    & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Rating               & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
+                Votes                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
+                Revenue (Millions)   & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
+                Metascore            & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
                 \bottomrule
             \end{tabular}
             \caption[short]{The different columns in the merged data set}\label{tab-merged-data-column-description}
         \end{table}
 
         To check this data was properly normalised we made a histogram plot of all the
-            numeric variables, shown in Figure \ref*{fig-distribution-of-numeric-variable}.
+            numeric variables, shown in Figure \ref{fig-distribution-of-numeric-variable}.
         As expected, a few variables did not appear to be normally distributed, namely:
         Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
@@ -130,10 +130,10 @@
                 \item Rating             : Square transform
             \end{itemize}
         \end{multicols}
-        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the
+        Figure \ref{fig-transformed-distribution-of-numeric-variable} shows the
             transformed and normalised numeric variables.
         The label has the p-values from testing whether the transformed distribution is
-            normal, using the Kolmogorov-Smirnov test\cite*{KStest} for goodness of fit.
+            normal, using the Kolmogorov-Smirnov test\cite{KStest} for goodness of fit.
         One interesting note is that altough the Director Exp.
         column fails the Kolmogorov-Smirnov test, there is clearly missing
         data; around 3 columns are missing from the histogram shown.
@@ -141,15 +141,21 @@
             curve, there is sufficient evidence to assume ln(Director Exp) has a normal
             distribution.
         \begin{figure}[H]
-            \centering
-            \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
-            \caption[short]{The distributions of the standardised and normalised numeric variables in the merged dataset,
-                            the legend has the p-values from testing with $H_{0}: X \not\sim N(0,1)$. Also shown on the plots is
-                            the Gaussian Distribution with the columns mean and standard deviation}\label{fig-transformed-distribution-of-numeric-variable}
-        \end{figure}
-        Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the transformed and normalised numeric variables.
-        The legend contains the p-values from testing the data with $H_{0}: X \not\sim N(0,1)$, using the Kolmogorov-Smirnov normality
-            test\cite*{KStest} for goodness of fit.
-        It's worth noting that even though the Director Exp. column failed the Kolmogorov-Smirnov test, there is missing data present in the histogram shown.
-        Given that the histogram follows a normal distribution curve, there is convincing evidence to assume ln(Director Exp.) has a normal distribution.
-        Overall, these transformations helped to normalize the dataset and enhance its suitability for further analysis.
+        \centering
+        \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
+        \caption[short]{The distributions of the standardised and normalised numeric variables in the merged dataset,
+        the legend has the p-values from testing with $H_{0}: X \not\sim N(0,1)$.
+        Also shown on the plots is the Gaussian Distribution with the columns mean and
+            standard deviation}\label{fig-transformed-distribution-of-numeric-variable}
+            \end{figure} Figure \ref{fig-transformed-distribution-of-numeric-variable}
+            shows the transformed and normalised numeric variables.
+        The legend contains the p-values from testing the data with $H_{0}: X \not\sim
+                N(0,1)$, using the Kolmogorov-Smirnov normality test\cite{KStest} for goodness
+            of fit.
+        It's worth noting that even though the Director Exp.
+        column failed the Kolmogorov-Smirnov test, there is missing data present in the histogram shown.
+        Given that the histogram follows a normal distribution curve, there is
+            convincing evidence to assume ln(Director Exp.
+        ) has a normal distribution.
+        Overall, these transformations helped to normalize the dataset and enhance its
+            suitability for further analysis.
