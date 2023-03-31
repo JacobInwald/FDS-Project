@@ -137,3 +137,9 @@
         normal distribution curve, providing convincing evidence that ln(Director Exp.)
         has a normal distribution. Ultimately, these transformations helped to normalize
         the dataset and improve its suitability for further analysis.
+
+        To make use of the Genre column, one-hot encoding was used.
+        We added a column for each Genre and set each entry to 1 if the corresponding movie
+            fit that genre and 0 otherwise.
+        Genres with less than 100 movies made were excluded to ensure a large enough sample size
+            was present, such that we could draw meaningful conclusions

@@ -83,4 +83,23 @@ for c in data.columns:
     data = data[np.abs(stats.zscore(data[c])) < 3]
     
 data = d.from_latex(data)
+
+# One hot encoding with Genre
+genre_data_clean = pd.DataFrame(columns=['Genre'])
+
+i = 0
+for x in range(len(data)):
+    r = data.iloc[x]
+    for g in r['Genre'].split(','):
+        genre_data_clean.loc[i] = [g]
+        i+=1
+
+genres = genre_data_clean['Genre'].unique()
+for g in genres:
+    data[g] = [int(g in s) for s in data['Genre']]
+
+    print(data[g])
+    if sum(data[g]) < 100:
+        data = data.drop(g, axis=1)
+
 data.to_csv("Data Sets/normalised_movie_data.csv", index=False)

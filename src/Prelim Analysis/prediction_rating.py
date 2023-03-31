@@ -10,7 +10,7 @@ from _Data import *
 # reading the csv file
 data = pd.read_csv("Data Sets/normalised_movie_data.csv")
 # data = data[['Animation' not in r for r in data['Genre']]]
-data = data.drop(['Genre', 'Title', 'Metascore'], axis=1)
+data = data.drop(['Genre', 'Title', 'Metascore', 'Votes^{1/3}'], axis=1)
 
 data = data.dropna()
 x = data.drop('Rating^2', axis=1)

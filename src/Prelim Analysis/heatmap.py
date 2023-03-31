@@ -26,8 +26,8 @@ data = pd.read_csv("Data Sets/normalised_movie_data.csv")
 data = data.dropna()
 data = data.drop(['Genre', 'Title'], axis=1)
 data = d.to_latex(data)
-fig = plt.figure(figsize=(8,8))
-heatmap = sns.heatmap(data.corr(), vmin=-1, vmax=1, annot=True, cmap='BrBG')
+fig = plt.figure(figsize=(5,5))
+heatmap = sns.heatmap(data.corr(), vmin=-1, vmax=1, annot=True, cmap='BrBG', annot_kws={"size": 6})
 heatmap.set_title('Normalised Correlation Heatmap')
 heatmap.set_xticklabels(heatmap.get_xticklabels(), 
                         rotation = 45,
