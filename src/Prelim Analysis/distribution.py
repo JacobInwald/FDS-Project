@@ -30,3 +30,14 @@ for ax_r in axs:
         i += 1
 
 d.save_figure(plt, "Distribution of Numeric Variables (No Transformation)")
+
+fig1, axs1 = plt.subplots(1, 2, figsize=(10, 5), sharey=True)
+fig1.suptitle("Distributions of Votes and Rank")
+fig1.supylabel("Count")
+axs1[0].hist(data["Votes"], 20, label="Votes", color="lightsalmon")
+axs1[0].set_xlabel("Votes")
+axs1[0].set_title("Distribution of Votes")
+axs1[1].hist(data["Rank"], 20, label="Rank", color="lightsalmon")
+axs1[1].set_xlabel("Rank")
+axs1[1].set_title("Distribution of Rank")
+d.save_figure(plt, "Distributions of Votes and Rank")
