@@ -117,7 +117,7 @@
         The results suggest that box office sales can be predicted by lead actor experience ($\beta=0.113, \sigma=0.030, p<0.05$),
             but cannot be predicted by director experience ($\beta=0.051, \sigma=0.030, p>0.05$).
         Previous research has shown that movie advertising tends to be focussed around the actors 
-            present more than the director of the movie\cite{label}.
+            present more than the director of the movie\cite{elberse2007power}.
         Examples of this are present in adverts like movie posters - actor faces feature front and 
             center while directors are listed in name only.
         Actors who have been in many movies are more recognisable, meaning potential consumers
@@ -144,14 +144,13 @@
         % We would like you to explore what makes a movie popular and/or successful.
         \paragraph{}
         % Success metric definition
-        To analyze the effect critics had on predicting general success of a movie, a actual metric of movie success is
-            needed.
-        The metric we used was $Success = \frac{Revenue^\frac{1}{3} + Rating^2}{2}$.
-        The reasoning behind this is quite simple, Revenue and Rating can both be used as metrics of movie success,
-            and Figure \ref{fig-heatmap} shows that they are not strongly correlated, meaning they describe independent
-            aspects of success. 
-        Therefore, the mean of both should better encapsulate the true success of a movie.
-        We will refer to this metric as success from now on.
+        To analyze the effect critics had on predicting general success of a movie, we define
+            a metric of success, $Success = \frac{Revenue^\frac{1}{3} + Rating^2}{2}$.
+        We chose this metric as Revenue and Rating are both measures of movie success,
+            and Figure \ref{fig-heatmap} shows that they are not strongly correlated.
+        This means they describe independent aspects of success, and therefore the mean of both
+            will better encapsulate the true success of a movie.
+        We refer to this metric as success from now on.
         
         To investigate the ability for critics to predict movie success, we present a multiple regression model,
             with the target variable being the success metric. 
@@ -217,7 +216,7 @@
     % Constant
     Another observation is the constants coefficient is negative ($\beta=-49.4,\sigma=10.9,p<0.05$).
     This means that the average movie tends to not be very successful, which is inline with research that
-        most movies do not succeed, with only a few actually garnering actual success \cite{}.
+        most movies do not succeed, with only a few actually garnering actual success \cite{walls2005modelling}.
 
     % Genre notes
     Finally, there are some interesting notes about the impact of genre has on the box office success of a movie.

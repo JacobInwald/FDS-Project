@@ -77,10 +77,14 @@
             director\_counts.csv.
         We then merged this data with the original IMDb
             dataset.
+        This involved dropping the Description column and replacing the
+            Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
+        A summary of the merged datasets columns is shown in Table
+            \ref*{tab-merged-data-column-description}.
         %----------
-        \begin{wraptable}{r}{10cm}
+        \begin{table}[H]
             \centering
-            \begin{tabular}{lp{3cm}l}
+            \begin{tabular}{lp{9cm}l}
                 \toprule
                 Column Name          & Description                                                  & Data Type \\
                 \midrule
@@ -92,13 +96,8 @@
                             it also shares all the columns described in Tables
                             \ref*{tab-IMDb-Movie-Data-Column-Description}, 
                             except for Director and Actors}\label{tab-merged-data-column-description}
-        \end{wraptable}
+        \end{table}
         %----------
-        This involved dropping the Description column and replacing the
-            Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
-        A summary of the merged datasets columns is shown in Table
-            \ref*{tab-merged-data-column-description}.
-
         To check this data was properly normalised we made a histogram plot of all the
             numeric variables, shown in Figure \ref{fig-distribution-of-numeric-variable}.
         As expected, a few variables did not appear to be normally distributed, namely:
@@ -124,7 +123,7 @@
                 \captionsetup{justification=justified,singlelinecheck=false}
                 \caption{The distributions of the standardised and normalised numeric variables
                         in the merged dataset, the legend has the p-values from testing with 
-                        $H_{0}: X \sim N(0,1)$. Also shown on the plots is the Gaussian Distribution
+                        $H_{0}: X \not\sim N(0,1)$. Also shown on the plots is the Gaussian Distribution
                         with the columns mean and standard deviation.}
                 \label{fig-transformed-distribution-of-numeric-variable}
             \end{subfigure}
