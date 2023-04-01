@@ -12,15 +12,13 @@
             ranking site.
         However, we only used the part that was obtained from TMDb.
         It is worth noting that the provenance of the IMDb dataset has been subject to
-            controversy as it was scraped from IMDb.com. 
-        However, for this investigation, we used only a sample of this dataset which is publicly
-            available on Kaggle.com.
+            controversy as it was scraped from IMDb.com.
 
     \paragraph{Data description}
         The IMDb movie dataset contains 12 columns with string or floating point
             values. 
         The only column of note is the Genre column, which can only take on 12 distinct values, 
-            shown in Table \ref*{tab-IMDb-Movie-Data-Column-Description}
+            shown in Table \ref*{tab-IMDb-Movie-Data-Column-Description}.
         A summary of the columns is provided in Table \ref*{tab-IMDb-Movie-Data-Column-Description}.
         \begin{table}[h]
             \centering
@@ -52,10 +50,10 @@
         We worked exclusively with the Crew table in TMD, which is a small part of
             the entire database. 
         This table contains three columns - Cast, Crew, and ID.
-        However, the Cast and Crew columns are not composed of discrete data points, 
+        The Cast and Crew columns are not composed of discrete data points, 
             but rather JSON files representing the entire cast or crew list. 
-        As a result, we to extracted the data using string parsing methods. 
-        A summary of the columns is provided in Table \ref*{tab-Credits-Column-Description}.
+        As a result, we extracted the data using string parsing methods. 
+        A summary of the columns is provided in Table~\ref{tab-Credits-Column-Description}.
         \begin{table}[h]
             \centering
             \begin{tabular}{lp{10cm}l}
@@ -63,7 +61,7 @@
                 Column Name & Description                                                              & Data Type  \\
                 \midrule
                 cast        & The cast list of the movie, including all actors who appeared in it.     & .json file \\
-                crew        & The entire crew list of the movie, including all the people who made it. & .json file \\
+                crew        & The entire crew list of the movie. & .json file \\
                 id          & The movie id - used in the larger dataset to connect tables together     & Integer    \\
                 \bottomrule
             \end{tabular}
@@ -79,7 +77,7 @@
             dataset.
         This involved dropping the Description column and replacing the
             Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
-        A summary of the merged datasets columns is shown in Table
+        A summary of the new columns is shown in Table
             \ref*{tab-merged-data-column-description}.
         %----------
         \begin{table}[H]
@@ -100,7 +98,7 @@
         %----------
         To check this data was properly normalised we made a histogram plot of all the
             numeric variables, shown in Figure \ref{fig-distribution-of-numeric-variable}.
-        As expected, a few variables did not appear to be normally distributed, namely:
+        As expected, a few variables did not appear to be normally distributed, namely
         Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
             \centering
@@ -144,9 +142,8 @@
         standarised and normalised numeric variables. The legend contains the p-values
         from the Kolmogorov-Smirnov normality test \cite*{KStest}, which was used to
         test the data against the null hypothesis $H_{0}: X \not\sim N(0,1)$. It is
-        worth noting that the Director Exp. column failed the test, however, there is
-        missing data present in the histogram. Despite this, the histogram follows a
-        normal distribution curve, providing convincing evidence that ln(Director Exp.)
+        worth noting that the Director Exp. column failed the test. Despite this, the histogram follows a
+        normal distribution curve and there appears to be missing data, providing convincing evidence that ln(Director Exp.)
         has a normal distribution. Ultimately, these transformations helped to normalize
         the dataset and improve its suitability for further analysis.
 
