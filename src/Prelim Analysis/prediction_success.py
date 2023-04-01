@@ -14,7 +14,7 @@ data = pd.read_csv("Data Sets/normalised_movie_data.csv")
 # metric = np.add((1-money_weight)*data['Rating^2'], money_weight*data['Revenue^{1/3}'])
 metric = np.add(data['Rating^2'], data['Revenue^{1/3}']) / 2
 data['Success'] = metric
-data = data.drop(['Genre', 'Title', 'Rating^2', 'Revenue^{1/3}'], axis=1)
+data = data.drop(['Genre', 'Title', 'Rating^2', 'Revenue^{1/3}', 'Votes^{1/3}'], axis=1)
 data = data.dropna()
 x = data.drop('Success', axis=1)
 y = data['Success']

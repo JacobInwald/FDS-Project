@@ -73,35 +73,31 @@
     \paragraph{Data processing}
         We used a Python script to parse the TMD dataset and count the number of
             movies each director and actor has been involved in.
-        he resulting datasets were saved as CSV files named actor\_counts.csv and
+        The resulting datasets were saved as CSV files named actor\_counts.csv and
             director\_counts.csv.
         We then merged this data with the original IMDb
             dataset.
+        %----------
+        \begin{wraptable}{r}{10cm}
+            \centering
+            \begin{tabular}{lp{3cm}l}
+                \toprule
+                Column Name          & Description                                                  & Data Type \\
+                \midrule
+                Director Exp.        & Amount of movies director has made & Float     \\
+                Mean Lead Roles Exp. & Mean amount of movies lead actors have made & Float     \\
+                \bottomrule
+            \end{tabular}
+            \caption[short]{The different columns in the merged data set, 
+                            it also shares all the columns described in Tables
+                            \ref*{tab-IMDb-Movie-Data-Column-Description}, 
+                            except for Director and Actors}\label{tab-merged-data-column-description}
+        \end{wraptable}
+        %----------
         This involved dropping the Description column and replacing the
             Director and Actor columns with Director Exp. and Mean Lead Roles Exp.
         A summary of the merged datasets columns is shown in Table
             \ref*{tab-merged-data-column-description}.
-
-        \begin{table}[h]
-            \begin{tabular}{lp{9cm}l}
-                \toprule
-                Column Name          & Description                                                  & Data Type \\
-                \midrule
-                Rank                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Title                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & String    \\
-                Genre                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Genre     \\
-                Director Exp.        & The number of movies that the director of the movie has made & Float     \\
-                Mean Lead Roles Exp. & The mean number of movies that the lead actors have been in  & Float     \\
-                Year                 & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Runtime (Minutes)    & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Rating               & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
-                Votes                & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                Revenue (Millions)   & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Float     \\
-                Metascore            & See table \ref{tab-IMDb-Movie-Data-Column-Description}       & Integer   \\
-                \bottomrule
-            \end{tabular}
-            \caption[short]{The different columns in the merged data set}\label{tab-merged-data-column-description}
-        \end{table}
 
         To check this data was properly normalised we made a histogram plot of all the
             numeric variables, shown in Figure \ref{fig-distribution-of-numeric-variable}.
@@ -109,9 +105,33 @@
         Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
         \begin{figure}[H]
             \centering
-            \includegraphics[width=0.8\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
-            \caption[short]{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
+            \begin{subfigure}[b]{0.75\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.2\textwidth}
+                \centering
+                \captionsetup{justification=justified,singlelinecheck=false}
+                \caption{The distributions of the numeric variables in the merged dataset}\label{fig-distribution-of-numeric-variable}
+            \end{subfigure}
+            \\
+            \begin{subfigure}[b]{0.75\textwidth}
+                \centering
+                \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
+            \end{subfigure}
+            \begin{subfigure}[b]{0.2\textwidth}
+                \centering
+                \captionsetup{justification=justified,singlelinecheck=false}
+                \caption{The distributions of the standardised and normalised numeric variables
+                        in the merged dataset, the legend has the p-values from testing with 
+                        $H_{0}: X \sim N(0,1)$. Also shown on the plots is the Gaussian Distribution
+                        with the columns mean and standard deviation.}
+                \label{fig-transformed-distribution-of-numeric-variable}
+            \end{subfigure}
+            \caption{Distribution of Numeric Variables in the Merged Dataset}
+            \label{fig-numeric-variable-distribution}
         \end{figure}
+                  
         Figure \ref*{fig-distribution-of-numeric-variable} shows that Revenue (Millions) and Votes are
         severely right-skewed, implying an exponential distribution. Runtime
         (Minutes) and Director Exp. appear to be less severely right-skewed,
@@ -120,13 +140,7 @@
         distribution are cube root transform for Revenue (Millions) and Votes,
         log transform for Runtime (Minutes) and Director Exp., and square
         transform for Rating.
-        \begin{figure}[H]
-            \centering
-            \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
-            \caption[short]{The distributions of the standardised and normalised numeric variables in the merged dataset,
-                            the legend has the p-values from testing with $H_{0}: X \not\sim N(0,1)$. Also shown on the plots is
-                            the Gaussian Distribution with the columns mean and standard deviation}\label{fig-transformed-distribution-of-numeric-variable}
-        \end{figure}
+        
         Figure \ref*{fig-transformed-distribution-of-numeric-variable} shows the
         standarised and normalised numeric variables. The legend contains the p-values
         from the Kolmogorov-Smirnov normality test \cite*{KStest}, which was used to

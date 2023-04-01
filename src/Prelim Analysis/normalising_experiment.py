@@ -45,11 +45,11 @@ for c in data.columns:
 
 # Plot data
 
-fig, axs = plt.subplots(ncols=5, nrows=2, figsize=(10,5), sharey=True)
-fig.delaxes(axs[1][2])
-fig.delaxes(axs[1][3])
+fig, axs = plt.subplots(ncols=5, nrows=2, figsize=(9,5), sharey=True)
 fig.delaxes(axs[1][4])
-fig.suptitle("Distribution of Numeric Variables (Transformed)")
+fig.delaxes(axs[1][3])
+fig.delaxes(axs[1][2])
+fig.suptitle("Distributions of transformed quantitative data")
 fig.supylabel("Frequency Density")
 fig.tight_layout()
 colors = plt.rcParams["axes.prop_cycle"]()
@@ -75,7 +75,7 @@ for ax_r in axs:
         fig.tight_layout()
 
         i+=1
-fig.legend(loc='lower right')
+fig.legend(loc='lower right', fontsize=14)
 d.save_figure(plt, "Distribution of Numeric Variables (Transformed)")
 for c in data.columns:
     if c in ['Genre', 'Title', 'Rank', 'Year']:
