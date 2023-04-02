@@ -5,8 +5,8 @@ import _Data as d
 
 data = pd.read_csv("Data Sets/merged_movie_data.csv")
 
-fig, axs = plt.subplots(ncols=4, nrows=2, figsize=(7, 4.5), sharey=True)
-fig.delaxes(axs[1][3])
+fig, axs = plt.subplots(ncols=2, nrows=4, figsize=(4.5, 9), sharey=True)
+fig.delaxes(axs[3][1])
 fig.suptitle("Distributions of quantitative data")
 fig.supylabel("Count")
 fig.tight_layout()
@@ -30,3 +30,25 @@ for ax_r in axs:
         i += 1
 
 d.save_figure(plt, "Distribution of Numeric Variables (No Transformation)")
+
+fig, axs = plt.subplots(ncols=2, nrows=1, figsize=(6, 3), sharey=True)
+fig.suptitle("Distributions of Rank and Votes")
+fig.supylabel("Count")
+fig.tight_layout()
+cs = data.columns
+i = 0
+for ax in axs:
+    if i == len(cs):
+        break
+    while cs[i] not in ['Rank', 'Votes']:
+        i += 1
+    c = cs[i]
+
+    ax.hist(data[c], 20, label=f'{c}', color='lightsalmon')
+    ax.set_xlabel(f'{c}')
+    ax.set_title(f'Distribution of \n {c}')
+    fig.tight_layout()
+
+    i += 1
+
+d.save_figure(plt, "Distributions of Votes and Rank")
