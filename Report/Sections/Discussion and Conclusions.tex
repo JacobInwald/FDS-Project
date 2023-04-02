@@ -1,19 +1,48 @@
 \section{Discussion and Conclusions}
     % Suggested 400 words.
+    \begin{multicols}{2}
+        \paragraph{Summary of findings}
+            Critics play a major role in the movie industry.
+            They are seen as weilding enormous power, with the ability to render years of work wasted with a
+                single review.
+            We aimed to investigate if critics truly have this power.
+            We found that critics can't predict box office success, bringing into question their power over movie
+                revenue.
+            However, we did find that critics can predict the general success and reception of a movie.
+            Their ratings have a high correlation with user ratings, and our multiple regression model used Metascore
+                as a predictor for success.
+            These findings suggest that while critics can predict the success of a movie, they don't appear to impact
+                the revenue the movie will bring in.
 
-    \paragraph{Summary of findings}
+            We also found that the general public is more lenient than critics.
+            The critic scores follow a unskewed normal distribution, whereas user ratings is left-skewed (see fig.~\ref{fig-distribution-of-numeric-variable}).
+            This means that on average the general public rates movies higher than critics will.
+            These findings suggest that critics provide more unbiased reviews of movies than a consumer will.
 
-    \paragraph{Evaluation of own work: strengths and limitations}
+            We also found that actor experience is a better predictor of box office success than the director experience.
+            This was reinforced by its moderate correlation to box office success, which is inline with research 
+                about "star power", the idea that stars drive movie success \cite{bibid}.
+            
+        \paragraph{Evaluation of own work: strengths and limitations}
+            One limitation of our approach was the small amount of data we worked with.
+            The main dataset we used - the IMDb dataset - was just a sample of a larger
+                database and had only 1000 entries.
+            An improvement we could make would be to purchase the full dataset and run our
+                analysis on that dataset.
+            Another limitation was the 
+            
+        \paragraph{Comparison with any other related work}
+            E.g. ``Anscombe has also demonstrated that many patterns of data can have the
+                same correlation coefficient''.
 
-    \paragraph{Comparison with any other related work}
-        E.g. ``Anscombe has also demonstrated that many patterns of data can have the
-            same correlation coefficient''.
+            Wikipedia can also be cited but it is better if you find the original reference
+                it for a particular claim in the list of references on the Wikipedia page, read
+                it, and cite it.
 
-        Wikipedia can also be cited but it is better if you find the original reference
-            it for a particular claim in the list of references on the Wikipedia page, read
-            it, and cite it.
+            The golden rule is always to cite information that has come from other sources,
+                to avoid plagiarism.
 
-        The golden rule is always to cite information that has come from other sources,
-            to avoid plagiarism.
+        \paragraph{Improvements and extensions}
 
-    \paragraph{Improvements and extensions}
+
+    \end{multicols}
