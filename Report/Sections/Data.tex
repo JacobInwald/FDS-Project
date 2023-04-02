@@ -2,8 +2,8 @@
     % Suggested 300 words
 
     \paragraph{Data provenance}
-        We utilized two movie datasets: an IMDb dataset\cite{data:IMDb} and
-            TMD\cite{data:TMD} (The Movie Dataset).
+        We utilized two movie datasets: an IMDb dataset~\cite{data:IMDb} and
+            TMD~\cite{data:TMD} (The Movie Dataset).
         The IMDb dataset contains data about movies made from 2006-2016, while the TMD
             dataset contains data about movies released on or before July 2017.
         Both datasets were obtained from kaggle.com and are shared under the CC0 1.0
@@ -47,8 +47,8 @@
             \caption[short]{The different columns in the IMDb-Movie-Data.csv file}\label{tab-IMDb-Movie-Data-Column-Description}
         \end{table}
 
-        We worked exclusively with the Crew table in TMD, which is a small part of
-            the entire database. 
+        We worked exclusively with the Crew table in TMD, which is a small part of the
+            entire database.
         This table contains three columns - Cast, Crew, and ID.
         The Cast and Crew columns are not composed of discrete data points, 
             but rather JSON files representing the entire cast or crew list. 
@@ -84,7 +84,7 @@
             \centering
             \begin{tabular}{lp{9cm}l}
                 \toprule
-                Column Name          & Description                                                  & Data Type \\
+                Column Name           & Description                                                  & Data Type \\
                 \midrule
                 Director Exp.        & Amount of movies director has made & Float     \\
                 Mean Lead Roles Exp. & Mean amount of movies lead actors have made & Float     \\
@@ -148,7 +148,7 @@
         the dataset and improve its suitability for further analysis.
 
         To make use of the Genre column, one-hot encoding was used.
-        We added a column for each Genre and set each entry to 1 if the corresponding movie
-            fit that genre and 0 otherwise.
-        Genres with less than 100 movies made were excluded to ensure a large enough sample size
-            was present, such that we could draw meaningful conclusions
+        We added a column for each Genre and set each entry to 1 if the corresponding
+            movie fit that genre and 0 otherwise.
+        Genres with less than 100 movies made were excluded to ensure a large enough
+            sample size was present, such that we could draw meaningful conclusions.
