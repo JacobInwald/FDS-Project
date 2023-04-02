@@ -1,8 +1,8 @@
 \newpage
 \section{Exploration and Analysis}
     \subsection{What makes a movie successful?}
-        % We would like you to explore what makes a movie popular and/or successful.
         \begin{multicols}{2}
+            % We would like you to explore what makes a movie popular and/or successful.
             \paragraph{}
                 In order to ascertain which factors are most influential in determining the
                     success of a movie, it is necessary to first define what constitutes success.
@@ -22,15 +22,6 @@
                     }\label{fig-heatmap}
                 \end{figure}
 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=\linewidth]{Final/Revenue Factors.pdf}
-                    \caption{
-                        Scatter plots showing the relationships between a movie's revenue and the four
-                        factors with moderate or strong correlations.
-                    }\label{fig-revenue-factors}
-                \end{figure}
-
             \paragraph{}
                 Figure~\ref{fig-heatmap} reveals a strong positive correlation (0.7) between a
                     movie's revenue and the number of votes it receives on IMDb, suggesting that
@@ -44,11 +35,41 @@
                     necessarily translate to higher revenues.
                 These four correlations are shown in more detail in
                     Figure~\ref{fig-revenue-factors}.
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\linewidth]{Final/Revenue Factors.pdf}
+                    \caption{
+                        Scatter plots showing the relationships between a movie's revenue and the four
+                        factors with moderate or strong correlations.
+                    }\label{fig-revenue-factors}
+                \end{figure}
         \end{multicols}
 
     \subsection{The relationship between a movie's ranked position and its number of votes}
-        % We would also like you to visualise the distribution of ranked position and
-        % number of votes, and comment on the relationship between them.
+        \begin{multicols}{2}
+            % We would also like you to visualise the distribution of ranked position and
+            % number of votes, and comment on the relationship between them.
+            \paragraph{}
+                IMDb's system for ranking movies is connected to the votes cast by viewers.
+                The statistical distributions of the ranks and the votes are show in
+                    Figure~\ref{fig-rank-vote-dist} and the correlation between these two varaibles
+                    is shown in Figure~\ref{fig-rank-vote-corr}.
+                This data suggests that lower ranked movies have more votes, which implies that
+                    people give lower ratings more often than they give higher ones.
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\linewidth]{Final/Distributions of Votes and Rank.pdf}
+                    \caption{}\label{fig-rank-vote-dist}
+                \end{figure}
+
+                \begin{figure}[H]
+                    \centering
+                    \includegraphics[width=\linewidth]{Final/Votes vs Rank.pdf}
+                    \caption{}\label{fig-rank-vote-corr}
+                \end{figure}
+        \end{multicols}
 
     \subsection*{}
         \paragraph{}
