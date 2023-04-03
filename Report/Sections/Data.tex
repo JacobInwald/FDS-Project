@@ -1,3 +1,4 @@
+\newpage
 \section{Data}
     % Suggested 300 words
     \begin{multicols}{2}
@@ -10,7 +11,6 @@
                 Universal Public Domain Dedication.
             TMD is merged data from TMDb (The Movie DataBase) and grouplens.org, a movie
                 ranking site.
-            However, we only used the part that was obtained from TMDb.
             It is worth noting that the provenance of the IMDb dataset has been subject to
                 controversy as it was scraped from IMDb.com.
 
@@ -22,6 +22,7 @@
             A summary of the columns is provided in Table
                 ~\ref{tab-IMDb-Movie-Data-Column-Description}.
     \end{multicols}
+
     \begin{table}[h]
         \centering
         \begin{tabular}{lp{10cm}l}
@@ -48,8 +49,8 @@
         \end{tabular}
         \caption[short]{The different columns in the IMDb-Movie-Data.csv file.}\label{tab-IMDb-Movie-Data-Column-Description}
     \end{table}
-    \begin{multicols}{2}
 
+    \begin{multicols}{2}
         We worked exclusively with the Crew table in TMD, which is a small part of the
             entire database.
         This table contains three columns - Cast, Crew, and ID.
@@ -58,8 +59,8 @@
         As a result, we extracted the data using string parsing methods.
         A summary of the columns is provided in
             Table~\ref{tab-Credits-Column-Description}.
-
     \end{multicols}
+
     \begin{table}[h]
         \centering
         \begin{tabular}{lp{10cm}l}
@@ -73,8 +74,8 @@
         \end{tabular}
         \caption[short]{The different columns in the credits.csv file.}\label{tab-Credits-Column-Description}
     \end{table}
-    \begin{multicols}{2}
 
+    \begin{multicols}{2}
         \paragraph{Data processing}
             We used a Python script to parse the TMD dataset and count the number of movies
                 each director and actor has been involved in.
@@ -84,10 +85,10 @@
             This involved dropping the Description column and replacing the Director and
                 Actor columns with Director Exp.
             and Mean Lead Roles Exp.
-            A summary of the new columns is shown in Table
-                ~\ref{tab-merged-data-column-description}.
-            %----------
+            A summary of the new columns is shown in
+                Table~\ref{tab-merged-data-column-description}.
     \end{multicols}
+
     \begin{table}[H]
         \centering
         \begin{tabular}{lp{9cm}l}
@@ -99,21 +100,18 @@
             \bottomrule
         \end{tabular}
         \caption[short]{The different columns in the merged data set,
-            it also shares all the columns described in Tables
+            it also shares all the columns described in Table
             ~\ref{tab-IMDb-Movie-Data-Column-Description},
             except for Director and Actors.}\label{tab-merged-data-column-description}
     \end{table}
+
     \begin{multicols}{2}
-        To check this data was properly normalised we made a histogram plot of all the
-            numeric variables, shown in Figure~\ref{fig-distribution-of-numeric-variable}.
-        As expected, a few variables did not appear to be normally distributed, namely
-            Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
-        % \end{multicols}
         \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (No Transformation).pdf}
             \caption{The distributions of the numeric variables in the merged dataset.}\label{fig-distribution-of-numeric-variable}
         \end{figure}
+
         \begin{figure}[H]
             \centering
             \includegraphics[width=\linewidth]{Final/Distribution of Numeric Variables (Transformed).pdf}
@@ -124,8 +122,12 @@
                     standard deviation.
             }\label{fig-transformed-distribution-of-numeric-variable}
         \end{figure}
-        % \caption{Distribution of Numeric Variables in the Merged Dataset}
-        % \label{fig-numeric-variable-distribution} \begin{multicols}{2}
+
+        To check this data was properly normalised we made a histogram plot of all the
+            numeric variables, shown in Figure~\ref{fig-distribution-of-numeric-variable}.
+        As expected, a few variables did not appear to be normally distributed, namely
+            Revenue (Millions), Votes, Runtime (Minutes), Director Exp., and Rating.
+
         Figure~\ref{fig-distribution-of-numeric-variable} shows that Revenue (Millions)
             and Votes are severely right-skewed, implying an exponential distribution.
         Runtime (Minutes) and Director Exp.
