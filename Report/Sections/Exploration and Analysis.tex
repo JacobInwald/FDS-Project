@@ -2,21 +2,23 @@
     \subsection{What makes a movie successful at the box office?}
         \begin{multicols}{2}
             % We would like you to explore what makes a movie popular and/or successful.
+            \begin{figure}[H]
+                \centering
+                \begin{adjustbox}{margin=-1.5cm 0cm 0cm 0cm, width=\linewidth}
+                    \includegraphics[width=\linewidth]{Final/Normalised Correlation Heatmap.pdf}
+                \end{adjustbox}
+                \caption{
+                    A heatmap illustrating the strength of correlations (using PMCC) between various normalised
+                    variables from the IMDb dataset~\cite{data:IMDb} and the TMD
+                    data~\cite{data:TMD}.
+                }\label{fig-heatmap}
+            \end{figure}
+
             \paragraph{}
                 By examining the correlations between the movie's revenue and other factors, we
                     can gain insight into which factors have the greatest impact on the success of
                     a movie.
                 These correlations are visualised in Figure~\ref{fig-heatmap}.
-
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=\linewidth]{Final/Normalised Correlation Heatmap.pdf}
-                    \caption{
-                        A heatmap illustrating the strength of correlations (using PMCC) between various normalised
-                        variables from the IMDb dataset~\cite{data:IMDb} and the TMD
-                        data~\cite{data:TMD}.
-                    }\label{fig-heatmap}
-                \end{figure}
 
             \paragraph{}
                 Figure~\ref{fig-heatmap} reveals a strong positive correlation ($r=0.7$)
