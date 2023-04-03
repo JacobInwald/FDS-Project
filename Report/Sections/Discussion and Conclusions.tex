@@ -1,19 +1,58 @@
 \section{Discussion and Conclusions}
     % Suggested 400 words.
+    \begin{multicols}{2}
+        \paragraph{Summary of findings}
+            Critics play a major role in the movie industry.
+            They are seen as wielding enormous power, with the ability to render years of
+                work wasted with a single review.
+            We aimed to investigate if critics truly have this power.
+            We found that critics can't predict box office success, bringing into question
+                their power over movie revenue.
+            However, we did find that critics can predict the general success and reception
+                of a movie.
+            Their ratings have a high correlation with user ratings, and our multiple
+                regression model used Metascore as a predictor for success.
+            These findings suggest that while critics can predict the success of a movie,
+                they don't appear to impact the revenue the movie will bring in.
+            Moreover, we found that the general public is more lenient than critics.
+            The critic scores follow a unskewed normal distribution, whereas user ratings
+                is left-skewed (see fig.~\ref{fig-distribution-of-numeric-variable}).
+            This means that on average the general public rates movies higher than critics
+                will.
+            These findings suggest that critics provide a more unbiased review of movies
+                than a consumer does.
+            We also found that actor experience is a better predictor of box office success
+                than the director experience.
+            This was reinforced by its moderate correlation to box office success, which is
+                inline with research about "star power", the idea that stars drive movie
+                success~\cite{elberse2007power}.
 
-    \paragraph{Summary of findings}
+        \paragraph{Evaluation of own work}
+            As a way to factor for non-linearity in the data, we normalised and
+                standardised the data.
+            We tested our models by checking that they maintained similar $R^2$ values for
+                train and test data and that the residuals verified linearity of data.
+            One limitation of our approach was the small amount of data we worked with.
+            The main dataset we used - the IMDb dataset - was just a sample of a larger
+                database and had only 1000 entries.
+            Another limitation was the lack of some would be useful columns from the
+                dataset.
+            One such example is budget, which was used in Ahmad et
+                al.~\cite{ahmadDuraisamyYousefBuckles} to produce a model for predicting
+                revenue of a movie.
 
-    \paragraph{Evaluation of own work: strengths and limitations}
+        \paragraph{Comparison with any other related work}
+            Elberse~\cite{elberse2007power} has also demonstrated that actors influence the
+                box office success of movies, also attributing this to lead actor experience.
+            Dhir and Raj~\cite{dhirRaj} also created a model to predict success, defining
+                it in this case as user rating.
+            Ahmad et al.~\cite{ahmadDuraisamyYousefBuckles} also created a model to predict
+                success, defining it in this case as revenue generated.
 
-    \paragraph{Comparison with any other related work}
-        E.g. ``Anscombe has also demonstrated that many patterns of data can have the
-            same correlation coefficient''.
+        \paragraph{Improvements and extensions}
+            An improvement we could make would be to purchase the full dataset and run our
+                analysis on that dataset.
+            Another improvement would be to find a dataset that combines various other
+                aspects of movie creation, for example movie budget or production managers.
 
-        Wikipedia can also be cited but it is better if you find the original reference
-            it for a particular claim in the list of references on the Wikipedia page, read
-            it, and cite it.
-
-        The golden rule is always to cite information that has come from other sources,
-            to avoid plagiarism.
-
-    \paragraph{Improvements and extensions}
+    \end{multicols}
