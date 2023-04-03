@@ -5,6 +5,7 @@ import _Data as d
 from scipy.stats import kstest
 import scipy
 from scipy import stats
+import seaborn as sns
 
 data = pd.read_csv("Data Sets/merged_movie_data.csv")
 data = data.dropna()
@@ -48,6 +49,9 @@ fig.delaxes(axs[3][1])
 fig.suptitle("Distributions of transformed quantitative data")
 fig.supylabel("Frequency Density")
 fig.tight_layout()
+colorblind_palette = sns.color_palette("colorblind")
+colors = plt.cycler(color=colorblind_palette)
+plt.rcParams["axes.prop_cycle"] = colors
 colors = plt.rcParams["axes.prop_cycle"]()
 
 cs = data.columns
