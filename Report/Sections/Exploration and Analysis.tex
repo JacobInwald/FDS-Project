@@ -1,5 +1,5 @@
 \section{Exploration and Analysis}
-    \subsection{What makes a movie successful at the box office?}
+    \subsection{What makes a movie successful at the box office?}\label{sec:boxofficesuccess}
         \begin{multicols}{2}
             % We would like you to explore what makes a movie popular and/or successful.
             \paragraph{}
@@ -73,7 +73,7 @@
                     the normalized data we collected.
                 The target variable was the normalised revenue, with the rest of the dataset as
                     the predictor variables, excluding Genre and Title.
-                $Votes^\frac{1}{3}$ was excluded as it is causally linked to Revenue; the more votes, the more people bought movie tickets.
+                $Votes^\frac{1}{3}$ was excluded as it may be causally linked to Revenue (see sec~\ref{sec:boxofficesuccess}).
                 The model uses Ordinary Least Squares regression and a constant column has been
                     added to show y-intercept.
                 The summary results are provided in table~\ref{tab-revenue-ols-summary}.
@@ -96,7 +96,7 @@
             Examples of this are present in adverts like movie posters - actor faces
                 feature front and center while directors are listed in name only.
             Actors who have been in many movies are more recognisable, meaning potential
-                consumers will be more likely to invest money in seeing a movie they are part
+                consumers may be more likely to invest money in seeing a movie they are part
                 of.
 
             % Meta score vs Rating

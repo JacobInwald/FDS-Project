@@ -9,7 +9,7 @@ data = data.drop(["Genre", "Title", "Action", "Adventure", "Sci-Fi",
                  "Thriller", "Comedy", "Drama", "Romance", "Crime"], axis=1)
 data = d.to_latex(data)
 fig = plt.figure(figsize=(5, 5))
-heatmap = sns.heatmap(data.corr(), vmin=-1, vmax=1,
+heatmap = sns.heatmap(data.corr(), fmt=".3f", vmin=-1, vmax=1,
                       annot=True, cmap="BrBG", annot_kws={"size": 6})
 heatmap.set_title("Normalised Correlation Heatmap")
 heatmap.set_xticklabels(heatmap.get_xticklabels(),

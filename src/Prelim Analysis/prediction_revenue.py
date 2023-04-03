@@ -6,6 +6,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from yellowbrick.regressor import residuals_plot
 from _Data import *
+import matplotlib as mpl
+
+mpl.rcParams['lines.markersize'] = 2
 
 # reading the csv file
 data = pd.read_csv("Data Sets/normalised_movie_data.csv")
@@ -25,6 +28,5 @@ print(re.sub(r'\\\$', '$', OLS(y,x).fit().summary().as_latex()))
 fig, ax = plt.subplots(nrows=1, ncols=1, figsize=(4,3))
 residuals_plot(LinearRegression(), x_train, y_train, x_test, y_test, ax=ax,
                      title='$Revenue^{\\frac{1}{3}}$ Residuals',
-                    show=False, test_alpha=0.5, train_alpha=0.5,
-                    scatter_kwargs={'s': 1})
+                    show=False)
 save_figure(plt, 'Revenue OLS Residuals')
