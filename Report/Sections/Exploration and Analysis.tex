@@ -42,26 +42,24 @@
                         factors with moderate or strong correlations.
                     }\label{fig-revenue-factors}
                 \end{figure}
-        \end{multicols}
 
-    \subsection{The relationship between a movie's ranked position and its number of votes}
-        \begin{multicols}{2}
-            % We would also like you to visualise the distribution of ranked position and
-            % number of votes, and comment on the relationship between them.
-            \paragraph{}
-                IMDb's system for ranking movies is connected to the votes cast by viewers.
-                The statistical distributions of the ranks and the votes are show in
-                    Figure~\ref{fig-rank-vote-dist}.
-                Plotting the two variables against each other produced a correlation of
-                    $r=-0.3$.
-                This data suggests that lower ranked movies have more votes, which implies that
-                    people give lower ratings more often than they give higher ones.
+            \subsection{The relationship between a movie's ranked position and its number of votes}
+                % We would also like you to visualise the distribution of ranked position and
+                % number of votes, and comment on the relationship between them.
+                \paragraph{}
+                    IMDb's system for ranking movies is connected to the votes cast by viewers.
+                    The statistical distributions of the ranks and the votes are show in
+                        Figure~\ref{fig-rank-vote-dist}.
+                    Plotting the two variables against each other produced a correlation of
+                        $r=-0.3$.
+                    This data suggests that lower ranked movies have more votes, which implies that
+                        people give lower ratings more often than they give higher ones.
 
-                \begin{figure}[H]
-                    \centering
-                    \includegraphics[width=\linewidth]{Final/Distributions of Votes and Rank.pdf}
-                    \caption{}\label{fig-rank-vote-dist}
-                \end{figure}
+                    \begin{figure}[H]
+                        \centering
+                        \includegraphics[width=\linewidth]{Final/Distributions of Votes and Rank.pdf}
+                        \caption{}\label{fig-rank-vote-dist}
+                    \end{figure}
         \end{multicols}
 
     \subsection{What factors can predict box office success?}
@@ -81,46 +79,6 @@
                     added to show y-intercept.
                 The summary results are provided in table~\ref{tab-revenue-ols-summary}.
         \end{multicols}
-
-        \begin{table}[H]
-            \begin{center}
-                \begin{tabular}{lclc}
-                    \toprule
-                    \textbf{Dep.~Variable:}    & $Revenue^{\frac{1}{3}}$ & \textbf{  R-squared:         } & 0.404    \\
-                    \textbf{Model:}            & OLS                     & \textbf{  Adj.~R-squared:    } & 0.393    \\
-                    \textbf{Method:}           & Least Squares           & \textbf{  F-statistic:       } & 36.60    \\
-                    \textbf{No.~Observations:} & 826                     & \textbf{  Prob (F-statistic):} & 1.35e-80 \\
-                    \textbf{Df Residuals:}     & 810                     & \textbf{Df Model:}             & 15       \\
-                    \bottomrule
-                \end{tabular}
-                \begin{tabular}{lcccccc}
-                                                    & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]} \\
-                    \midrule
-                    \textbf{$const$}                & 114.0116      & 19.712           & 5.784      & 0.000               & 75.319          & 152.705         \\
-                    \textbf{$Rank$}                 & -0.0006       & 0.000            & -5.654     & 0.000               & -0.001          & -0.000          \\
-                    \textbf{$Year$}                 & -0.0565       & 0.010            & -5.770     & 0.000               & -0.076          & -0.037          \\
-                    \textbf{$Metascore$}            & 0.0416        & 0.038            & 1.093      & 0.275               & -0.033          & 0.116           \\
-                    \textbf{$Mean Lead Roles Exp.$} & 0.1125        & 0.030            & 3.793      & 0.000               & 0.054           & 0.171           \\
-                    \textbf{$ln(Runtime)$}          & 0.1705        & 0.033            & 5.203      & 0.000               & 0.106           & 0.235           \\
-                    \textbf{$ln(Director Exp)$}     & 0.0507        & 0.029            & 1.756      & 0.079               & -0.006          & 0.107           \\
-                    \textbf{$Rating^2$}             & 0.0816        & 0.041            & 2.013      & 0.044               & 0.002           & 0.161           \\
-                    \textbf{$Action$}               & 0.1824        & 0.070            & 2.598      & 0.010               & 0.045           & 0.320           \\
-                    \textbf{$Adventure$}            & 0.4765        & 0.074            & 6.452      & 0.000               & 0.332           & 0.621           \\
-                    \textbf{$Sci-Fi$}               & 0.0318        & 0.087            & 0.364      & 0.716               & -0.140          & 0.203           \\
-                    \textbf{$Thriller$}             & -0.0395       & 0.078            & -0.504     & 0.615               & -0.193          & 0.114           \\
-                    \textbf{$Comedy$}               & 0.1145        & 0.072            & 1.599      & 0.110               & -0.026          & 0.255           \\
-                    \textbf{$Drama$}                & -0.5579       & 0.071            & -7.877     & 0.000               & -0.697          & -0.419          \\
-                    \textbf{$Romance$}              & -0.0243       & 0.084            & -0.288     & 0.773               & -0.190          & 0.141           \\
-                    \textbf{$Crime$}                & -0.0545       & 0.082            & -0.664     & 0.507               & -0.216          & 0.107           \\
-                    \bottomrule
-                \end{tabular}
-            \end{center}
-            \caption[short]{Multiple regression results with $Revenue^{\frac{1}{3}}$ as the dependent variable
-                and the normalised data as the independent variable.
-                The OLS approach was used to find the best fit.
-                The residuals for this model are shown in fig~\ref{fig-revenue-ols-residuals}.
-            }\label{tab-revenue-ols-summary}
-        \end{table}
 
         \begin{multicols}{2}
             This model performs respectably, explaining about 40\% of the variance in box
@@ -166,6 +124,46 @@
             Dramas appear to have the largest negative impact on box office success
                 ($\beta=-0.558,\sigma=0.071,p<0.05$).
         \end{multicols}
+
+        \begin{table}[H]
+            \begin{center}
+                \begin{tabular}{lclc}
+                    \toprule
+                    \textbf{Dep.~Variable:}    & $Revenue^{\frac{1}{3}}$ & \textbf{  R-squared:         } & 0.404    \\
+                    \textbf{Model:}            & OLS                     & \textbf{  Adj.~R-squared:    } & 0.393    \\
+                    \textbf{Method:}           & Least Squares           & \textbf{  F-statistic:       } & 36.60    \\
+                    \textbf{No.~Observations:} & 826                     & \textbf{  Prob (F-statistic):} & 1.35e-80 \\
+                    \textbf{Df Residuals:}     & 810                     & \textbf{Df Model:}             & 15       \\
+                    \bottomrule
+                \end{tabular}
+                \begin{tabular}{lcccccc}
+                                                    & \textbf{coef} & \textbf{std err} & \textbf{t} & \textbf{P$> |$t$|$} & \textbf{[0.025} & \textbf{0.975]} \\
+                    \midrule
+                    \textbf{$const$}                & 114.0116      & 19.712           & 5.784      & 0.000               & 75.319          & 152.705         \\
+                    \textbf{$Rank$}                 & -0.0006       & 0.000            & -5.654     & 0.000               & -0.001          & -0.000          \\
+                    \textbf{$Year$}                 & -0.0565       & 0.010            & -5.770     & 0.000               & -0.076          & -0.037          \\
+                    \textbf{$Metascore$}            & 0.0416        & 0.038            & 1.093      & 0.275               & -0.033          & 0.116           \\
+                    \textbf{$Mean Lead Roles Exp.$} & 0.1125        & 0.030            & 3.793      & 0.000               & 0.054           & 0.171           \\
+                    \textbf{$ln(Runtime)$}          & 0.1705        & 0.033            & 5.203      & 0.000               & 0.106           & 0.235           \\
+                    \textbf{$ln(Director Exp)$}     & 0.0507        & 0.029            & 1.756      & 0.079               & -0.006          & 0.107           \\
+                    \textbf{$Rating^2$}             & 0.0816        & 0.041            & 2.013      & 0.044               & 0.002           & 0.161           \\
+                    \textbf{$Action$}               & 0.1824        & 0.070            & 2.598      & 0.010               & 0.045           & 0.320           \\
+                    \textbf{$Adventure$}            & 0.4765        & 0.074            & 6.452      & 0.000               & 0.332           & 0.621           \\
+                    \textbf{$Sci-Fi$}               & 0.0318        & 0.087            & 0.364      & 0.716               & -0.140          & 0.203           \\
+                    \textbf{$Thriller$}             & -0.0395       & 0.078            & -0.504     & 0.615               & -0.193          & 0.114           \\
+                    \textbf{$Comedy$}               & 0.1145        & 0.072            & 1.599      & 0.110               & -0.026          & 0.255           \\
+                    \textbf{$Drama$}                & -0.5579       & 0.071            & -7.877     & 0.000               & -0.697          & -0.419          \\
+                    \textbf{$Romance$}              & -0.0243       & 0.084            & -0.288     & 0.773               & -0.190          & 0.141           \\
+                    \textbf{$Crime$}                & -0.0545       & 0.082            & -0.664     & 0.507               & -0.216          & 0.107           \\
+                    \bottomrule
+                \end{tabular}
+            \end{center}
+            \caption[short]{Multiple regression results with $Revenue^{\frac{1}{3}}$ as the dependent variable
+                and the normalised data as the independent variable.
+                The OLS approach was used to find the best fit.
+                The residuals for this model are shown in fig~\ref{fig-revenue-ols-residuals}.
+            }\label{tab-revenue-ols-summary}
+        \end{table}
 
     \subsection{Can critics truly predict movie success?}
         % We would like you to explore what makes a movie popular and/or successful.
@@ -255,6 +253,20 @@
             This is a relatively strong correlation, suggesting that critics can discern
                 potentially successful movies.
 
+            \begin{figure}[H]
+                \includegraphics[width=\linewidth]{/Final/Revenue OLS Residuals.pdf}
+                \caption[short]{The residuals for the box office success revenue model.
+                    The $R^2$ it achieves on train or test data is shown in the legend of the plot.
+                }\label{fig-revenue-ols-residuals}
+            \end{figure}
+
+            \begin{figure}[H]
+                \includegraphics[width=\linewidth]{/Final/Success OLS Residuals.pdf}
+                \caption[short]{The residuals for the success revenue model.
+                    The $R^2$ it achieves on train or test data is shown in the legend of the plot.
+                }\label{fig-success-ols-residuals}
+            \end{figure}
+
             % Constant
             Another observation is the constants coefficient is negative
                 ($\beta=-49.4,\sigma=10.9,p<0.05$).
@@ -269,20 +281,5 @@
                 ($\beta=0.128,\sigma=0.036,p<0.05$).
             Sci-Fi appears to have the largest negative impact on success
                 ($\beta=-0.223,\sigma=0.043,p<0.05$).
-
-            \begin{figure}[H]
-                \includegraphics[width=\linewidth]{/Final/Revenue OLS Residuals.pdf}
-                \caption[short]{The residuals for the box office success revenue model.
-                    The $R^2$ it achieves on train or test data is shown in the legend of the plot.
-                }\label{fig-revenue-ols-residuals}
-            \end{figure}
-
-            \begin{figure}[H]
-                \includegraphics[width=\linewidth]{/Final/Success OLS Residuals.pdf}
-                \caption[short]{The residuals for the success revenue model.
-                    The $R^2$ it achieves on train or test data is shown in the legend of the plot.
-                }\label{fig-success-ols-residuals}
-
-            \end{figure}
 
         \end{multicols}
