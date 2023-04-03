@@ -1,12 +1,8 @@
-\newpage
 \section{Exploration and Analysis}
-    \subsection{What makes a movie successful?}
+    \subsection{What makes a movie successful at the box office?}
         \begin{multicols}{2}
             % We would like you to explore what makes a movie popular and/or successful.
             \paragraph{}
-                In order to ascertain which factors are most influential in determining the
-                    success of a movie, it is necessary to first define what constitutes success.
-                For the purpose of this analysis, success is defined as the movie's revenue.
                 By examining the correlations between the movie's revenue and other factors, we
                     can gain insight into which factors have the greatest impact on the success of
                     a movie.
@@ -26,7 +22,8 @@
                 Figure~\ref{fig-heatmap} reveals a strong positive correlation ($r=0.7$)
                     between a movie's revenue and the number of votes it receives on IMDb,
                     suggesting that the more votes a movie receives, the higher its revenue is
-                    likely to be.
+                    likely to be, which implies that movies which have more votes may have sold
+                    more tickets.
                 Additionally, the heatmap shows moderate positive correlations between the
                     movie's revenue and its runtime ($r=0.25$) and between the movie's revenue and
                     the experience of the actors in lead roles ($r=0.24$), indicating that longer
@@ -54,8 +51,9 @@
             \paragraph{}
                 IMDb's system for ranking movies is connected to the votes cast by viewers.
                 The statistical distributions of the ranks and the votes are show in
-                    Figure~\ref{fig-rank-vote-dist} and the correlation between these two varaibles
-                    is shown in Figure~\ref{fig-rank-vote-corr}.
+                    Figure~\ref{fig-rank-vote-dist}.
+                Plotting the two variables against each other produced a correlation of
+                    $r=-0.3$.
                 This data suggests that lower ranked movies have more votes, which implies that
                     people give lower ratings more often than they give higher ones.
 
@@ -66,24 +64,25 @@
                 \end{figure}
         \end{multicols}
 
-    \subsection*{}
-        \paragraph{}
-
-            % Suggested 500 words for individual report; proportionately longer for group
-            % projects). Revenue Multiple Regression
     \subsection{What factors can predict box office success?}
-        % We would like you to explore what makes a movie popular and/or successful.
-        \paragraph{}
-            In order to further analyze the correlations between the various movie details
-                and the revenue they generated, we created a multiple regression model using
-                the normalized data we collected.
-            The target variable was the normalised revenue, with the rest of the dataset as
-                the predictor variables, excluding Genre and Title.
-            $Votes^\frac{1}{3}$ was excluded as it is causally linked to Revenue; the more votes, the more people bought movie tickets.
-            The model uses Ordinary Least Squares regression and a constant column has been
-                added to show y-intercept.
-            The summary results are provided in table~\ref{tab-revenue-ols-summary}.
-            \begin{table}[H]
+        % Suggested 500 words for individual report; proportionately longer for group
+        % projects). Revenue Multiple Regression
+
+        \begin{multicols}{2}
+            % We would like you to explore what makes a movie popular and/or successful.
+            \paragraph{}
+                In order to further analyze the correlations between the various movie details
+                    and the revenue they generated, we created a multiple regression model using
+                    the normalized data we collected.
+                The target variable was the normalised revenue, with the rest of the dataset as
+                    the predictor variables, excluding Genre and Title.
+                $Votes^\frac{1}{3}$ was excluded as it is causally linked to Revenue; the more votes, the more people bought movie tickets.
+                The model uses Ordinary Least Squares regression and a constant column has been
+                    added to show y-intercept.
+                The summary results are provided in table~\ref{tab-revenue-ols-summary}.
+        \end{multicols}
+
+        \begin{table}[H]
             \begin{center}
                 \begin{tabular}{lclc}
                     \toprule
@@ -117,11 +116,14 @@
                 \end{tabular}
             \end{center}
             \caption[short]{Multiple regression results with $Revenue^{\frac{1}{3}}$ as the dependent variable
-            and the normalised data as the independent variable.
-            The OLS approach was used to find the best fit.
-            The residuals for this model are shown in
-                fig~\ref{fig-revenue-ols-residuals}}\label{tab-revenue-ols-summary} \end{table}
-                This model performs respectably, explaining about 40\% of the variance in box
+                and the normalised data as the independent variable.
+                The OLS approach was used to find the best fit.
+                The residuals for this model are shown in fig~\ref{fig-revenue-ols-residuals}.
+            }\label{tab-revenue-ols-summary}
+        \end{table}
+
+        \begin{multicols}{2}
+            This model performs respectably, explaining about 40\% of the variance in box
                 office success.
             It is also statistically significant ($R^2=0.404, F(15,810)=36.6, p<0.05$).
             The results indicate a well performing model, and as such we can postulate that
@@ -163,30 +165,35 @@
                 ($\beta=0.477,\sigma=0.074,p<0.05$).
             Dramas appear to have the largest negative impact on box office success
                 ($\beta=-0.558,\sigma=0.071,p<0.05$).
+        \end{multicols}
+
     \subsection{Can critics truly predict movie success?}
         % We would like you to explore what makes a movie popular and/or successful.
-        \paragraph{}
-            % Success metric definition
-            To analyze the effect critics had on predicting general success of a movie, we
-                define a metric of success, $Success = \frac{Revenue^\frac{1}{3} +
-                        Rating^2}{2}$.
-            We chose this metric as Revenue and Rating are both measures of movie success,
-                and Figure~\ref{fig-heatmap} shows that they are not strongly correlated.
-            This means they describe independent aspects of success, and therefore the mean
-                of both will better encapsulate the true success of a movie.
-            We refer to this metric as success from now on.
+        \begin{multicols}{2}
+            \paragraph{}
+                % Success metric definition
+                To analyze the effect critics had on predicting general success of a movie, we
+                    define a metric of success, $Success = \frac{Revenue^\frac{1}{3} +
+                            Rating^2}{2}$.
+                We chose this metric as Revenue and Rating are both measures of movie success,
+                    and Figure~\ref{fig-heatmap} shows that they are not strongly correlated.
+                This means they describe independent aspects of success, and therefore the mean
+                    of both will better encapsulate the true success of a movie.
+                We refer to this metric as success from now on.
 
-            To investigate the ability for critics to predict movie success, we present a
-                multiple regression model, with the target variable being the success metric.
-            We used the rest of the normalised dataset for predictor variables, excluding
-                the $Revenue^\frac{1}{3}$, $Rating^2$, Genre and Title columns.
-            Genre and Title were excluded as they are not quantative data and
-                $Revenue^\frac{1}{3}$ and $Rating^2$ were excluded as they are causally linked
-                to the success metric.
-            We use the same approach as in table~\ref{tab-revenue-ols-summary}, with a
-                constant column and using OLS.
-            The summary results are provided in table~\ref{tab-success-ols-summary}.
-            \begin{table}[H]
+                To investigate the ability for critics to predict movie success, we present a
+                    multiple regression model, with the target variable being the success metric.
+                We used the rest of the normalised dataset for predictor variables, excluding
+                    the $Revenue^\frac{1}{3}$, $Rating^2$, Genre and Title columns.
+                Genre and Title were excluded as they are not quantative data and
+                    $Revenue^\frac{1}{3}$ and $Rating^2$ were excluded as they are causally linked
+                    to the success metric.
+                We use the same approach as in table~\ref{tab-revenue-ols-summary}, with a
+                    constant column and using OLS.
+                The summary results are provided in table~\ref{tab-success-ols-summary}.
+        \end{multicols}
+
+        \begin{table}[H]
             \begin{center}
                 \begin{tabular}{lclc}
                     \toprule
@@ -220,11 +227,14 @@
                 \end{tabular}
             \end{center}
             \caption[short]{Multiple regression results with $Revenue^{\frac{1}{3}}$ as the dependent variable
-            and the normalised data as the independent variable.
-            The OLS approach was used to find the best fit.
-            The residuals for this model are shown in
-                fig~\ref{fig-success-ols-residuals}}\label{tab-success-ols-summary} \end{table}
-                This model performs very well, explaining about 75\% of the variance in user
+                and the normalised data as the independent variable.
+                The OLS approach was used to find the best fit.
+                The residuals for this model are shown in fig~\ref{fig-success-ols-residuals}.
+            }\label{tab-success-ols-summary}
+        \end{table}
+
+        \begin{multicols}{2}
+            This model performs very well, explaining about 75\% of the variance in user
                 ratings.
             It is also statistically significant ($R^2=0.758, F(14,810)=169, p<0.05$).
             The results indicates a well performing model, and as such we can postulate
@@ -268,4 +278,7 @@
             \begin{figure}[H]
                 \includegraphics[width=\linewidth]{/Final/Success OLS Residuals.pdf}
                 \caption[short]{title}\label{fig-success-ols-residuals}
+
             \end{figure}
+
+        \end{multicols}
