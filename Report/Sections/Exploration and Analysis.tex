@@ -21,9 +21,8 @@
             \paragraph{}
                 Figure~\ref{fig-heatmap} reveals a strong positive correlation ($r=0.7$)
                     between a movie's revenue and the number of votes it receives on IMDb,
-                    suggesting that the more votes a movie receives, the higher its revenue is
-                    likely to be, which implies that movies which have more votes may have sold
-                    more tickets.
+                    suggesting that movies which have more votes may have sold more tickets, which
+                    shows a possible interaction or causal link.
                 Additionally, the heatmap shows moderate positive correlations between the
                     movie's revenue and its runtime ($r=0.25$) and between the movie's revenue and
                     the experience of the actors in lead roles ($r=0.24$), indicating that longer
@@ -50,10 +49,10 @@
                     IMDb's system for ranking movies is connected to the votes cast by viewers.
                     The statistical distributions of the ranks and the votes are show in
                         Figure~\ref{fig-rank-vote-dist}.
-                    Plotting the two variables against each other produced a correlation of
-                        $r=-0.3$.
-                    This data suggests that lower ranked movies have more votes, which implies that
-                        people give lower ratings more often than they give higher ones.
+                    Plotting the normalised variables against each other produced a PMCC of
+                        $r=-0.23$.
+                    This moderate negative correlation suggests that having more votes on IMDb does
+                        not necessarily relate to higher revenues.
 
                     \begin{figure}[H]
                         \centering
@@ -248,8 +247,8 @@
             Metascore is one of the key predictors in this model - with the third largest
                 absolute coefficient - demonstrating that critics are important when it comes
                 to predicting the success of a movie.
-            This idea is supported by the PPMCC that Metascore has with the Success metric
-                ($R^2=0.48$).
+            This idea is supported by the PMCC that Metascore has with the Success metric
+                ($r=0.48$).
             This is a relatively strong correlation, suggesting that critics can discern
                 potentially successful movies.
 
